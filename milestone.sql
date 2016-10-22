@@ -1,107 +1,94 @@
+SET foreign_key_checks = 0;
+DROP TABLE IF EXISTS employee, equipment, flight, customer, reservation, logging, authentication;
+SET foreign_key_checks = 1;
+
 CREATE TABLE employee
 (
-	user_id integer PRIMARY KEY,
-	lname varchar(30), 
-	fname varchar(30), 
-	phone integer, 
-	address varchar(100), 
-	SSN integer,
-	email varchar(60)
+	emp_id INTEGER PRIMARY KEY,
+	lname VARCHAR(30), 
+	fname VARCHAR(30), 
+	phone INTEGER, 
+	address VARCHAR(100), 
+	SSN INTEGER,
+	email VARCHAR(60),
+	job_type INTEGER,			/*0-admin, 1-pilot, 2-FA*/
+	title VARCHAR(20), 			/*administrator*/
+	rank VARCHAR(20), 			/*pilot or FA*/
+	gender CHAR,				/*FA*/
+	active_status BOOLEAN, 		/*pilot*/
+	certification VARCHAR(60), 	/*pilot*/
+	hours INTEGER				/*pilot*/
 );
-
-/*CREATE TABLE administrator
-(
-	userID integer PRIMARY KEY,
-	lName varchar(30), 
-	fName varchar(30), 
-	phone integer, 
-	address varchar(100), 
-	SSN integer,
-	email varchar(60),
-	title varchar(60)
-);
-
-CREATE TABLE pilot
-(
-	userID integer PRIMARY KEY,
-	lName varchar(30), 
-	fName varchar(30), 
-	phone integer, 
-	address varchar(100), 
-	SSN integer,
-	email varchar(60),
-	stat varchar(120),
-	rank varchar(80),
-	certification varchar(120),
-	total_hours integer
-);
-
-CREATE TABLE flight_attendant
-(
-	userID integer PRIMARY KEY,
-	lName varchar(30), 
-	fName varchar(30), 
-	phone integer, 
-	address varchar(100), 
-	SSN integer,
-	email varchar(60),
-	gender varchar(20),
-	rank varchar(80);
-);*/
 
 CREATE TABLE equipment
 (
-	equipment_id integer PRIMARY KEY,
-	num_seats integer,
-	type varchar(10),
-	pilots integer,
-	flight_attendants integer
+	equipment_id INTEGER PRIMARY KEY,
+	num_seats INTEGER,
+	type VARCHAR(10),
+	pilots INTEGER,
+	flight_attendants INTEGER
 );
 
 CREATE TABLE flight
 (
-	flight_num integer PRIMARY KEY,
-	days integer,
-	price decimal(13,2),
-	origin varchar(20),
-	destination varchar(20),
-	FOREIGN KEY equipment_id REFERENCES equipment(equipment_id)
-	/*FOREIGN KEY pilot REFERENCES pilot(user_id),
-	FOREIGN KEY flight_attendant(user_id)*/
-);
-
-CREATE TABLE reservation
-(
-	reservation_id integer PRIMARY KEY,
-	FOREIGN KEY flight_num REFERENCES flight(flight_num) NOT NULL,
-	FOREIGN KEY customer_id REFERENCES customer(customer_id) NOT NULL,
-	departure time,
-	arrival time
+	flight_num INTEGER PRIMARY KEY,
+	days INTEGER,
+	price DECIMAL(13,2),
+	origin VARCHAR(20),
+	destination VARCHAR(20),
+	equipment_id INTEGER,
+	pilot1 INTEGER,
+	pilot2 INTEGER,
+	fa1 INTEGER,
+	fa2 INTEGER,
+	fa3 INTEGER,
+	fa4 INTEGER,
+	FOREIGN KEY (equipment_id) REFERENCES equipment(equipment_id),
+	FOREIGN KEY (pilot1) REFERENCES employee(emp_id),
+	FOREIGN KEY (pilot2) REFERENCES employee(emp_id),
+	FOREIGN KEY (fa1) REFERENCES employee(emp_id),
+	FOREIGN KEY (fa2) REFERENCES employee(emp_id),
+	FOREIGN KEY (fa3) REFERENCES employee(emp_id),
+	FOREIGN KEY (fa4) REFERENCES employee(emp_id)
 );
 
 CREATE TABLE customer
 (
-	customer_id integer PRIMARY KEY,
-	fname integer,
-	lname integer,
-	age integer,
-	bag_num integer
+	customer_id INTEGER PRIMARY KEY,
+	fname INTEGER,
+	lname INTEGER,
+	age INTEGER,
+	bag_num INTEGER
+);
+
+CREATE TABLE reservation
+(
+	reservation_id INTEGER PRIMARY KEY,
+	flight_num INTEGER,
+	customer_id INTEGER,
+	departure TIME,
+	arrival TIME,
+	FOREIGN KEY (flight_num) REFERENCES flight(flight_num),
+	FOREIGN KEY (customer_id) REFERENCES customer(customer_id)
 );
 
 CREATE TABLE logging
 (
-	log_num int PRIMARY KEY,
-	ip varchar(15),
-	action_time time,
-	action varchar(20),
-	FOREIGN KEY user_emp REFERENCES employee(user_id),
-	FOREIGN KEY user_cust REFERENCES customer(customer_id),
-	FOREIGN KEY flight_num REFERENCES flight(flight_num)
+	log_num INTEGER PRIMARY KEY,
+	ip VARCHAR(15),
+	action_TIME TIME,
+	action VARCHAR(20),
+	user_emp INTEGER,
+	user_cust INTEGER,
+	flight_num INTEGER,
+	FOREIGN KEY (user_emp) REFERENCES employee(emp_id),
+	FOREIGN KEY (user_cust) REFERENCES customer(customer_id),
+	FOREIGN KEY (flight_num) REFERENCES flight(flight_num)
 );
 
 CREATE TABLE authentication
 (
-	FOREIGN KEY user_id integer REFERENCES employee(user_id),
-	pass_hash varchar(64),
-	PRIMARY KEY user_id
+	user_id INTEGER PRIMARY KEY,
+	pass_hash VARCHAR(64),
+	FOREIGN KEY (user_id) REFERENCES employee(emp_id)
 );
