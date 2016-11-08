@@ -1,3 +1,42 @@
+<?php
+
+  //Login
+  /*
+  if (isset($_POST['loginBtn'])){
+
+
+    $username = $_POST['username'];
+    $password = $_POST['password'];
+
+
+    $stmt = mysqli_prepare($conn, "SELECT user_id, pass_hash FROM authentication WHERE user_id = ? AND pass_hash = ?");
+
+    if ($stmt){
+
+      mysqli_stmt_bind_param($stmt, "ss", $username, $password);
+      mysqli_stmt_execute($stmt);
+
+      if(mysqli_stmt_fetch($stmt)){
+
+        //Login user
+
+      }
+      else {
+
+
+        //Invalid username/password
+
+
+      }
+
+
+
+    }
+    mysqli_stmt_close($stmt);
+  }
+  */
+?>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -67,12 +106,12 @@
         <div id="navbar" class="navbar-collapse collapse">
           <form class="navbar-form navbar-right">
             <div class="form-group">
-              <input type="text" placeholder="Email" class="form-control">
+              <input type="text" name="username" placeholder="Email" class="form-control">
             </div>
             <div class="form-group">
-              <input type="password" placeholder="Password" class="form-control">
+              <input type="password" name = "password" placeholder="Password" class="form-control">
             </div>
-            <button type="submit" class="btn btn-success">Sign in</button>
+            <button type="submit" name = "loginBtn" class="btn btn-success">Sign in</button>
           </form>
         </div><!--/.navbar-collapse -->
       </div>
