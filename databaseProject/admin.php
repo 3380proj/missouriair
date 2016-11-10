@@ -1,7 +1,7 @@
 <?php
 
   //Login
-  /*
+
   if (isset($_POST['loginBtn'])){
 
 
@@ -18,6 +18,7 @@
 
       if(mysqli_stmt_fetch($stmt)){
 
+        $_SESSION['user_session'] = $userRow['user_id'];
         //Login user
 
       }
@@ -28,13 +29,10 @@
 
 
       }
-
-
-
     }
     mysqli_stmt_close($stmt);
   }
-  */
+
 ?>
 
 <!DOCTYPE html>
