@@ -1,13 +1,12 @@
 <?php
 
   //Login
-
+  include_once 'dbconfig.php';
   if (isset($_POST['loginBtn'])){
 
 
     $username = $_POST['username'];
     $password = $_POST['password'];
-
 
     $stmt = mysqli_prepare($conn, "SELECT user_id, pass_hash FROM authentication WHERE user_id = ? AND pass_hash = ?");
 
@@ -24,7 +23,7 @@
       }
       else {
 
-
+        echo "did not work";
         //Invalid username/password
 
 
