@@ -61,33 +61,7 @@
     <![endif]-->
   </head>
 
-  <body>
-
-     <!--                      Need to add action here. Not sure what page we want this to go to yet                                   -->
-	<form method="POST" action="" name="flightForm">
-		Flight from:
-		<input type="text" name="from" placeholder="City">
-		<br>
-		Flight to:
-		<input type="text" name="to" placeholder="City">
-		<br>
-		Departure Date:
-		<input type="date" name="departureDate" placeholder="mm/dd/yyyy">
-		Return Date:
-		<input type="date" name="returnDate" placeholder="mm/dd/yyyy">
-		Adults(18+)
-		<select>
-			<option value="1">1</option>
-			<option value="2">2</option>
-			<option value="3">3</option>
-			<option value="4">4</option>
-			<option value="5">5</option>
-			<option value="6">6</option>
-		</select>
-		
-	<!-- Form obviously needs things added. -->
-
-	</form>
+  <body>    
     
     <nav class="navbar navbar-inverse navbar-fixed-top">
       <div class="container">
@@ -120,7 +94,7 @@
         <h1>
             <br>
             <div>
-            <img src="MissouriAirLogo1.png" alt="Missouri Air" id="logo">
+            <img src="MissouriAirLogo1.jpg" alt="Missouri Air" id="logo">
             </div>
           </h1>
       </div>
@@ -131,10 +105,49 @@
       <div class="row">
         <div class="col-md-4">
           <h2>Search For Flights</h2>
-          <p>a) Departure city (FROM)
+		
+		
+	<!--form action needs to be filled in-->
+		
+		
+		
+	<form method="POST" action="list.php" name="flightForm">
+		Flight from:
+		<input type="text" name="from" placeholder="City">
+		<br>
+		Flight to:
+		<input type="text" name="to" placeholder="City">
+		<br>
+		Departure Date:
+		<input type="text" name="departureDate" placeholder="mm/dd/yyyy">
+		Return Date:
+		<input type="text" name="returnDate" placeholder="mm/dd/yyyy">
+		Adults(18+)
+		<select>
+			<option value="1">1</option>
+			<option value="2">2</option>
+			<option value="3">3</option>
+			<option value="4">4</option>
+			<option value="5">5</option>
+			<option value="6">6</option>
+		</select>
+		Prices ($0 - $999)
+		<input type="text" name="price" placeholder="Enter a price here">
+		<input type="submit" name="submit" value="Submit">
+		</form>
+	<!-- Form obviously needs things added. -->	
+		
+	
+	
+	<!-- <p>a) Departure city (FROM)
              b) Destination city (TO)
              c) Day/Time of available flights
-             d) Price ($0 to $999, etc.) </p>
+             d) Price ($0 to $999, etc.) </p> 
+			 
+			 I commented this out, but left it here just in case we want to know what to put on form.
+			 
+			 -->	
+		
           <p><a class="btn btn-default" href="list.php" role="button">Submit &raquo;</a></p>
         </div>
         
