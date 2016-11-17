@@ -23,7 +23,7 @@
       }
       else {
 
-        echo "did not work";
+        echo "did not work well";
         //Invalid username/password
 
 
