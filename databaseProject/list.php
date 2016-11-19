@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <title>Administrator Page</title>
+    <title>Results</title>
 
     <!-- Bootstrap -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -82,17 +82,69 @@
     <div class="container">
 
       <h1>Flights Availible:</h1>
-      <p>Forms here</p>
+      
+        <?php
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+        $conn = mysqli_connect('localhost','kaublea','','kaublea') or die ("Connection error: " .mysqli_connect_error());
+ 
+        $from_search = $_POST["from"];
+        $to_search = $_POST["to"];
+        $departureDate_search = $_POST["departureDate"];
+        $returnDate_search = $_POST["returnDate"]; 
+        $price_search = $_POST["price"]; 
+        
+        $statement = mysqli_prepare($conn, "SELECT * FROM database WHERE from, to, departureDate, returnDate, price LIKE ?, ?, ?, ?, ?");
+    
+        }
+        
+        if(mysqli_stmt_execute($statement)){
+            mysqli_stmt_bind_param($statement, "sssss", $from_search, $to_search, $departureDate_search, $returnDate_search, $price_search);
+            echo "<table>\n";
+            print "<thead><tr>";   
+            $i=0;
+            $meta = $statement->result_metadata();
+            $query_data=array(); 
+            while ($field = $meta->fetch_field()) {
+              print "<th>" . $field->name . "</th>";
+              $var = $i;
+              $$var = null;
+              $query_data[$var] = &$$var;
+              $i++;   
+            }
+            print "</tr></thead>";
+            while (mysqli_stmt_fetch($statement))
+            {
+              echo "<tr>\n";
+              echo "\t<td>" . $from . "</td>\n";
+              echo "\t<td>" . $to . "</td>\n";
+              echo "\t<td>" . $departureDate . "</td>\n";
+              echo "\t<td>" . $returnDate . "</td>\n";
+              echo "\t<td>" . $price . "</td>\n";
+              echo "\t<td><form><input type=\"submit\" action=\"confirmRes.php\" name=\"resSelect\" value=\"Select Reservation\"></form></td>\n";
+              echo "</tr>\n";
+            }
+            echo "</table>\n";
+        }
+        mysqli_stmt_close($statement);
+        mysqli_close($conn);
+ 
+ ?>
 
     </div> <!-- /container -->
-
-      
-      
-      
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="js/bootstrap.min.js"></script>
+      
+  <?php 
+      
+      ?>
+
   </body>
 </html>
+      
+<!-- git pull in folder if outdated locally 
+if new submit git add filename
+git commit -a 
+git push origin master -->
