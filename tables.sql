@@ -90,5 +90,5 @@ CREATE TABLE authentication
 (
 	user_id INTEGER PRIMARY KEY,
 	pass_hash VARCHAR(64),
-	FOREIGN KEY (user_id) REFERENCES employee(id)
+	FOREIGN KEY (user_id) REFERENCES employee(emp_id)
 );
