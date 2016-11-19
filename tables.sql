@@ -5,12 +5,11 @@ SET foreign_key_checks = 1;
 CREATE TABLE employee
 (
 	emp_id INTEGER PRIMARY KEY,
-	lname VARCHAR(30), 
 	fname VARCHAR(30), 
+	lname VARCHAR(30), 
 	job_type INTEGER,			/*0-admin, 1-pilot, 2-FA*/
 	rank VARCHAR(20), 			/*pilot or FA*/
 	status BOOLEAN, 		/*pilot*/
-	certification VARCHAR(60), 	/*pilot*/
 	hours INTEGER				/*pilot*/
 );
 
@@ -44,12 +43,14 @@ CREATE TABLE flight
 	aircraft INTEGER,
 	pilot_1 INTEGER,
 	pilot_2 INTEGER,
+	pilot_3 INTEGER,
 	att_1 INTEGER,
 	att_2 INTEGER,
 	att_3 INTEGER,
 	FOREIGN KEY (aircraft) REFERENCES equipment(serial),
 	FOREIGN KEY (pilot_1) REFERENCES employee(emp_id),
 	FOREIGN KEY (pilot_2) REFERENCES employee(emp_id),
+	FOREIGN KEY (pilot_3) REFERENCES employee(emp_id),
 	FOREIGN KEY (att_1) REFERENCES employee(emp_id),
 	FOREIGN KEY (att_2) REFERENCES employee(emp_id),
 	FOREIGN KEY (att_3) REFERENCES employee(emp_id)
@@ -59,7 +60,7 @@ CREATE TABLE customer
 (
 	id INTEGER PRIMARY KEY,
 	fname INTEGER,
-	lname INTEGER,
+	lname INTEGER
 );
 
 CREATE TABLE reservation
