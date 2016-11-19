@@ -1,5 +1,5 @@
 SET foreign_key_checks = 0;
-DROP TABLE IF EXISTS employee, equipment, flight, customer, reservation, logging, authentication;
+DROP TABLE IF EXISTS employee, certification, equipment, flight, customer, reservation, logging, authentication;
 SET foreign_key_checks = 1;
 
 CREATE TABLE employee
@@ -7,69 +7,69 @@ CREATE TABLE employee
 	emp_id INTEGER PRIMARY KEY,
 	lname VARCHAR(30), 
 	fname VARCHAR(30), 
-	phone INTEGER, 
-	address VARCHAR(100), 
-	SSN INTEGER,
-	email VARCHAR(60),
 	job_type INTEGER,			/*0-admin, 1-pilot, 2-FA*/
-	title VARCHAR(20), 			/*administrator*/
 	rank VARCHAR(20), 			/*pilot or FA*/
-	gender CHAR,				/*FA*/
-	active_status BOOLEAN, 		/*pilot*/
+	status BOOLEAN, 		/*pilot*/
 	certification VARCHAR(60), 	/*pilot*/
 	hours INTEGER				/*pilot*/
 );
 
+CREATE TABLE certification
+(
+	emp_id INTEGER,
+	equipment VARCHAR(10),
+	FOREIGN KEY (emp_id) REFERENCES employee(emp_id) ON DELETE CASCADE,
+	FOREIGN KEY (equipment) REFERENCES equipment(equipment) ON DELETE CASCADE,
+	PRIMARY KEY (emp_id, equipment)
+);
+
 CREATE TABLE equipment
 (
-	equipment_id INTEGER PRIMARY KEY,
-	num_seats INTEGER,
-	type VARCHAR(10),
+	serial INTEGER PRIMARY KEY,
+	seats INTEGER,
+	equipment VARCHAR(10),
 	pilots INTEGER,
-	flight_attendants INTEGER
+	att INTEGER
 );
 
 CREATE TABLE flight
 (
-	flight_num INTEGER PRIMARY KEY,
-	days INTEGER,
+	number INTEGER PRIMARY KEY,
+	day VARCHAR(8),
 	price DECIMAL(13,2),
-	origin VARCHAR(20),
-	destination VARCHAR(20),
-	equipment_id INTEGER,
-	pilot1 INTEGER,
-	pilot2 INTEGER,
-	fa1 INTEGER,
-	fa2 INTEGER,
-	fa3 INTEGER,
-	fa4 INTEGER,
-	FOREIGN KEY (equipment_id) REFERENCES equipment(equipment_id),
-	FOREIGN KEY (pilot1) REFERENCES employee(emp_id),
-	FOREIGN KEY (pilot2) REFERENCES employee(emp_id),
-	FOREIGN KEY (fa1) REFERENCES employee(emp_id),
-	FOREIGN KEY (fa2) REFERENCES employee(emp_id),
-	FOREIGN KEY (fa3) REFERENCES employee(emp_id),
-	FOREIGN KEY (fa4) REFERENCES employee(emp_id)
-);
+	from VARCHAR(20),
+	to VARCHAR(20),
+	dep TIME,
+	arr TIME,
+	aircraft INTEGER,
+	pilot_1 INTEGER,
+	pilot_2 INTEGER,
+	att_1 INTEGER,
+	att_2 INTEGER,
+	att_3 INTEGER,
+	FOREIGN KEY (aircraft) REFERENCES equipment(serial),
+	FOREIGN KEY (pilot_1) REFERENCES employee(emp_id),
+	FOREIGN KEY (pilot_2) REFERENCES employee(emp_id),
+	FOREIGN KEY (att_1) REFERENCES employee(emp_id),
+	FOREIGN KEY (att_2) REFERENCES employee(emp_id),
+	FOREIGN KEY (att_3) REFERENCES employee(emp_id)
+);_
 
 CREATE TABLE customer
 (
-	customer_id INTEGER PRIMARY KEY,
+	id INTEGER PRIMARY KEY,
 	fname INTEGER,
 	lname INTEGER,
-	age INTEGER,
-	bag_num INTEGER
 );
 
 CREATE TABLE reservation
 (
-	reservation_id INTEGER PRIMARY KEY,
-	flight_num INTEGER,
-	customer_id INTEGER,
-	departure TIME,
-	arrival TIME,
-	FOREIGN KEY (flight_num) REFERENCES flight(flight_num),
-	FOREIGN KEY (customer_id) REFERENCES customer(customer_id)
+	id INTEGER PRIMARY KEY,
+	flight INTEGER,
+	customer INTEGER,
+	price DECIMAL(13,2),
+	FOREIGN KEY (flight) REFERENCES flight(number),
+	FOREIGN KEY (customer) REFERENCES customer(id)
 );
 
 CREATE TABLE logging
@@ -81,14 +81,14 @@ CREATE TABLE logging
 	user_emp INTEGER,
 	user_cust INTEGER,
 	flight_num INTEGER,
-	FOREIGN KEY (user_emp) REFERENCES employee(emp_id),
-	FOREIGN KEY (user_cust) REFERENCES customer(customer_id),
-	FOREIGN KEY (flight_num) REFERENCES flight(flight_num)
+	FOREIGN KEY (user_emp) REFERENCES employee(id),
+	FOREIGN KEY (user_cust) REFERENCES customer(id),
+	FOREIGN KEY (flight_num) REFERENCES flight(number)
 );
 
 CREATE TABLE authentication
 (
 	user_id INTEGER PRIMARY KEY,
 	pass_hash VARCHAR(64),
-	FOREIGN KEY (user_id) REFERENCES employee(emp_id)
+	FOREIGN KEY (user_id) REFERENCES employee(id)
 );
