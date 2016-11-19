@@ -81,7 +81,7 @@ CREATE TABLE logging
 	user_emp INTEGER,
 	user_cust INTEGER,
 	flight_num INTEGER,
-	FOREIGN KEY (user_emp) REFERENCES employee(id),
+	FOREIGN KEY (user_emp) REFERENCES employee(emp_id),
 	FOREIGN KEY (user_cust) REFERENCES customer(id),
 	FOREIGN KEY (flight_num) REFERENCES flight(number)
 );
