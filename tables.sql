@@ -18,7 +18,6 @@ CREATE TABLE certification
 	emp_id INTEGER,
 	equipment VARCHAR(10),
 	FOREIGN KEY (emp_id) REFERENCES employee(emp_id) ON DELETE CASCADE,
-	FOREIGN KEY (equipment) REFERENCES equipment(equipment) ON DELETE CASCADE,
 	PRIMARY KEY (emp_id, equipment)
 );
 
