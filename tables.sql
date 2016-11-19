@@ -53,7 +53,7 @@ CREATE TABLE flight
 	FOREIGN KEY (att_1) REFERENCES employee(emp_id),
 	FOREIGN KEY (att_2) REFERENCES employee(emp_id),
 	FOREIGN KEY (att_3) REFERENCES employee(emp_id)
-);_
+);
 
 CREATE TABLE customer
 (
