@@ -85,7 +85,8 @@
       
         <?php
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-        $conn = mysqli_connect('localhost','kaublea','','kaublea') or die ("Connection error: " .mysqli_connect_error());
+        include("../secure/databaseLogin.php");
+        $conn = mysqli_connect(HOST,USERNAME,PASSWORD,DBNAME) or die("Connect Error " . mysqli_error($conn));
  
         $from_search = $_POST["from"];
         $to_search = $_POST["to"];
