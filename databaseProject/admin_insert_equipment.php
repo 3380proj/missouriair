@@ -6,8 +6,7 @@
 	}
 	
 	if ($admin) {
-		$equiptment = $_POST['equiptment'];
-		$description = $_POST['description'];
+		$equipment = $_POST['equipment'];
 		$serial = $_POST['serial'];
 		$seat = $_POST['seat'];
 		$pilots = $_POST['pilots'];
@@ -20,17 +19,16 @@
 			exit;
 		}
 		
-		$equiptment = $mysqli->real_escape_string($equiptment); 
-		$description = $mysqli->real_escape_string($description);
+		$equipment = $mysqli->real_escape_string($equipment);
 		$serial = $mysqli->real_escape_string($serial);
 		$seat = $mysqli->real_escape_string($seat); 
 		$pilots = $mysqli->real_escape_string($pilots);
 		$att = $mysqli->real_escape_string($att);
 		
-		$sql="INSERT INTO equiptment (equiptment, description, serial, seat, pilots, att) VALUES (?, ?, ?, ?, ?, ?)";
+		$sql="INSERT INTO equipment (equipment, serial, seat, pilots, att) VALUES ( ?, ?, ?, ?, ?)";
 		
 		if($stmt = mysqli_prepare($mysqli, $sql)){
-			mysqli_stmt_bind_param($stmt, "ssssss", $equiptment, $description, $serial, $seat, $pilots, $att);
+			mysqli_stmt_bind_param($stmt, "ssssss", $equipment, $serial, $seat, $pilots, $att);
 			
 			if(mysqli_stmt_execute($stmt)){
 				exit;

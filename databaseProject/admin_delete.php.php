@@ -27,14 +27,19 @@
 		
 		if($pre_check_result){
 			$pre_count = $pre_check_result -> num_rows;
+				
+			$sql = "DELETE FROM '$table' WHERE '$column' = '$value'";
+		
+			$sql_stmt = mysqli_prepare($mysqli, $sql);
+				
+			$sqlResult = $mysqli->query($sql);
 		}
-				
-		$sql = "DELETE FROM '$table' WHERE '$column' = '$value'";
 		
-		$sql_stmt = mysqli_prepare($mysqli, $sql);
-				
-		$sqlResult = $mysqli->query($sql);
-		
+		else{
+				header("Location: error.php");
+				exit;
+		}
+			
 		if($sqlResult){
 			$post_count = $sqlResult -> num_rows;
 			

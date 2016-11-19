@@ -6,8 +6,7 @@
 	}
 	
 	if ($admin) {
-		$equiptment = $_POST['equiptment'];
-		$description = $_POST['description'];
+		$equipment = $_POST['equipment'];
 		$serial = $_POST['serial'];
 		$seat = $_POST['seat'];
 		$pilots = $_POST['pilots'];
@@ -20,14 +19,13 @@
 			exit;
 		}
 		
-		$equiptment = $mysqli->real_escape_string($equiptment); 
-		$description = $mysqli->real_escape_string($description);
+		$equipment = $mysqli->real_escape_string($equipment);
 		$serial = $mysqli->real_escape_string($serial);
 		$seat = $mysqli->real_escape_string($seat); 
 		$pilots = $mysqli->real_escape_string($pilots);
 		$att = $mysqli->real_escape_string($att);
 		
-		$sql="UPDATE equiptment SET equiptment = '$equiptment', description = '$description', seat = '$seat', pilots = '$pilots', att = '$att' WHERE serial = '$serial'";
+		$sql="UPDATE equipment SET equipment = '$equipment', seat = '$seat', pilots = '$pilots', att = '$att' WHERE serial = '$serial'";
 		
 		if($stmt = mysqli_prepare($mysqli, $sql)){		
 			if(mysqli_stmt_execute($stmt)){
