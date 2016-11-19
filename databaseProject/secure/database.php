@@ -1,0 +1,6 @@
+<?php 
+	DEFINE("HOST", "localhost"); 
+	DEFINE("DBNAME", "CS3380GRP1"); 
+	DEFINE("USERNAME", "CS3380GRP1"); 
+	DEFINE("PASSWORD", "177d33a"); 
+?>
