@@ -41,7 +41,7 @@ INSERT INTO flight VALUES
 	(5540, '2016-11-21', 899, 'PARIS', 'CHICAGO', '16:00:00', '05:00:00', 'N47892', 382901, 887362, null, 776573, 372819, 485932);
 
 INSERT INTO customer VALUES
-	(1, 'Susan', Miller);
+	(1, 'Susan', 'Miller');
 
 INSERT INTO reservation VALUES
 	('B4091', 5540, 1, 899);
