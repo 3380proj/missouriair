@@ -34,7 +34,7 @@ CREATE TABLE equipment
 CREATE TABLE flight
 (
 	number INTEGER PRIMARY KEY,
-	day VARCHAR(8),
+	day DATE,
 	price DECIMAL(13,2),
 	from VARCHAR(20),
 	to VARCHAR(20),
