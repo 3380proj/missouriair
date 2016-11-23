@@ -23,7 +23,7 @@ CREATE TABLE certification
 
 CREATE TABLE equipment
 (
-	serial INTEGER PRIMARY KEY,
+	serial VARCHAR(10) PRIMARY KEY,
 	seats INTEGER,
 	equipment VARCHAR(10),
 	pilots INTEGER,
