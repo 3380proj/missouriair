@@ -39,7 +39,7 @@ CREATE TABLE flight
 	dest VARCHAR(20),
 	dep TIME,
 	arr TIME,
-	aircraft INTEGER,
+	aircraft VARCHAR(10),
 	pilot_1 INTEGER,
 	pilot_2 INTEGER,
 	pilot_3 INTEGER,
