@@ -104,17 +104,11 @@ bag and 5% sales tax.-->
      <?php
     
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $conn = mysqli_connect('localhost','kaublea','','kaublea') or die ("Connection error: " .mysqli_connect_error());
-    
-    $price = "Pass in price from database"; 
-    $price = $_POST['price']; 
-    $fname = $_POST['fname'];
-    $lname = $_POST['lname']; 
-    $numBags = $_POST['bags'];  
+    include("../secure/database.php");
+    $conn = mysqli_connect(HOST,USERNAME,PASSWORD,DBNAME) or die("Connect Error " . mysqli_error($conn));
+      
     $yes = $_POST['yes']; 
     $no = $_POST['no']; 
-
-    }
         
     echo "<div class="container"><tr>
         <td>"$fname"</td>
@@ -126,27 +120,29 @@ bag and 5% sales tax.-->
     <form method=\"POST\"><input type=\"submit\" name=\"yes\" value=\"Yes\">
     <input type=\"submit\" name=\"no\" value=\"No\"></form>"
     
+    }
+        
     if(isset($_POST['yes']))
     { 
-    $sql = "INSERT INTO database 
-    (reservation, fname, lname, price)
-    VALUES (
-    '$reservationNum', 
-    '$fname', 
-    '$lname,  
-    '$price', 
-    )";
+        $statement = mysqli_prepare($conn, "INSERT INTO database (reservation, fname, lname, price) VALUES (?, ?, ?, ?)");
 
-    if ($conn->multi_query($sql) === TRUE) {
-        echo "Reservation Created";
-    } else {
-        echo "Error: " . $sql . "<br>" . $conn->error;
-    }
+        mysqli_stmt_bind_param($statement, "ssss", $reservation, $fname, $lname, $price);
+
+        $numBags = $_POST['bags']; 
+        $price = "Pass in price from database"; 
+        $reservation = "SELECT FROM database flight reservation"; 
+        $price = $_POST['price']; 
+        $fname = $_POST['fname'];
+        $lname = $_POST['lname'];  
+
+        if(!mysqli_stmt_execute($statement)){
+        echo "\nError occurred: " . mysqli_stmt_error($statement);
+        }
+        mysqli_stmt_close($statement);
     }
     else header('confirmRes.php');
-    
         
-    $conn->close();
+    mysqli_close($conn); 
 	
 ?>
 

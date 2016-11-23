@@ -9,10 +9,6 @@
 		$id = $_POST['id'];
 		$fname = $_POST['fname'];
 		$lname = $_POST['lname'];
-		$status = $_POST['status'];
-		$hours = $_POST['hours'];
-		$rank = $_POST['rank'];
-		$job_type = $_POST['job_type'];
 
 		$mysqli = new mysqli($dbhost, $dbuser, $dbpass, $dbname);
 		
@@ -24,15 +20,11 @@
 		$id = $mysqli->real_escape_string($id); 
 		$fname = $mysqli->real_escape_string($fname);
 		$lname = $mysqli->real_escape_string($lname);
-		$status = $mysqli->real_escape_string($status); 
-		$hours = $mysqli->real_escape_string($hours);
-		$rank = $mysqli->real_escape_string($rank);
-		$job_type = $mysqli->real_escape_string($job_type);
 		
-		$sql="INSERT INTO employee (emp_id, fname, lname, status, hours, rank, job_type) VALUES (?, ?, ?, ?, ?, ?, ?)";
+		$sql="INSERT INTO customer (id, fname, lname) VALUES (?, ?, ?)";
 		
 		if($stmt = mysqli_prepare($mysqli, $sql)){
-			mysqli_stmt_bind_param($stmt, "sssssss", $id, $fname, $lname, $status, $hours, $rank, $job_type);
+			mysqli_stmt_bind_param($stmt, "sss", $id, $fname, $lname);
 			
 			if(mysqli_stmt_execute($stmt)){
 				exit;

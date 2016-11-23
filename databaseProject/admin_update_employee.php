@@ -12,7 +12,7 @@
 		$status = $_POST['status'];
 		$hours = $_POST['hours'];
 		$rank = $_POST['rank'];
-		$equiptment = $_POST['equiptment'];
+		$job_type = $_POST['job_type'];
 
 		$mysqli = new mysqli($dbhost, $dbuser, $dbpass, $dbname);
 		
@@ -27,9 +27,9 @@
 		$status = $mysqli->real_escape_string($status); 
 		$hours = $mysqli->real_escape_string($hours);
 		$rank = $mysqli->real_escape_string($rank);
-		$equiptment = $mysqli->real_escape_string($equiptment);
+		$job_type = $mysqli->real_escape_string($job_type);
 		
-		$sql="UPDATE employee SET fname = '$fname', lname = '$lname', status = '$status', hours = '$hours', rank = '$rank', equiptment = '$equiptment') WHERE emp_id = '$id'";
+		$sql="UPDATE employee SET fname = '$fname', lname = '$lname', status = '$status', hours = '$hours', rank = '$rank', job_type = '$job_type') WHERE emp_id = '$id'";
 		
 		if($stmt = mysqli_prepare($mysqli, $sql)){
 			if(mysqli_stmt_execute($stmt)){

@@ -18,7 +18,6 @@ CREATE TABLE certification
 	emp_id INTEGER,
 	equipment VARCHAR(10),
 	FOREIGN KEY (emp_id) REFERENCES employee(emp_id) ON DELETE CASCADE,
-	FOREIGN KEY (equipment) REFERENCES equipment(equipment) ON DELETE CASCADE,
 	PRIMARY KEY (emp_id, equipment)
 );
 
@@ -34,10 +33,10 @@ CREATE TABLE equipment
 CREATE TABLE flight
 (
 	number INTEGER PRIMARY KEY,
-	day DATE,
+	day VARCHAR(8),
 	price DECIMAL(13,2),
-	from VARCHAR(20),
-	to VARCHAR(20),
+	origin VARCHAR(20),
+	dest VARCHAR(20),
 	dep TIME,
 	arr TIME,
 	aircraft INTEGER,
@@ -54,7 +53,7 @@ CREATE TABLE flight
 	FOREIGN KEY (att_1) REFERENCES employee(emp_id),
 	FOREIGN KEY (att_2) REFERENCES employee(emp_id),
 	FOREIGN KEY (att_3) REFERENCES employee(emp_id)
-);_
+);
 
 CREATE TABLE customer
 (
@@ -82,7 +81,7 @@ CREATE TABLE logging
 	user_emp INTEGER,
 	user_cust INTEGER,
 	flight_num INTEGER,
-	FOREIGN KEY (user_emp) REFERENCES employee(id),
+	FOREIGN KEY (user_emp) REFERENCES employee(emp_id),
 	FOREIGN KEY (user_cust) REFERENCES customer(id),
 	FOREIGN KEY (flight_num) REFERENCES flight(number)
 );
@@ -91,5 +90,5 @@ CREATE TABLE authentication
 (
 	user_id INTEGER PRIMARY KEY,
 	pass_hash VARCHAR(64),
-	FOREIGN KEY (user_id) REFERENCES employee(id)
+	FOREIGN KEY (user_id) REFERENCES employee(emp_id)
 );

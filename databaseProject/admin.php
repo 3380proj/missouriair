@@ -1,37 +1,5 @@
 <?php
 
-  //Login
-  include_once 'dbconfig.php';
-  if (isset($_POST['loginBtn'])){
-
-
-    $username = $_POST['username'];
-    $password = $_POST['password'];
-
-    $stmt = mysqli_prepare($conn, "SELECT user_id, pass_hash FROM authentication WHERE user_id = ? AND pass_hash = ?");
-
-    if ($stmt){
-
-      mysqli_stmt_bind_param($stmt, "ss", $username, $password);
-      mysqli_stmt_execute($stmt);
-
-      if(mysqli_stmt_fetch($stmt)){
-
-        $_SESSION['user_session'] = $userRow['user_id'];
-        //Login user
-
-      }
-      else {
-
-        echo "did not work well";
-        //Invalid username/password
-
-
-      }
-    }
-    mysqli_stmt_close($stmt);
-  }
-
 ?>
 
 <!DOCTYPE html>
