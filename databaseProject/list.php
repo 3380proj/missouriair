@@ -99,15 +99,7 @@
         if(mysqli_stmt_execute($statement)){
             mysqli_stmt_bind_result($statement,$number,$departureDate,$price,$origin,$dest,$dep,$arr,$aircraft,$pilot_1,$pilot_2,$pilot_3,$att_1,$att_2,$att_3);
             echo "<table class=\"table\">\n";
-            echo "<thead>
-                    <tr>
-                      <th>Origin</th>
-                      <th>Destination</th>
-                      <th>Date</th>
-                      <th>Departure</th>
-                      <th>Price</th>
-                    </tr>
-                  </thead>\n";
+            echo "<thead>\n\t<tr>\n\t\t<th>Origin</th>\n\t\t<th>Destination</th>\n\t\t<th>Date</th>\n\t\t<th>Departure</th>\n\t\t<th>Price</th>\n\t</tr>\n</thead>\n";
             while (mysqli_stmt_fetch($statement))
             {
               echo "<tr>\n";
