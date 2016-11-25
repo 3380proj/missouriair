@@ -98,7 +98,7 @@
 
         if(mysqli_stmt_execute($statement)){
             mysqli_stmt_bind_result($statement,$number,$departureDate,$price,$origin,$dest,$dep,$arr,$aircraft,$pilot_1,$pilot_2,$pilot_3,$att_1,$att_2,$att_3);
-            echo "<table>\n";
+            echo "<table class=\"table\">\n";
             while (mysqli_stmt_fetch($statement))
             {
               echo "<tr>\n";
