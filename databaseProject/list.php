@@ -93,7 +93,9 @@
         $departureDate_search = $_POST["departureDate"];
         $price_search = $_POST["price"]; 
         echo "DEBUG: search data - " . $origin_search . $dest_search . $departureDate_search . $price_search . "<br />\n";
-        $statement = mysqli_prepare($conn, "SELECT * FROM flight WHERE origin, dest, day, price LIKE %?%, %?%, %?%, %?%");
+        /*$statement = mysqli_prepare($conn, "SELECT * FROM flight WHERE origin, dest, day, price LIKE ?, ?, ?, ?");*/
+        $statement = mysqli_prepare($conn, "SELECT * FROM flight WHERE origin LIKE ? AND dest LIKE ? AND day LIKE * AND price LIKE ?");
+
         mysqli_stmt_bind_param($statement, "ssss", $origin_search, $dest_search, $departureDate_search, $price_search);
 
         if(mysqli_stmt_execute($statement)){
@@ -106,7 +108,7 @@
               echo "\t<td>" . $origin . "</td>\n";
               echo "\t<td>" . $dest . "</td>\n";
               echo "\t<td>" . $departureDate . "</td>\n";
-              echo "\t<td>" . $price . "</td>\n";
+              echo "\t<td>" . $price . "</td>\n"; 
               echo "\t<td><form><input type=\"submit\" action=\"confirmRes.php\" name=\"resSelect\" value=\"Select Reservation\"></form></td>\n";
               echo "</tr>\n";
             }
