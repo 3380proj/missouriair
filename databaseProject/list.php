@@ -96,7 +96,7 @@
         
         $statement = mysqli_prepare($conn, "SELECT * FROM database WHERE from, to, departureDate, returnDate, price LIKE ?, ?, ?, ?, ?");
     
-        }
+        
         
         if(mysqli_stmt_execute($statement)){
             mysqli_stmt_bind_param($statement, "sssss", $from_search, $to_search, $departureDate_search, $returnDate_search, $price_search);
@@ -128,6 +128,7 @@
         }
         mysqli_stmt_close($statement);
         mysqli_close($conn);
+	}
  
  ?>
 
