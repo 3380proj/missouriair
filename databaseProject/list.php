@@ -94,8 +94,7 @@
         $returnDate_search = $_POST["returnDate"]; 
         $price_search = $_POST["price"]; 
         
-        $statement = mysqli_prepare($conn, "SELECT * FROM database WHERE from, to, departureDate, returnDate, price LIKE ?, ?, ?, ?, ?");
-    
+        $statement = mysqli_prepare($conn, "SELECT * FROM database WHERE from, to, departureDate, returnDate, price LIKE %?%, %?%, %?%, %?%, %?%");
         }
         
         if(mysqli_stmt_execute($statement)){
