@@ -84,7 +84,7 @@
       <h1>Flights Available:</h1>
       
         <?php
-        /*if ($_SERVER['REQUEST_METHOD'] == 'POST') {*/
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         include("../secure/database.php");
         $conn = mysqli_connect(HOST,USERNAME,PASSWORD,DBNAME) or die("Connect Error " . mysqli_error($conn));
  
@@ -92,14 +92,11 @@
         $dest_search = "%{$_POST['dest']}%";
         $departureDate_search = "%{$_POST['departureDate']}%";
         $price_search = "%{$_POST['price']}%"; 
-        echo "DEBUG: search data - " . $origin_search . $dest_search . $departureDate_search . $price_search . "<br />\n";
-        /*$statement = mysqli_prepare($conn, "SELECT * FROM flight WHERE origin, dest, day, price LIKE ?, ?, ?, ?");*/
         $statement = mysqli_prepare($conn, "SELECT * FROM flight WHERE origin LIKE ? AND dest LIKE ? AND day LIKE ? AND price LIKE ?");
 
         mysqli_stmt_bind_param($statement, "ssss", $origin_search, $dest_search, $departureDate_search, $price_search);
 
         if(mysqli_stmt_execute($statement)){
-            echo "DEBUG: statement executed <br />\n";
             mysqli_stmt_bind_result($statement,$number,$departureDate,$price,$origin,$dest,$dep,$arr,$aircraft,$pilot_1,$pilot_2,$pilot_3,$att_1,$att_2,$att_3);
             echo "<table>\n";
             while (mysqli_stmt_fetch($statement))
@@ -116,7 +113,7 @@
         }
         mysqli_stmt_close($statement);
         mysqli_close($conn);
-      	/*}*/
+      	}
  
  ?>
 
