@@ -88,36 +88,23 @@
         include("../secure/database.php");
         $conn = mysqli_connect(HOST,USERNAME,PASSWORD,DBNAME) or die("Connect Error " . mysqli_error($conn));
  
-        $from_search = $_POST["from"];
-        $to_search = $_POST["to"];
+        $origin_search = $_POST["from"];
+        $dest_search = $_POST["to"];
         $departureDate_search = $_POST["departureDate"];
-        $returnDate_search = $_POST["returnDate"]; 
         $price_search = $_POST["price"]; 
         
-        $statement = mysqli_prepare($conn, "SELECT * FROM flight WHERE origin, dest, departureDate, returnDate, price LIKE %?%, %?%, %?%, %?%, %?%");
+        $statement = mysqli_prepare($conn, "SELECT * FROM flight WHERE origin, dest, day, price LIKE %?%, %?%, %?%, %?%");
+        mysqli_stmt_bind_param($statement, "ssss", $origin_search, $dest_search, $departureDate_search, $price_search);
 
         if(mysqli_stmt_execute($statement)){
-            mysqli_stmt_bind_param($statement, "sssss", $from_search, $to_search, $departureDate_search, $returnDate_search, $price_search);
+            mysqli_stmt_bind_result($statement,$number,$departureDate,$price,$origin,$dest,$dep,$arr,$aircraft,$pilot_1,$pilot_2,$pilot_3,$att_1,$att_2,$att_3);
             echo "<table>\n";
-            print "<thead><tr>";   
-            $i=0;
-            $meta = $statement->result_metadata();
-            $query_data=array(); 
-            while ($field = $meta->fetch_field()) {
-              print "<th>" . $field->name . "</th>";
-              $var = $i;
-              $$var = null;
-              $query_data[$var] = &$$var;
-              $i++;   
-            }
-            print "</tr></thead>";
             while (mysqli_stmt_fetch($statement))
             {
               echo "<tr>\n";
-              echo "\t<td>" . $from . "</td>\n";
-              echo "\t<td>" . $to . "</td>\n";
+              echo "\t<td>" . $origin . "</td>\n";
+              echo "\t<td>" . $dest . "</td>\n";
               echo "\t<td>" . $departureDate . "</td>\n";
-              echo "\t<td>" . $returnDate . "</td>\n";
               echo "\t<td>" . $price . "</td>\n";
               echo "\t<td><form><input type=\"submit\" action=\"confirmRes.php\" name=\"resSelect\" value=\"Select Reservation\"></form></td>\n";
               echo "</tr>\n";
@@ -126,7 +113,7 @@
         }
         mysqli_stmt_close($statement);
         mysqli_close($conn);
-	}
+      	}
  
  ?>
 
