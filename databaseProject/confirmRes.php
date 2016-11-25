@@ -110,10 +110,10 @@ bag and 5% sales tax.-->
     $yes = $_POST['yes']; 
     $no = $_POST['no']; 
         
-    echo "<div class="container"><tr>
-        <td>"$fname"</td>
-        <td>"$lname"</td>
-        <td>"$numBags"</td>
+    echo "<div class=\"container\"><tr>
+        <td>{$fname}</td>
+        <td>{$lname}</td>
+        <td>{$numBags}</td>
         </tr>";
            
     echo "<p>Would you like to confirm this reservation?</p>
@@ -130,7 +130,7 @@ bag and 5% sales tax.-->
 
         $numBags = $_POST['bags']; 
         $price = "Pass in price from database"; 
-        $reservation = "SELECT FROM database flight reservation"; 
+        $reservation = ""; 
         $price = $_POST['price']; 
         $fname = $_POST['fname'];
         $lname = $_POST['lname'];  
