@@ -94,7 +94,7 @@
         $price_search = $_POST["price"]; 
         echo "DEBUG: search data - " . $origin_search . $dest_search . $departureDate_search . $price_search . "<br />\n";
         /*$statement = mysqli_prepare($conn, "SELECT * FROM flight WHERE origin, dest, day, price LIKE ?, ?, ?, ?");*/
-        $statement = mysqli_prepare($conn, "SELECT * FROM flight WHERE origin LIKE ? AND dest LIKE ? AND day LIKE ? AND price LIKE ?");
+        $statement = mysqli_prepare($conn, "SELECT * FROM flight WHERE origin LIKE %?% AND dest LIKE %?% AND day LIKE %?% AND price LIKE %?%");
 
         mysqli_stmt_bind_param($statement, "ssss", $origin_search, $dest_search, $departureDate_search, $price_search);
 
