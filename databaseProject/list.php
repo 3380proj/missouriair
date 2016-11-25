@@ -81,7 +81,7 @@
     <br><br><br><br><br><br>
     <div class="container">
 
-      <h1>Flights Availible:</h1>
+      <h1>Flights Available:</h1>
       
         <?php
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
