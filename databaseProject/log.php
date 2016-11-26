@@ -5,15 +5,14 @@
       //header("Location: index.php");
       //exit;
     //}
-
     
-
-
-
-
-
-
-
+    if(isset($_POST['refreshBtn'])){
+        
+        include("../secure/database.php");
+        $conn = mysqli_connect(HOST,USERNAME,PASSWORD,DBNAME) or die("Connect Error " . mysqli_error($conn));
+        
+        
+    }
 
 ?>
 <!DOCTYPE html>
@@ -92,7 +91,7 @@
                 <option value = "reservation">Reservation</option>
                 <option value = "flight">Flight</option>
             </select>
-            <input type="submit" name="submit" value="Refresh">
+            <input type="submit" name="refreshBtn" value="Refresh" class="btn btn-block btn-primary">
             
         </form>
         <hr>
