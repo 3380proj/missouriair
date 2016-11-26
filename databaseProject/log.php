@@ -112,10 +112,6 @@
         echo "<table class=\"table\">\n";
             echo "<thead>\n\t<tr>\n\t\t<th>Log_Num</th>\n\t\t<th>IP</th>\n\t\t<th>Action Time</th>\n\t\t<th>Action</th>\n\t\t<th>User_Emp</th>\n\t\t<th>User_Cust</th>\n\t\t<th>Flight_Num</th></tr>\n</thead>\n";
         ?>
-        <hr>
-        <footer>
-            <p>&copy; 2016 Missouri Air, Inc.</p>
-        </footer>
     </div> <!-- /container -->  
       
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
