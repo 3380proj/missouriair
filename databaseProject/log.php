@@ -109,16 +109,8 @@
         <?php 
         include("../secure/database.php");
         $conn = mysqli_connect(HOST,USERNAME,PASSWORD,DBNAME) or die("Connect Error " . mysqli_error($conn));
-
-        $result = mysqli_query($conn, "SELECT * from logging");
-        echo "<table border=1>";
-
-        while($field = mysqli_fetch_field($result)){
-            echo "<th>";
-            echo $field->name . "<br>";
-            echo "</th>";
-
-        }
+        echo "<table class=\"table\">\n";
+            echo "<thead>\n\t<tr>\n\t\t<th>Log_Num</th>\n\t\t<th>IP</th>\n\t\t<th>Action Time</th>\n\t\t<th>Action</th>\n\t\t<th>User_Emp</th>\n\t\t<th>User_Cust</th>\n\t\t<th>Flight_Num</th></tr>\n</thead>\n";
         ?>
         <hr>
         <footer>
