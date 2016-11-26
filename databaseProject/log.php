@@ -72,6 +72,7 @@
                 <option value = "reservation">Reservation</option>
                 <option value = "flight">Flight</option>
             </select>
+            <br>
             <input type="submit" name="refreshBtn" value="Refresh" class="btn btn-success">
             <br>
             <br>
