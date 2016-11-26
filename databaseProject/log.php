@@ -50,6 +50,7 @@
       </div>
     </nav>
     
+    <br><br><br><br><br><br>
     <div class="container">
         <h3>Logs</h3>
         <form action="log.php" method="POST">
@@ -75,6 +76,7 @@
             <br>
             <br>
         </form>
+        
         <?php 
         include("../secure/database.php");
         $conn = mysqli_connect(HOST,USERNAME,PASSWORD,DBNAME) or die("Connect Error " . mysqli_error($conn));
