@@ -49,18 +49,6 @@
         </div><!--/.navbar-collapse -->
       </div>
     </nav>
-
-    <!-- Main jumbotron for a primary marketing message or call to action -->
-    <div class="jumbotron">
-      <div class="container">
-        <h1>
-            <br>
-            <div>
-            <img src="MissouriAirLogo1.gif" alt="Missouri Air" id="logo">
-            </div>
-          </h1>
-      </div>
-    </div>
     
     <div class="container">
         <h3>Logs</h3>
