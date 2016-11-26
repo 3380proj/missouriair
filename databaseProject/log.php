@@ -91,7 +91,7 @@
                 <option value = "reservation">Reservation</option>
                 <option value = "flight">Flight</option>
             </select>
-            <input type="submit" name="refreshBtn" value="Refresh">
+            <input type="submit" name="refreshBtn" value="Refresh" class="btn btn-success">
             
         </form>
         <hr>
