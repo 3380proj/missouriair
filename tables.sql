@@ -23,7 +23,7 @@ CREATE TABLE certification
 
 CREATE TABLE equipment
 (
-	serial VARCHAR(10) PRIMARY KEY,
+	serial INTEGER PRIMARY KEY,
 	seats INTEGER,
 	equipment VARCHAR(10),
 	pilots INTEGER,
@@ -33,13 +33,13 @@ CREATE TABLE equipment
 CREATE TABLE flight
 (
 	number INTEGER PRIMARY KEY,
-	day DATE,
+	day VARCHAR(8),
 	price DECIMAL(13,2),
 	origin VARCHAR(20),
 	dest VARCHAR(20),
 	dep TIME,
 	arr TIME,
-	aircraft VARCHAR(10),
+	aircraft INTEGER,
 	pilot_1 INTEGER,
 	pilot_2 INTEGER,
 	pilot_3 INTEGER,
@@ -88,7 +88,8 @@ CREATE TABLE logging
 
 CREATE TABLE authentication
 (
-	user_id INTEGER PRIMARY KEY,
-	pass_hash VARCHAR(64),
+	user_id INTEGER AUTO_INCREMENT PRIMARY KEY,
+    user_name VARCHAR(50),
+	pass_hash VARCHAR(15),
 	FOREIGN KEY (user_id) REFERENCES employee(emp_id)
 );
