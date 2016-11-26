@@ -1,5 +1,5 @@
 <?php
-    echo "TESTING";
+
     //session_start();
     // if session is not set this will redirect to home page
     //if( !isset($_SESSION['user']) ) {
@@ -104,6 +104,7 @@
                 <option value = "flight">Flight</option>
             </select>
             <input type="submit" name="refreshBtn" value="Refresh" class="btn btn-success">
+            <?php echo "testing" ?>
         </form>
         <hr>
         <footer>
