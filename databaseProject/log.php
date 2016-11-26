@@ -11,7 +11,7 @@
         include("../secure/database.php");
         $conn = mysqli_connect(HOST,USERNAME,PASSWORD,DBNAME) or die("Connect Error " . mysqli_error($conn));
         
-        $result = mysqli_query($conn, "SELECT * from classes");
+        $result = mysqli_query($conn, "SELECT * from logging");
         echo "<table border=1>";
 
         while($field = mysqli_fetch_field($result)){
