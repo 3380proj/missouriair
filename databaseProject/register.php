@@ -1,18 +1,18 @@
-<?php
+<?php   
     session_start();
     $error = false;
     $usernameError = "";
     $passwordError = "";
     $message = "";
+
+    if (isset($_POST['registerBtn'])) {
     
-    if (isset($_POST['loginBtn'])){
-        
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             include("../secure/database.php");
             $conn = mysqli_connect(HOST,USERNAME,PASSWORD,DBNAME) or die("Connect Error " . mysqli_error($conn));
         }
-        
-        //Clean inputs
+  
+        // Clean inputs
         $username = trim($_POST['username']);
         $username = strip_tags($username);
         $username = htmlspecialchars($username);
@@ -24,50 +24,45 @@
         $password = mysqli_real_escape_string($conn, $password);
 
         //name validation
-        if(empty($username)){
-
+        if (empty($username)) {
             $error = true;
-            $usernameError = "Please enter valid username";
+            $usernameError = "Please enter a username.";
+            
+        } else if (strlen($username) < 3) {
+            $error = true;
+            $usernameError = "Name must have atleat 3 characters.";
+        }
 
+        // password validation
+        if (empty($password)){
+            $error = true;
+            $passwordError = "Please enter password.";
+        } else if(strlen($password) < 6) {
+            $error = true;
+            $passwordError = "Password must have atleast 6 characters.";
         }
         
-        //password validation
-        if(empty($password)){
-
-            $error = true;
-            $passwordError = "Please enter valid password";
-        }
-
-        //if there's no error, continue to login
-        if (!$error) {
-            $stmt = mysqli_prepare($conn, "SELECT user_name, pass_hash FROM authentication WHERE user_name LIKE ? AND pass_hash LIKE ?");
+        // if there's no error, continue to signup
+        if(!$error) {
             
-            if ($stmt) {    
+            $stmt = mysqli_prepare($conn, "INSERT INTO authentication (user_name, pass_hash) VALUES (?, ?)");
+            if ($stmt) {
+                
                 mysqli_stmt_bind_param($stmt, "ss", $username, $password);
                 mysqli_stmt_execute($stmt);
-                $result = mysqli_stmt_get_result($stmt);
-                $num = mysqli_num_rows($result);
+                $num = mysqli_affected_rows($conn);
                 
-                //Row was found (data was valid) = success
+                //Row was inserted (data was valid) = success
                 if ($num == 1){
                     
-                    $row = mysqli_fetch_array($result);
-                    $user = $row['user_name']; 
-                    $_SESSION['user'] = $user;
-                    if ($user = "admin"){
-                        
-                        //home for now
-                        //header("Location: admin.php");
-                        header("Location: home.php");
-                        
-                    }else{
-                     
-                        header("Location: home.php");
-                        
-                    }
-                }else{
+                    $message = "Successfully registered, you may login now";
+                    unset($username);
+                    unset($password);
                     
-                    $message = "Invalid Username or Password.";
+                }else {
+                    
+                    $message = "Something went wrong, try again later..."; 
+                    
                 }
             }
         }
@@ -84,9 +79,31 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
         <title>Results</title>
-
         <!-- Bootstrap -->
         <link href="css/bootstrap.min.css" rel="stylesheet">
+        
+        <script>
+            /*
+            function employeeType(nameSelect){
+                console.log(nameSelect);
+                if(nameSelect){
+                    if(nameSelect.value == 1){
+                        document.getElementById("flight-attendant-box").style.display = "block";
+                        document.getElementById("pilot-box").style.display = "none";
+                    }
+                    else{
+                        document.getElementById("pilot-box").style.display = "block";
+                        document.getElementById("flight-attendant-box").style.display = "none";
+                    }
+                }
+                else{
+                    document.getElementById("flight-attendant-box").style.display = "none";
+                    document.getElementById("pilot-box").style.display = "none";
+                }
+            }
+            */
+            
+        </script>
 
         <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -115,13 +132,13 @@
         
         <br><br><br><br><br><br>
         <div class="container">
-            <form method="post">
-                <h3>Employee Login</h3>
+            <form method="POST">
+                <h3>Employee Registration</h3>
 
                 <div class="form-group">
                     <div class="input-group">
                         <span class="input-group-addon"><span class="glyphicon glyphicon-user"></span></span>
-                        <input type="text" name="username" class="form-control" placeholder="Enter Name" maxlength="50"/>
+                        <input type="text" name="username" class="form-control" placeholder="Enter a username" maxlength="50"/>
                     </div>
                     <span class="text-danger"><?php echo $usernameError; ?></span>
                 </div>
@@ -129,20 +146,41 @@
                 <div class="form-group">
                     <div class="input-group">
                         <span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
-                        <input type="password" name="password" class="form-control" placeholder="Enter Password" maxlength="15"/>
+                        <input type="password" name="password" class="form-control" placeholder="Enter a password" maxlength="15"/>
                     </div>
                     <span class="text-danger"><?php echo $passwordError; ?></span>
                 </div>
+                
+                
+                <!--
+                <div class="form-group">
+                    <div class="input-group">
+                        <select onchange="employeeType(this);">
+                            <option selected disabled>Choose Employee Type</option>
+                            <option value="1">Flight Attendant</option>
+                            <option value="2">Pilot</option>
+                        </select>
+                    </div>
+                    <div id="flight-attendant-box" style="display:none;">
+                        <input type="text" name="fname" class="form-control" placeholder="Enter First Name" maxlength="50"/>
+                        <input type="text" name="lname" class="form-control" placeholder="Enter Last Name" maxlength="50"/>
+                    </div>
+                    <div id="pilot-box" style="display:none;">
+                        <input type="text" name="fname" class="form-control" placeholder="Enter First Name" maxlength="50"/>
+                        <input type="text" name="lname" class="form-control" placeholder="Enter Last Name" maxlength="50"/>
+                    </div>
+                </div>
+                -->
 
                 <div class="form-group">
                     <div class="input-group">
-                        <button type="submit" class="btn btn-block btn-primary" name="loginBtn">Login</button>
+                        <button type="submit" class="btn btn-block btn-primary" name="registerBtn">Register</button>
                     </div>
                     <span class="text-danger"><?php echo $message; ?></span>
                 </div>
 
                 <div class="form-group">
-                    <a href="register.php">Sign Up Here...</a>
+                    <a href="login.php">Login here...</a>
                 </div>
             
             </form>
