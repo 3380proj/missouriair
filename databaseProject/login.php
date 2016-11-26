@@ -69,6 +69,8 @@
                     
                     $message = "Invalid Username or Password.";
                 }
+            }else{
+                echo "ERROR";
             }
         }
     }
