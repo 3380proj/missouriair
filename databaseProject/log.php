@@ -75,7 +75,13 @@
         
         <form action="log.php" method="POST">
             Amount of Logs
-            <input type="text" name="logs" id="logs">
+            <select name="amountOfLogs">
+                <option value = "25">25</option>
+                <option value = "50">50</option>
+                <option value = "100">100</option>
+                <option value = "200">200</option>
+                <option value = "500">500</option>
+            </select>
             Start Date:
             <input type ="time" name="start_date" id="start_date">
             End Date:
