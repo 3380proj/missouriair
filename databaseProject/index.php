@@ -2,7 +2,7 @@
     
     if (isset($_POST['loginBtn'])){
         
-        header("Location: login.php")
+        header("Location: login.php");
         
     }
 
