@@ -1,4 +1,5 @@
 <?php
+    echo "TESTING";
     //session_start();
     // if session is not set this will redirect to home page
     //if( !isset($_SESSION['user']) ) {
@@ -6,12 +7,12 @@
       //exit;
     //}
     
-    echo "testing";
+    /*
     if(isset($_POST['refreshBtn'])){
         
         include("../secure/database.php");
         $conn = mysqli_connect(HOST,USERNAME,PASSWORD,DBNAME) or die("Connect Error " . mysqli_error($conn));
-        /*
+        
         $result = mysqli_query($conn, "SELECT * from logging");
         echo "<table border=1>";
 
@@ -22,8 +23,9 @@
             echo "</th>";
                         
         }
-        */
+        
     }
+    */
 
 ?>
 <!DOCTYPE html>
@@ -82,7 +84,6 @@
     
     <div class="container">
         <h3>Logs</h3>
-        
         <form action="log.php" method="POST">
             Amount of Logs
             <select name="amountOfLogs">
@@ -103,7 +104,6 @@
                 <option value = "flight">Flight</option>
             </select>
             <input type="submit" name="refreshBtn" value="Refresh" class="btn btn-success">
-            
         </form>
         <hr>
         <footer>
