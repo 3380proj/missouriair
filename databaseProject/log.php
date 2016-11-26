@@ -76,6 +76,7 @@
         <form action="log.php" method="POST">
             Amount of Logs
             <select name="amountOfLogs">
+                <option selected disabled>Choose here</option>
                 <option value = "25">25</option>
                 <option value = "50">50</option>
                 <option value = "100">100</option>
