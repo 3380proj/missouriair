@@ -73,7 +73,7 @@
     <div class="container">
         <h3>Logs</h3>
         
-        <form action="insert.php" method="POST">
+        <form action="log.php" method="POST">
             Amount of Logs
             <input type="text" name="logs" id="logs">
             Start Date:
