@@ -107,7 +107,6 @@
             <br>
         </form>
         <?php 
-        if(isset($_POST['refreshBtn'])){
             include("../secure/database.php");
             $conn = mysqli_connect(HOST,USERNAME,PASSWORD,DBNAME) or die("Connect Error " . mysqli_error($conn));
 
