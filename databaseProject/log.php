@@ -105,6 +105,7 @@
             </select>
             <input type="submit" name="refreshBtn" value="Refresh" class="btn btn-success">
             <br>
+            <br>
         </form>
         <?php 
         include("../secure/database.php");
