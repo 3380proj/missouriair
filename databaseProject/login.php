@@ -50,12 +50,26 @@
                 
                 //Row was found (data was valid) = success
                 if ($num == 1){
-                    
+                        
                     $row = mysqli_fetch_array($result);
                     $user = $row['user_id']; 
-                    $_SESSION['employee'] = $user;
-                    header("Location: home.php");
-                    
+                    $statement = mysqli_prepare($conn, "SELECT job_type FROM employee WHERE emp_id LIKE ?"); 
+                    mysqli_stmt_bind_param($statement, "i", $user);
+                    mysqli_stmt_execute($statement);
+                    $res = mysqli_stmt_get_result($statment);
+                    $entry = mysqli_fetch_array($res);
+                    $jobtype = $entry['job_type'];
+                    if ($jobtype == 0){
+                        
+                        $_SESSION['admin'] = $user;
+                        header("Location: admin.php");
+                        
+                    }else{
+                     
+                        $_SESSION['employee'] = $user;
+                        header("Location: home.php");
+                        
+                    }
                 }else{
                     
                     $message = "Invalid Username or Password.";

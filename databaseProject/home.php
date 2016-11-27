@@ -105,9 +105,11 @@
     <br><br><br><br><br><br>
     <div class="container">
         <h1><?php echo $empPosition; ?></h1>
+        <h3>Flight Logs</h3>
         <?php
-            statement = mysqli_prepare($conn, "SELECT * FROM flight WHERE CONCAT(pilot_1, ' ', pilot_2, ' ', pilot_3, ' ', att_1, ' ', att_2, ' ', att_3) = ?");
-            mysqli_stmt_bind_param($statement, "i", $empID);
+        
+            $statement = mysqli_prepare($conn, "SELECT * FROM flight WHERE pilot_1 LIKE ? OR pilot_2 LIKE ? OR pilot_3 LIKE ? OR att_1 LIKE ? OR att_2 LIKE ? OR att_3 LIKE ?");
+            mysqli_stmt_bind_param($statement, "iiiiii", $empID, $empID, $empID, $empID, $empID, $empID);
             if(mysqli_stmt_execute($statement)){
                 mysqli_stmt_bind_result($statement,$number,$departureDate,$price,$origin,$dest,$dep,$arr,$aircraft,$pilot_1,$pilot_2,$pilot_3,$att_1,$att_2,$att_3);
                 echo "<table class=\"table\">\n";
@@ -127,10 +129,6 @@
             }
             mysqli_stmt_close($statement);
         ?>
-        <hr>
-        <footer>
-            <p>&copy; 2016 Missouri Air, Inc.</p>
-        </footer>
     </div> <!-- /container -->  
       
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->

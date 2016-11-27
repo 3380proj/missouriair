@@ -79,11 +79,45 @@
         </form>
         
         <?php 
+         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         include("../secure/database.php");
         $conn = mysqli_connect(HOST,USERNAME,PASSWORD,DBNAME) or die("Connect Error " . mysqli_error($conn));
+        
+        $origin_search = "%{$_POST['origin']}%";
+        $dest_search = "%{$_POST['dest']}%";
+        $departureDate_search = "%{$_POST['departureDate']}%";
+        $price_search = "%{$_POST['price']}%"; 
+        $statement = mysqli_prepare($conn, "SELECT * FROM login WHERE origin LIKE ? AND dest LIKE ? AND day LIKE ? AND price LIKE ?");
+        mysqli_stmt_bind_param($statement, "ssss", $origin_search, $dest_search, $departureDate_search, $price_search);
+        if(mysqli_stmt_execute($statement)){
+            mysqli_stmt_bind_result($statement,$number,$departureDate,$price,$origin,$dest,$dep,$arr,$aircraft,$pilot_1,$pilot_2,$pilot_3,$att_1,$att_2,$att_3);
+            echo "<table class=\"table\">\n";
+            echo "<thead>\n\t<tr>\n\t\t<th>Origin</th>\n\t\t<th>Destination</th>\n\t\t<th>Date</th>\n\t\t<th>Departure</th>\n\t\t<th>Price</th>\n\t</tr>\n</thead>\n";
+            while (mysqli_stmt_fetch($statement))
+            {
+              echo "<tr>\n";
+              echo "\t<td>" . $origin . "</td>\n";
+              echo "\t<td>" . $dest . "</td>\n";
+              echo "\t<td>" . $departureDate . "</td>\n";
+              echo "\t<td>" . $dep . "</td>\n";
+              echo "\t<td>" . $price . "</td>\n"; 
+              echo "\t<td><form action=\"confirmRes.php\"><button name=\"resSelect\" type=\"submit\" value=\"{$number}\" class=\"btn btn-secondary\">Reserve</button></form></td>\n";
+              echo "</tr>\n";
+              
+            }
+            echo "</table>\n";
+        }
+        mysqli_stmt_close($statement);
+        mysqli_close($conn);
+      	}
+        
+        
+        ?>
+        
+        <!-- This part is currently commented out because I dont know if it needs to be deleted yet
         echo "<table class=\"table\">\n";
             echo "<thead>\n\t<tr>\n\t\t<th>Log_Num</th>\n\t\t<th>IP</th>\n\t\t<th>Action Time</th>\n\t\t<th>Action</th>\n\t\t<th>User_Emp</th>\n\t\t<th>User_Cust</th>\n\t\t<th>Flight_Num</th></tr>\n</thead>\n";
-        ?>
+        ?> -->
     </div> <!-- /container -->  
       
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
