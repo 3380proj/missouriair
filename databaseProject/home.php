@@ -48,7 +48,8 @@
         </div><!--/.navbar-collapse -->
       </div>
     </nav>
-      
+    
+    <br><br><br><br><br><br>
     <div class="container">
         <h1>Employee functions go here..</h1>
         <hr>
