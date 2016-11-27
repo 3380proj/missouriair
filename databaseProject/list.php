@@ -65,15 +65,6 @@
           <a class="navbar-brand" href="index.html"><img src="MissouriAirLogo2.jpg" style="width:100px;height:100px;"></a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
-          <form class="navbar-form navbar-right">
-            <div class="form-group">
-              <input type="text" placeholder="Email" class="form-control">
-            </div>
-            <div class="form-group">
-              <input type="password" placeholder="Password" class="form-control">
-            </div>
-            <button type="submit" class="btn btn-success">Sign in</button>
-          </form>
         </div><!--/.navbar-collapse -->
       </div>
     </nav>
@@ -81,41 +72,53 @@
     <br><br><br><br><br><br>
     <div class="container">
 
-      <h1>Flights Available:</h1>
+      <h1>Flights Availible:</h1>
       
         <?php
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         include("../secure/database.php");
         $conn = mysqli_connect(HOST,USERNAME,PASSWORD,DBNAME) or die("Connect Error " . mysqli_error($conn));
  
-        $origin_search = "%{$_POST['origin']}%";
-        $dest_search = "%{$_POST['dest']}%";
-        $departureDate_search = "%{$_POST['departureDate']}%";
-        $price_search = "%{$_POST['price']}%"; 
-        $statement = mysqli_prepare($conn, "SELECT * FROM flight WHERE origin LIKE ? AND dest LIKE ? AND day LIKE ? AND price LIKE ?");
-
-        mysqli_stmt_bind_param($statement, "ssss", $origin_search, $dest_search, $departureDate_search, $price_search);
-
+        $from_search = $_POST["from"];
+        $to_search = $_POST["to"];
+        $departureDate_search = $_POST["departureDate"];
+        $returnDate_search = $_POST["returnDate"]; 
+        $price_search = $_POST["price"]; 
+        
+        $statement = mysqli_prepare($conn, "SELECT * FROM database WHERE from, to, departureDate, returnDate, price LIKE ?, ?, ?, ?, ?");
+    
+        }
+        
         if(mysqli_stmt_execute($statement)){
-            mysqli_stmt_bind_result($statement,$number,$departureDate,$price,$origin,$dest,$dep,$arr,$aircraft,$pilot_1,$pilot_2,$pilot_3,$att_1,$att_2,$att_3);
-            echo "<table class=\"table\">\n";
-            echo "<thead>\n\t<tr>\n\t\t<th>Origin</th>\n\t\t<th>Destination</th>\n\t\t<th>Date</th>\n\t\t<th>Departure</th>\n\t\t<th>Price</th>\n\t</tr>\n</thead>\n";
+            mysqli_stmt_bind_param($statement, "sssss", $from_search, $to_search, $departureDate_search, $returnDate_search, $price_search);
+            echo "<table>\n";
+            print "<thead><tr>";   
+            $i=0;
+            $meta = $statement->result_metadata();
+            $query_data=array(); 
+            while ($field = $meta->fetch_field()) {
+              print "<th>" . $field->name . "</th>";
+              $var = $i;
+              $$var = null;
+              $query_data[$var] = &$$var;
+              $i++;   
+            }
+            print "</tr></thead>";
             while (mysqli_stmt_fetch($statement))
             {
               echo "<tr>\n";
-              echo "\t<td>" . $origin . "</td>\n";
-              echo "\t<td>" . $dest . "</td>\n";
+              echo "\t<td>" . $from . "</td>\n";
+              echo "\t<td>" . $to . "</td>\n";
               echo "\t<td>" . $departureDate . "</td>\n";
-              echo "\t<td>" . $dep . "</td>\n";
-              echo "\t<td>" . $price . "</td>\n"; 
-              echo "\t<td><form action=\"confirmRes.php\"><button name=\"resSelect\" type=\"submit\" value=\"{$number}\" class=\"btn btn-secondary\">Reserve</button></form></td>\n";
+              echo "\t<td>" . $returnDate . "</td>\n";
+              echo "\t<td>" . $price . "</td>\n";
+              echo "\t<td><form><input type=\"submit\" action=\"confirmRes.php\" name=\"resSelect\" value=\"Select Reservation\"></form></td>\n";
               echo "</tr>\n";
             }
             echo "</table>\n";
         }
         mysqli_stmt_close($statement);
         mysqli_close($conn);
-      	}
  
  ?>
 
