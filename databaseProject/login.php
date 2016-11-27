@@ -53,7 +53,7 @@
                     
                     $row = mysqli_fetch_array($result);
                     $user = $row['user_id']; 
-                    $_SESSION['user_id'] = $user;
+                    $_SESSION['employee'] = $user;
                     header("Location: home.php");
                     
                 }else{
