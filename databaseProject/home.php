@@ -5,7 +5,7 @@
       //header("Location: index.php");
       //exit;
     //}
-    
+    echo $_SESSION['employee'];
     /*
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         include("../secure/database.php");
