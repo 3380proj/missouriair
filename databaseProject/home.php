@@ -1,11 +1,10 @@
 <?php
     session_start();
-    // if session is not set this will redirect to login page
-    //if(!isset($_SESSION['employee']) ) {
-      //header("Location: index.php");
-      //exit;
-    //}
-    echo $_SESSION['employee'];
+    //if session is not set this will redirect to login page
+    if(!isset($_SESSION['employee']) ) {
+      header("Location: index.php");
+      exit;
+    }
     /*
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         include("../secure/database.php");
