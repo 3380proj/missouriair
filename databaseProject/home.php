@@ -95,8 +95,8 @@
             <form class="navbar-form navbar-right" method = "POST">
                 <button type="submit" name="logoutBtn" class="btn btn-danger navbar-right">Logout</button>
             </form>
-            <p class="navbar-text navbar-right"><?php echo "Welcome " . $fname . " " . $lname; ?></p>
-
+            <p class="navbar-text navbar-right"><?php echo "Welcome " . $fname . " " . $lname  . "<br>Rank: " . $empPosition; ?></p>
+S
         </div><!--/.navbar-collapse -->
       </div>
     </nav>
