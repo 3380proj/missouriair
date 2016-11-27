@@ -40,7 +40,7 @@
 
         //if there's no error, continue to login
         if (!$error) {
-            $stmt = mysqli_prepare($conn, "SELECT user_name, pass_hash FROM authentication WHERE user_name LIKE ? AND pass_hash LIKE ?");
+            $stmt = mysqli_prepare($conn, "SELECT user_id, user_name, pass_hash FROM authentication WHERE user_name LIKE ? AND pass_hash LIKE ?");
             
             if ($stmt) {    
                 mysqli_stmt_bind_param($stmt, "ss", $username, $password);
