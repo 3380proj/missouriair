@@ -33,6 +33,14 @@
             
         }
     }
+
+    if (isset($_POST['logoutBtn'])) {
+        unset($_SESSION['user']);
+        session_unset();
+        session_destroy();
+        header("Location: index.php");
+        exit;
+    }
 ?>
 
 <!DOCTYPE html>
@@ -72,6 +80,7 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">
         <p class="navbar-text navbar-right"><?php echo "Welcome " . $fname . " " . $lname; ?></p>
+        <button type="submit" name="logoutBtn" class="btn btn-danger navbar-right">Logout</button>
         </div><!--/.navbar-collapse -->
       </div>
     </nav>
