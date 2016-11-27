@@ -59,7 +59,7 @@
             $stmt = mysqli_prepare($conn, "INSERT INTO authentication (user_id, user_name, pass_hash) VALUES (?, ?, ?)");
             if ($stmt) {
                 
-                mysqli_stmt_bind_param($stmt, "iss", $username, $password);
+                mysqli_stmt_bind_param($stmt, "iss", $empID, $username, $password);
                 mysqli_stmt_execute($stmt);
                 $num = mysqli_affected_rows($conn);
                 
