@@ -79,8 +79,10 @@
           <a class="navbar-brand" href="#"><img src="MissouriAirLogo2.jpg" style="width:100px;height:100px;"></a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
-        <p class="navbar-text navbar-right"><?php echo "Welcome " . $fname . " " . $lname; ?></p>
-        <button type="submit" name="logoutBtn" class="btn btn-danger navbar-right">Logout</button>
+            <p class="navbar-text navbar-right"><?php echo "Welcome " . $fname . " " . $lname; ?></p>
+            <form class="navbar-form navbar-right" method = "POST">
+                <button type="submit" name="logoutBtn" class="btn btn-danger navbar-right">Logout</button>
+            </form>
         </div><!--/.navbar-collapse -->
       </div>
     </nav>
