@@ -1,16 +1,15 @@
 <?php
     session_start();
-    // if session is not set this will redirect to login page
+    //if session is not set this will redirect to login page
     if(!isset($_SESSION['employee']) ) {
       header("Location: index.php");
       exit;
     }
     
-    /*
-    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    //if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         include("../secure/database.php");
         $conn = mysqli_connect(HOST,USERNAME,PASSWORD,DBNAME) or die("Connect Error " . mysqli_error($conn));
-    }
+    //}
 
     $stmt = mysqli_prepare($conn, "SELECT emp_id, fname, lname, job_type, rank FROM employee WHERE emp_id LIKE ?");    
     if ($stmt) {   
@@ -36,7 +35,6 @@
             
         }
     }
-    */
 ?>
 
 <!DOCTYPE html>
