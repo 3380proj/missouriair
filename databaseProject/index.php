@@ -1,5 +1,11 @@
 <?php
-    
+
+    session_start();
+    // if session is not set this will redirect to login page
+    if( isset($_SESSION['user']) ) {
+      header("Location: home.php");
+      exit;
+    }
     if (isset($_POST['loginBtn'])){
         
         header("Location: login.php");
