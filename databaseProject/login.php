@@ -58,7 +58,7 @@
                     mysqli_stmt_execute($statement);
                     $res = mysqli_stmt_get_result($statment);
                     $entry = mysqli_fetch_array($res);
-                    $jobtype = entry['job_type'];
+                    $jobtype = $entry['job_type'];
                     if ($jobtype == 0){
                         
                         $_SESSION['admin'] = $user;
