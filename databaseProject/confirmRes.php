@@ -86,8 +86,8 @@
 number of bags. The price for the flight will be calculated as the price in the database PLUS $20 for each
 bag and 5% sales tax.-->
         <form method="POST" action="confirmation.php" name="resForm">
-    Flight:
-    <input type="text" name="flight" value="<?php echo $_GET["resSelect"] ?>" readonly>
+    Flight Number:
+    <input type="text" name="flight_no" value="<?php echo $_GET["resSelect"] ?>" readonly>
     <br>
 		First Name:
 		<input type="text" name="fname" placeholder="First name">
@@ -101,7 +101,7 @@ bag and 5% sales tax.-->
 			<option value="2">2</option>
             <option value="3">3</option>	
 		</select>
-        <input type="submit" name="submit" value="Submit">
+        <input type="submit" name="submit" value="Submit" class="btn btn-primary">
 		</form>    
         
      <?php
@@ -127,18 +127,31 @@ bag and 5% sales tax.-->
     
         
     if (isset($_POST['yes'])) { 
-        $statement = mysqli_prepare($conn, "INSERT INTO database (reservation, fname, lname, price) VALUES (?, ?, ?, ?)");
-
-        mysqli_stmt_bind_param($statement, "ssss", $reservation, $fname, $lname, $price);
-
+        $ins_statement = mysqli_prepare($conn, "INSERT INTO database (reservation, fname, lname, price) VALUES (?, ?, ?, ?)");
+        mysqli_stmt_bind_param($ins_statement, "ssss", $reservation, $fname, $lname, $price);
+        $seats_statement = mysqli_prepare($conn, "SELECT flight.price, equipment.seats FROM flight INNER JOIN equipment ON flight.aircraft=equipment.serial WHERE flight.number = ?");
+        mysqli_stmt_bind_param($seats_statement, "i", $_POST["flight_no"]);
+        
+        if(mysqli_stmt_execute($seats_statement)){
+          $result = mysqli_stmt_get_result($seats_statement);
+          $numRows = mysqli_num_rows($result);
+          if($numRows == 1) {
+            $row = mysqli_fetch_array($result);
+            $numSeats = $row['seats'];
+            $price = $row['price'];
+          } else {
+            echo "Invalid Flight";
+            exit();
+          }
+        }
+        
         $numBags = $_POST['bags']; 
-        $price = "Pass in price from database"; 
-        $reservation = ""; 
-        $price = $_POST['price']; 
+        $price += $numBags * 20; //bag price
+        $price *= 1.05; //sales tax
         $fname = $_POST['fname'];
         $lname = $_POST['lname'];  
 
-        if(!mysqli_stmt_execute($statement)){
+        if(!mysqli_stmt_execute($ins_statement)){
         echo "\nError occurred: " . mysqli_stmt_error($statement);
         }
         mysqli_stmt_close($statement);
