@@ -58,8 +58,8 @@ CREATE TABLE flight
 CREATE TABLE customer
 (
 	id INTEGER AUTO_INCREMENT PRIMARY KEY,
-	fname INTEGER,
-	lname INTEGER
+	fname VARCHAR(20),
+	lname VARCHAR(20)
 );
 
 CREATE TABLE reservation
