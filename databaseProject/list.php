@@ -108,7 +108,7 @@
               echo "\t<td>" . $departureDate . "</td>\n";
               echo "\t<td>" . $dep . "</td>\n";
               echo "\t<td>" . $price . "</td>\n"; 
-              echo "\t<td><form><button name=\"resSelect\" type=\"submit\" value=\"{$number}\" class=\"btn btn-secondary\">Reserve</button></form></td>\n";
+              echo "\t<td><form action=\"confirmRes.php\" method=\"POST\"><button name=\"resSelect\" type=\"submit\" value=\"{$number}\" class=\"btn btn-secondary\">Reserve</button></form></td>\n";
               echo "</tr>\n";
             }
             echo "</table>\n";
