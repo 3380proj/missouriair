@@ -107,26 +107,9 @@ bag and 5% sales tax.-->
      <?php
     
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    include("../secure/database.php");
-    $conn = mysqli_connect(HOST,USERNAME,PASSWORD,DBNAME) or die("Connect Error " . mysqli_error($conn));
-      
-    $yes = $_POST['yes']; 
-    $no = $_POST['no']; 
-
-        
-    echo "<div class=\"container\"><tr>
-        <td>{$fname}</td>
-        <td>{$lname}</td>
-        <td>{$numBags}</td>
-        </tr>";
-           
-    echo "<p>Would you like to confirm this reservation?</p>
-    <form method=\"POST\"><input type=\"submit\" name=\"yes\" value=\"Yes\">
-    <input type=\"submit\" name=\"no\" value=\"No\"></form>";
+        include("../secure/database.php");
+        $conn = mysqli_connect(HOST,USERNAME,PASSWORD,DBNAME) or die("Connect Error " . mysqli_error($conn));
     
-    
-        
-    if (isset($_POST['yes'])) { 
         $res_statement = mysqli_prepare($conn, "INSERT INTO reservation (customer, price) VALUES (?, ?, ?)");
         mysqli_stmt_bind_param($ins_statement, "id", $cust_id, $price);
         $cust_statement = mysqli_prepare($conn, "INSERT INTO customer (fname,lname) VALUES (?, ?)");
@@ -165,10 +148,7 @@ bag and 5% sales tax.-->
         mysqli_stmt_close($seats_statement);
         mysqli_stmt_close($res_statement);
         mysqli_stmt_close($cust_statement);
-    }
-    else header('confirmRes.php');
-        
-    mysqli_close($conn); 
+        mysqli_close($conn); 
     }
 	
 ?>
