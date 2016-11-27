@@ -64,7 +64,7 @@ CREATE TABLE customer
 
 CREATE TABLE reservation
 (
-	id INTEGER PRIMARY KEY,
+	id INTEGER AUTO_INCREMENT PRIMARY KEY,
 	flight INTEGER,
 	customer INTEGER,
 	price DECIMAL(13,2),

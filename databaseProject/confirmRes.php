@@ -127,8 +127,8 @@ bag and 5% sales tax.-->
     
         
     if (isset($_POST['yes'])) { 
-        $ins_statement = mysqli_prepare($conn, "INSERT INTO database (reservation, fname, lname, price) VALUES (?, ?, ?, ?)");
-        mysqli_stmt_bind_param($ins_statement, "ssss", $reservation, $fname, $lname, $price);
+        $ins_statement = mysqli_prepare($conn, "INSERT INTO reservation (fname, lname, price) VALUES (?, ?, ?)");
+        mysqli_stmt_bind_param($ins_statement, "sss", $fname, $lname, $price);
         $seats_statement = mysqli_prepare($conn, "SELECT flight.price, equipment.seats FROM flight INNER JOIN equipment ON flight.aircraft=equipment.serial WHERE flight.number = ?");
         mysqli_stmt_bind_param($seats_statement, "i", $_POST["flight_no"]);
         
@@ -152,9 +152,10 @@ bag and 5% sales tax.-->
         $lname = $_POST['lname'];  
 
         if(!mysqli_stmt_execute($ins_statement)){
-        echo "\nError occurred: " . mysqli_stmt_error($statement);
+        echo "\nError occurred: " . mysqli_stmt_error($ins_statement);
         }
-        mysqli_stmt_close($statement);
+        mysqli_stmt_close($seats_statement)
+        mysqli_stmt_close($ins_statement);
     }
     else header('confirmRes.php');
         
