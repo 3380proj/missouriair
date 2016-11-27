@@ -40,7 +40,7 @@
 
         //if there's no error, continue to login
         if (!$error) {
-            $stmt = mysqli_prepare($conn, "SELECT user_id, user_name, pass_hash FROM authentication WHERE user_name LIKE ? AND pass_hash LIKE ?");
+            $stmt = mysqli_prepare($conn, "SELECT authentication.user_id, authentication.user_name, authentication.pass_hash, employee.job_type FROM authentication INNER JOIN employee ON authentication.user_id = employee.emp_id WHERE authentication.user_name LIKE ? AND authentication.pass_hash LIKE ?");
             
             if ($stmt) {    
                 mysqli_stmt_bind_param($stmt, "ss", $username, $password);
@@ -53,14 +53,7 @@
                         
                     $row = mysqli_fetch_array($result);
                     $user = $row['user_id']; 
-                    
-                    
-                    $statement = mysqli_prepare($conn, "SELECT job_type FROM employee WHERE emp_id = ?"); 
-                    mysqli_stmt_bind_param($statement, "i", $user);
-                    mysqli_stmt_execute($statement);
-                    $res = mysqli_stmt_get_result($statment);
-                    $entry = mysqli_fetch_array($res);
-                    $jobtype = $entry['job_type'];
+                    $jobtype = $row['job_type'];
                     
                     if ($jobtype == 0){
                         
