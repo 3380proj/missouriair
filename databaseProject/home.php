@@ -5,7 +5,7 @@
       header("Location: index.php");
       exit;
     }
-    /*
+    
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         include("../secure/database.php");
         $conn = mysqli_connect(HOST,USERNAME,PASSWORD,DBNAME) or die("Connect Error " . mysqli_error($conn));
@@ -35,7 +35,6 @@
             
         }
     }
-    */
 ?>
 
 <!DOCTYPE html>
@@ -74,7 +73,7 @@
           <a class="navbar-brand" href="#"><img src="MissouriAirLogo2.jpg" style="width:100px;height:100px;"></a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
-        <span><?php //echo $lname; ?></span>
+        <span><?php echo $lname; ?></span>
         </div><!--/.navbar-collapse -->
       </div>
     </nav>
