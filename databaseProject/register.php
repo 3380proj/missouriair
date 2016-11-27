@@ -13,6 +13,12 @@
         }
   
         // Clean inputs
+        
+        $empID = trim($_POST['empID']);
+        $empID = strip_tags($empID);
+        $empID = htmlspecialchars($empID);
+        $empID = mysqli_real_escape_string($conn, $empID);
+        
         $username = trim($_POST['username']);
         $username = strip_tags($username);
         $username = htmlspecialchars($username);
@@ -23,6 +29,11 @@
         $password = htmlspecialchars($password);
         $password = mysqli_real_escape_string($conn, $password);
 
+        //employee ID validation
+        if (empty($empID)) {
+            $error = true;
+            $usernameError = "Please enter your employee ID.";
+        } 
         //name validation
         if (empty($username)) {
             $error = true;
@@ -45,10 +56,10 @@
         // if there's no error, continue to signup
         if(!$error) {
             
-            $stmt = mysqli_prepare($conn, "INSERT INTO authentication (user_name, pass_hash) VALUES (?, ?)");
+            $stmt = mysqli_prepare($conn, "INSERT INTO authentication (user_id, user_name, pass_hash) VALUES (?, ?, ?)");
             if ($stmt) {
                 
-                mysqli_stmt_bind_param($stmt, "ss", $username, $password);
+                mysqli_stmt_bind_param($stmt, "iss", $username, $password);
                 mysqli_stmt_execute($stmt);
                 $num = mysqli_affected_rows($conn);
                 
@@ -134,7 +145,16 @@
         <div class="container">
             <form method="POST">
                 <h3>Employee Registration</h3>
-
+                
+                
+                <div class="form-group">
+                    <div class="input-group">
+                        <span class="input-group-addon"><span class="glyphicon glyphicon-user"></span></span>
+                        <input type="text" name="empID" class="form-control" placeholder="Enter your employee ID" maxlength="50"/>
+                    </div>
+                    <span class="text-danger"><?php //echo $usernameError; ?></span>
+                </div>
+                
                 <div class="form-group">
                     <div class="input-group">
                         <span class="input-group-addon"><span class="glyphicon glyphicon-user"></span></span>
