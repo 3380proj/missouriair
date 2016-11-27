@@ -25,6 +25,19 @@
             $lname = $row['lname'];
             $jobtype = $row['job_type'];
             $rank = $row['rank'];
+            if ($jobtype == 0){
+                
+                $empPosition = "Admin";
+                
+            }else if ($jobtype == 1){
+                
+                $empPosition = "Pilot";
+                
+            }else {
+                
+                $empPosition = "Flight Attendant";
+                
+            }
 
         }else{
 
@@ -83,6 +96,7 @@
                 <button type="submit" name="logoutBtn" class="btn btn-danger navbar-right">Logout</button>
             </form>
             <p class="navbar-text navbar-right"><?php echo "Welcome " . $fname . " " . $lname; ?></p>
+
         </div><!--/.navbar-collapse -->
       </div>
     </nav>
