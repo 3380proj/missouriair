@@ -52,19 +52,10 @@
                 if ($num == 1){
                     
                     $row = mysqli_fetch_array($result);
-                    $user = $row['user_name']; 
-                    $_SESSION['user'] = $user;
-                    if ($user = "admin"){
-                        
-                        //home for now
-                        //header("Location: admin.php");
-                        header("Location: home.php");
-                        
-                    }else{
-                     
-                        header("Location: home.php");
-                        
-                    }
+                    $user = $row['user_id']; 
+                    $_SESSION['user_id'] = $user;
+                    header("Location: home.php");
+                    
                 }else{
                     
                     $message = "Invalid Username or Password.";
