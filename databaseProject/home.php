@@ -35,22 +35,6 @@
             
         }
     }
-
-
-    CREATE TABLE employee
-(
-	emp_id INTEGER PRIMARY KEY,
-	fname VARCHAR(30), 
-	lname VARCHAR(30), 
-	job_type INTEGER,			/*0-admin, 1-pilot, 2-FA*/
-	rank VARCHAR(20), 			/*pilot or FA*/
-	status BOOLEAN, 		/*pilot*/
-	hours INTEGER				/*pilot*/
-);
-
-
-
-
 ?>
 
 <!DOCTYPE html>
