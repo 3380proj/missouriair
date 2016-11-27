@@ -118,12 +118,11 @@ bag and 5% sales tax.-->
            
     echo "<p>Would you like to confirm this reservation?</p>
     <form method=\"POST\"><input type=\"submit\" name=\"yes\" value=\"Yes\">
-    <input type=\"submit\" name=\"no\" value=\"No\"></form>"
+    <input type=\"submit\" name=\"no\" value=\"No\"></form>";
     
-    }
+    
         
-    if(isset($_POST['yes']))
-    { 
+    if (isset($_POST['yes'])) { 
         $statement = mysqli_prepare($conn, "INSERT INTO database (reservation, fname, lname, price) VALUES (?, ?, ?, ?)");
 
         mysqli_stmt_bind_param($statement, "ssss", $reservation, $fname, $lname, $price);
@@ -143,6 +142,7 @@ bag and 5% sales tax.-->
     else header('confirmRes.php');
         
     mysqli_close($conn); 
+    }
 	
 ?>
 
