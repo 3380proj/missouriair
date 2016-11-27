@@ -154,7 +154,7 @@ bag and 5% sales tax.-->
         if(!mysqli_stmt_execute($ins_statement)){
         echo "\nError occurred: " . mysqli_stmt_error($ins_statement);
         }
-        mysqli_stmt_close($seats_statement)
+        mysqli_stmt_close($seats_statement);
         mysqli_stmt_close($ins_statement);
     }
     else header('confirmRes.php');
