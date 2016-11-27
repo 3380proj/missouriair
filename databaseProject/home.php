@@ -6,10 +6,10 @@
       exit;
     }
     
-    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    //if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         include("../secure/database.php");
         $conn = mysqli_connect(HOST,USERNAME,PASSWORD,DBNAME) or die("Connect Error " . mysqli_error($conn));
-    }
+    //}
 
     $stmt = mysqli_prepare($conn, "SELECT emp_id, fname, lname, job_type, rank FROM employee WHERE emp_id LIKE ?");    
     if ($stmt) {   
