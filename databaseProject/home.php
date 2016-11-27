@@ -105,6 +105,8 @@
     <br><br><br><br><br><br>
     <div class="container">
         <h1><?php echo $empPosition; ?></h1>
+        <br>
+        <h3>Flight Logs</h3>
         <?php
             //$statement = mysqli_prepare($conn, "SELECT * FROM flight WHERE CONCAT(pilot_1, ' ', pilot_2, ' ', pilot_3, ' ', att_1, ' ', att_2, ' ', att_3) LIKE ?");
             $statement = mysqli_prepare($conn, "SELECT * FROM flight WHERE att_1 LIKE ?");
