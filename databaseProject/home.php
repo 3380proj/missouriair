@@ -75,7 +75,7 @@
           <a class="navbar-brand" href="#"><img src="MissouriAirLogo2.jpg" style="width:100px;height:100px;"></a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
-        <span><?php echo $lname; ?></span>
+        <span><?php //echo $lname; ?></span>
         </div><!--/.navbar-collapse -->
       </div>
     </nav>
