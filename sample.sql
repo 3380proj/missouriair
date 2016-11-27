@@ -8,7 +8,8 @@ INSERT INTO employee VALUES
 	(372819, 'Simon', 'Said', 2, 'Junior', 1, 2887),
 	(776573, 'Janet', 'Johnson', 2, 'Senior', 1, 7654),
 	(111980, 'Hillary', 'Trump', 2, 'Senior', 1, 13101),
-	(485932, 'Donald', 'Clinton', 2, 'Senior', 1, 8876);
+	(485932, 'Donald', 'Clinton', 2, 'Senior', 1, 8876),
+	(111111, 'Admin', 'Admin', 0, null, 1, null);
 
 INSERT INTO certification VALUES
 	(382901, 'B747'),
