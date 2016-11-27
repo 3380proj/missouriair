@@ -1,9 +1,39 @@
 <?php
     session_start();
     // if session is not set this will redirect to login page
-    if( !isset($_SESSION['user']) ) {
+    if( !isset($_SESSION['employee']) ) {
       header("Location: index.php");
       exit;
+    }
+    
+    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+        include("../secure/database.php");
+        $conn = mysqli_connect(HOST,USERNAME,PASSWORD,DBNAME) or die("Connect Error " . mysqli_error($conn));
+    }
+
+    $stmt = mysqli_prepare($conn, "SELECT emp_id, fname, lname, job_type, rank FROM employee WHERE emp_id LIKE ?");    
+    if ($stmt) {   
+        $empID = $_SESSION['employee'];
+        mysqli_stmt_bind_param($stmt, "i", $empID);
+        mysqli_stmt_execute($stmt);
+        $result = mysqli_stmt_get_result($stmt);
+        $num = mysqli_num_rows($result);
+                
+        //Row was found (data was valid) = success
+        if ($num == 1){
+
+            $row = mysqli_fetch_array($result);
+            $fname = $row['fname']; 
+            $lname = $row['lname'];
+            $jobtype = $row['job_type'];
+            $rank = $row['rank'];
+
+        }else{
+
+            unset($_SESSION['employee']);
+            header("Location: index.php");
+            
+        }
     }
 ?>
 
@@ -43,8 +73,7 @@
           <a class="navbar-brand" href="#"><img src="MissouriAirLogo2.jpg" style="width:100px;height:100px;"></a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
-          <form class="navbar-form navbar-right">
-          </form>
+        <span><?php echo $lname; ?></span>
         </div><!--/.navbar-collapse -->
       </div>
     </nav>
