@@ -111,7 +111,7 @@ bag and 5% sales tax.-->
         $conn = mysqli_connect(HOST,USERNAME,PASSWORD,DBNAME) or die("Connect Error " . mysqli_error($conn));
     
         $res_statement = mysqli_prepare($conn, "INSERT INTO reservation (customer, price) VALUES (?, ?, ?)");
-        mysqli_stmt_bind_param($ins_statement, "id", $cust_id, $price);
+        mysqli_stmt_bind_param($res_statement, "id", $cust_id, $price);
         $cust_statement = mysqli_prepare($conn, "INSERT INTO customer (fname,lname) VALUES (?, ?)");
         mysqli_stmt_bind_param($cust_statement, "ss", $fname, $lname);
         $seats_statement = mysqli_prepare($conn, "SELECT flight.price, equipment.seats FROM flight INNER JOIN equipment ON flight.aircraft=equipment.serial WHERE flight.number = ?");
