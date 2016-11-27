@@ -85,7 +85,7 @@
         <!--  first name, last name, age,
 number of bags. The price for the flight will be calculated as the price in the database PLUS $20 for each
 bag and 5% sales tax.-->
-        <form method="POST" action="confirmation.php" name="resForm">
+        <form method="POST" action="confirmRes.php" name="resForm">
     Flight Number:
     <input type="text" name="flight_no" value="<?php echo $_GET["resSelect"] ?>" readonly>
     <br>
