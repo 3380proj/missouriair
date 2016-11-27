@@ -47,4 +47,4 @@ INSERT INTO reservation VALUES
 	('B4091', 5540, 1, 899);
 
 INSERT INTO authentication VALUES
-	('csmith', 'secret');
+	(99872, 'csmith', 'secret');
