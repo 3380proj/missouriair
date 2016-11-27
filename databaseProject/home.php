@@ -95,15 +95,14 @@
             <form class="navbar-form navbar-right" method = "POST">
                 <button type="submit" name="logoutBtn" class="btn btn-danger navbar-right">Logout</button>
             </form>
-            <p class="navbar-text navbar-right"><?php echo "Welcome " . $fname . " " . $lname  . "<br>Rank: " . $empPosition; ?></p>
-S
+            <p class="navbar-text navbar-right"><?php echo "Welcome " . $fname . " " . $lname;  ?></p>
         </div><!--/.navbar-collapse -->
       </div>
     </nav>
     
     <br><br><br><br><br><br>
     <div class="container">
-        <h1>Employee functions go here..</h1>
+        <h1><?php echo $empPosition; ?></h1>
         <hr>
         <footer>
             <p>&copy; 2016 Missouri Air, Inc.</p>
