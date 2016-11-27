@@ -1,5 +1,19 @@
 <?php
 
+    session_start();
+    //if session is not set this will redirect to login page
+    if(!isset($_SESSION['admin']) ) {
+      header("Location: index.php");
+      exit;
+    }
+
+    if (isset($_POST['logoutBtn'])) {
+        unset($_SESSION['user']);
+        session_unset();
+        session_destroy();
+        header("Location: index.php");
+        exit;
+    }
 ?>
 
 <!DOCTYPE html>
