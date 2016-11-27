@@ -45,3 +45,6 @@ INSERT INTO customer VALUES
 
 INSERT INTO reservation VALUES
 	('B4091', 5540, 1, 899);
+
+INSERT INTO authentication VALUES
+	('csmith', 'secret');

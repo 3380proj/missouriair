@@ -99,7 +99,7 @@ bag and 5% sales tax.-->
 		<select name="bags">
 			<option value="1">1</option>
 			<option value="2">2</option>
-            <option value="3">3</option>	
+      <option value="3">3</option>	
 		</select>
         <input type="submit" name="submit" value="Submit" class="btn btn-primary">
 		</form>    
@@ -127,8 +127,10 @@ bag and 5% sales tax.-->
     
         
     if (isset($_POST['yes'])) { 
-        $ins_statement = mysqli_prepare($conn, "INSERT INTO reservation (fname, lname, price) VALUES (?, ?, ?)");
-        mysqli_stmt_bind_param($ins_statement, "sss", $fname, $lname, $price);
+        $res_statement = mysqli_prepare($conn, "INSERT INTO reservation (customer, price) VALUES (?, ?, ?)");
+        mysqli_stmt_bind_param($ins_statement, "id", $cust_id, $price);
+        $cust_statement = mysqli_prepare($conn, "INSERT INTO customer (fname,lname) VALUES (?, ?)");
+        mysqli_stmt_bind_param($cust_statement, "ss", $fname, $lname);
         $seats_statement = mysqli_prepare($conn, "SELECT flight.price, equipment.seats FROM flight INNER JOIN equipment ON flight.aircraft=equipment.serial WHERE flight.number = ?");
         mysqli_stmt_bind_param($seats_statement, "i", $_POST["flight_no"]);
         
@@ -145,17 +147,24 @@ bag and 5% sales tax.-->
           }
         }
         
-        $numBags = $_POST['bags']; 
+        $numBags = intval($_POST['bags']); 
         $price += $numBags * 20; //bag price
         $price *= 1.05; //sales tax
         $fname = $_POST['fname'];
         $lname = $_POST['lname'];  
+        
+        if(mysqli_stmt_execute($cust_statement)){
+          $cust_id = mysqli_insert_id($conn); 
+        } else {
+          echo "\nError occurred: " . mysqli_stmt_error($cust_statement);
+        }
 
-        if(!mysqli_stmt_execute($ins_statement)){
-        echo "\nError occurred: " . mysqli_stmt_error($ins_statement);
+        if(!mysqli_stmt_execute($res_statement)){
+          echo "\nError occurred: " . mysqli_stmt_error($res_statement);
         }
         mysqli_stmt_close($seats_statement);
-        mysqli_stmt_close($ins_statement);
+        mysqli_stmt_close($res_statement);
+        mysqli_stmt_close($cust_statement);
     }
     else header('confirmRes.php');
         
