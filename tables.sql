@@ -4,7 +4,7 @@ SET foreign_key_checks = 1;
 
 CREATE TABLE employee
 (
-	emp_id INTEGER PRIMARY KEY,
+	emp_id INTEGER AUTO_INCREMENT PRIMARY KEY,
 	fname VARCHAR(30), 
 	lname VARCHAR(30), 
 	job_type INTEGER,			/*0-admin, 1-pilot, 2-FA*/
@@ -23,7 +23,7 @@ CREATE TABLE certification
 
 CREATE TABLE equipment
 (
-	serial INTEGER PRIMARY KEY,
+	serial VARCHAR(10) PRIMARY KEY,
 	seats INTEGER,
 	equipment VARCHAR(10),
 	pilots INTEGER,
@@ -88,7 +88,7 @@ CREATE TABLE logging
 
 CREATE TABLE authentication
 (
-	user_id INTEGER AUTO_INCREMENT PRIMARY KEY,
+	user_id INTEGER PRIMARY KEY,
     user_name VARCHAR(50),
 	pass_hash VARCHAR(15),
 	FOREIGN KEY (user_id) REFERENCES employee(emp_id)
