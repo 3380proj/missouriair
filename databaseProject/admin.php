@@ -86,7 +86,21 @@
     <div class="container">
 
       <h1>Welcome, Administrator</h1>
-      <p>Forms here</p>
+      <div class="row">
+        <form method="POST" action="admin_search.php">
+        <div class="col-md-8"><input type="text" name="emp_id" placeholder="Employee ID"></div>
+        <div class="col-md-4"><button type="submit" name="submit" value="Submit" class="btn btn-primary">Search</button></div>
+        </form>
+      </div>
+      <div class="row">
+        <div class="col-md-4"><a href=".php" class="btn btn-default">Edit Flights</a></div>
+        <div class="col-md-4"><a href=".php" class="btn btn-default">Edit Customers</a></div>
+        <div class="col-md-4"><a href=".php" class="btn btn-default">Edit Equip</a></div>
+      </div>
+      <div class="row">
+        <div class="col-md-4"><a href=".php" class="btn btn-default">Edit Employees</a></div>
+        <div class="col-md-4"><a href=".php" class="btn btn-default">Edit Certifications</a></div>
+      </div>
 
     </div> <!-- /container -->
 
