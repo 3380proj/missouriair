@@ -110,6 +110,7 @@
               echo "\t<td>" . $price . "</td>\n"; 
               echo "\t<td><form action=\"confirmRes.php\"><button name=\"resSelect\" type=\"submit\" value=\"{$number}\" class=\"btn btn-secondary\">Reserve</button></form></td>\n";
               echo "</tr>\n";
+              
             }
             echo "</table>\n";
         }
@@ -118,6 +119,7 @@
       	}
  
  ?>
+ 
 
     </div> <!-- /container -->
 
