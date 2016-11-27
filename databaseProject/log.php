@@ -87,7 +87,7 @@
         $dest_search = "%{$_POST['dest']}%";
         $departureDate_search = "%{$_POST['departureDate']}%";
         $price_search = "%{$_POST['price']}%"; 
-        $statement = mysqli_prepare($conn, "SELECT * FROM login WHERE origin LIKE ? AND dest LIKE ? AND day LIKE ? AND price LIKE ?");
+        $statement = mysqli_prepare($conn, "SELECT * FROM logging WHERE origin LIKE ? AND dest LIKE ? AND day LIKE ? AND price LIKE ?");
         mysqli_stmt_bind_param($statement, "ssss", $origin_search, $dest_search, $departureDate_search, $price_search);
         if(mysqli_stmt_execute($statement)){
             mysqli_stmt_bind_result($statement,$number,$departureDate,$price,$origin,$dest,$dep,$arr,$aircraft,$pilot_1,$pilot_2,$pilot_3,$att_1,$att_2,$att_3);
