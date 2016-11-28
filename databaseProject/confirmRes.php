@@ -1,6 +1,5 @@
 <?php
     $error = false;
-    $message = "";
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -56,7 +55,6 @@
     <div class="container">
         <div id="res-prompt">
             <p>Have you made a reseveration before?</p>
-            <p>If you are, a customer ID is required. (If you were brought back here, your customer ID was invalid)</p>
             <input type="submit" name="prevBtn" value="Yes" class="btn btn-primary" onclick="prevCustomer()">
             <input type="submit" name="newBtn" value="No" class="btn btn-primary" onclick="newCustomer()">
         </div>
@@ -86,11 +84,10 @@
         <div id="prev-div" style="display:none;">
             <form method="POST" action="confirmRes.php" name="resForm">
                 Flight Number:
-                <input type="text" name="flight_no" value="<?php if(isset($_GET["resSelect"])){echo $_GET["resSelect"];};?>" readonly>
+                <input type="text" name="flight_no" value="<?php echo isset($_GET['resSelect'])?$_GET['resSelect']:null ?>" readonly>
                 <br>
                 Enter customer ID:
                 <input type="text" name="custID" placeholder="Your ID">
-                <span class="text-danger"><?php echo $message; ?></span>
                 <br>
                 Number of Bags: 
                 <select name="bags">
@@ -125,7 +122,6 @@
             $numSeats = $row['seats'];
             $price = $row['price'];
           } else {
-            echo "Invalid Flight";
             exit();
           }
         }
@@ -163,8 +159,8 @@
                     
                 }else{
                     $error = true;
-                    $message = "Invalid customer ID";
-                    exit();
+                    echo "<script>alert('Invalid Customer ID'); echo window.location.href = 'index.php';</script>";
+                    //exit();
                 }
             } 
         }
