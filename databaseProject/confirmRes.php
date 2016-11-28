@@ -169,7 +169,6 @@
 
         if (!isset($_POST['custID'])){
             if(mysqli_stmt_execute($cust_statement)){
-                echo $fname . " " . $lname;
                 $cust_id = mysqli_insert_id($conn); 
             } else {
                 echo "\nCustomer creation error occurred: " . mysqli_stmt_error($cust_statement);
