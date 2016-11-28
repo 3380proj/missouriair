@@ -97,18 +97,18 @@
         include("../secure/database.php");
         $conn = mysqli_connect(HOST,USERNAME,PASSWORD,DBNAME) or die("Connect Error " . mysqli_error($conn));
         
-        $amountOfLogs_search = "%{$_POST['amountOfLogs']}%";
-        $action_date_search = "%{$_POST['action_date']}%";
-        $action_type_search = "%{$_POST['action_type']}%";
-        $ip_search = "%{$_POST['ip']}%";
-        $log_num_search = "%{$_POST['log_num']}%";     
-        $user_emp_search = "%{$_POST['user_emp']}%";     
-        $user_cust_search = "%{$_POST['user_cust']}%";
-        $flight_num_search = "%{$_POST['flight_num']}%";
+        $amountOfLogs = "%{$_POST['amountOfLogs']}%";
+        $action_date = "%{$_POST['action_date']}%";
+        $action_type = "%{$_POST['action_type']}%";
+        $ip = "%{$_POST['ip']}%";
+        $log_num = "%{$_POST['log_num']}%";     
+        $user_emp = "%{$_POST['user_emp']}%";     
+        $user_cust = "%{$_POST['user_cust']}%";
+        $flight_num = "%{$_POST['flight_num']}%";
              
              
-        $statement = mysqli_prepare($conn, "SELECT * FROM logging WHERE action_date LIKE ? AND action_type LIKE ? AND log_num LIKE ? AND user_emp LIKE ? AND user_cust LIKE ? AND flight_num LIKE ?");
-        mysqli_stmt_bind_param($statement, "sss", $action_date, $action);
+        $statement = mysqli_prepare($conn, "SELECT * FROM logging WHERE action_date LIKE ? AND action_type LIKE ? AND log_num LIKE ? AND user_emp LIKE ? AND user_cust LIKE ? AND flight_num LIKE ? AND ip LIKE ?");
+        mysqli_stmt_bind_param($statement, "ssiiiis", $action_date, $action_type, $log_num, $user_emp, $user_cust, $flight_num, $ip);
         if(mysqli_stmt_execute($statement)){
             mysqli_stmt_bind_result($statement,$number,$departureDate,$price,$origin,$dest,$dep,$arr,$aircraft,$pilot_1,$pilot_2,$pilot_3,$att_1,$att_2,$att_3);
             echo "<table class=\"table\">\n";
