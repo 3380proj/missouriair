@@ -135,7 +135,7 @@
                         }
                         else
                         {
-                            echo "<script>alert(Failed)</script>"
+                            echo "<script>alert(Failed)</script>";
                         }
                         
                     }
