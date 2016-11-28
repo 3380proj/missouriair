@@ -119,15 +119,14 @@
                       echo "\t<td>" . $emp_id . "</td>\n";
                       echo "\t<td>" . $equipment . "</td>\n";
                       echo "\t<td><form action=\"admin_certification_edit.php\"><button name=\"Edit\" type=\"submit\" class=\"btn btn-secondary\">Edit</button></form></td>\n";
-                      echo "\t<td><form action='' method='POST'><button name=\"delete\" type=\"submit\" class=\"btn btn-secondary\">Delete</button></form></td>\n";
+                      echo "\t<td><form action='' method='POST'><button name=\"delete\" type=\"submit\" value=\"{$emp_id}\" class=\"btn btn-secondary\">Delete</button></form></td>\n";
                       echo "</tr>\n";
 
                 }
                 echo "</table>\n";
-                    
                     if(isset($_POST['delete'])){
                         $table= "certification";
-                        $value= $emp_id;
+                        $value= $_POST['delete'];
                         if(delete($table, $value)==1)
                         {
                             echo "<script>alert(Sucess)</script>";
