@@ -54,6 +54,7 @@
     <div class="container">
         <h3>Logs</h3>
         <form action="log.php" method="POST">
+          <!-- if we decide to use Amount of Logs#####
             Amount of Logs
             <select name="amountOfLogs">
                 <option selected disabled>Choose here</option>
@@ -62,7 +63,7 @@
                 <option value = "100">100</option>
                 <option value = "200">200</option>
                 <option value = "500">500</option>
-            </select>
+            </select> -->
             Log Number:
             <input type="text" name="log_num">
             IP:
@@ -72,19 +73,20 @@
             
             Type of Action:
             <select name="action_type">
-                <option value = "reservation">Reservation</option>
+                <option value = "RESERVE">Reservation</option>
                 <option value = "flight">Flight</option>
             </select>
+            <br><br>
             Employee:
             <input type="text" name="user_emp">
-            <br>
+            
             Customer:
             <input type="text" name="user_cust">
-            <br>
+            
             Flight Number:
             <input type="text" name="flight_num">
-            <br>
-            <input type="submit" name="refreshBtn" value="Refresh" class="btn btn-success">
+            
+            <input type="submit" name="submit" value="Submit" class="btn btn-success">
             <br>
             <br>
         </form>
@@ -93,35 +95,38 @@
 
         -->
         <?php 
-         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         include("../secure/database.php");
         $conn = mysqli_connect(HOST,USERNAME,PASSWORD,DBNAME) or die("Connect Error " . mysqli_error($conn));
         
-        $amountOfLogs = "%{$_POST['amountOfLogs']}%";
-        $action_date = "%{$_POST['action_date']}%";
-        $action_type = "%{$_POST['action_type']}%";
-        $ip = "%{$_POST['ip']}%";
-        $log_num = "%{$_POST['log_num']}%";     
-        $user_emp = "%{$_POST['user_emp']}%";     
-        $user_cust = "%{$_POST['user_cust']}%";
-        $flight_num = "%{$_POST['flight_num']}%";
+        $action_date_search = "%{$_POST['action_date']}%";
+        $action_type_search = "%{$_POST['action_type']}%";
+        $ip_search = "%{$_POST['ip']}%";
+        $log_num_search = "%{$_POST['log_num']}%";     
+        $user_emp_search = "%{$_POST['user_emp']}%";     
+        $user_cust_search = "%{$_POST['user_cust']}%";
+        $flight_num_search = "%{$_POST['flight_num']}%";
              
              
         $statement = mysqli_prepare($conn, "SELECT * FROM logging WHERE action_date LIKE ? AND action_type LIKE ? AND log_num LIKE ? AND user_emp LIKE ? AND user_cust LIKE ? AND flight_num LIKE ? AND ip LIKE ?");
-        mysqli_stmt_bind_param($statement, "ssiiiis", $action_date, $action_type, $log_num, $user_emp, $user_cust, $flight_num, $ip);
+        mysqli_stmt_bind_param($statement, "ssiiiis", $action_date_search, $action_type_search, $log_num_search, $user_emp_search, $user_cust_search, $flight_num_search, $ip_search);
         if(mysqli_stmt_execute($statement)){
-            mysqli_stmt_bind_result($statement,$number,$departureDate,$price,$origin,$dest,$dep,$arr,$aircraft,$pilot_1,$pilot_2,$pilot_3,$att_1,$att_2,$att_3);
+            mysqli_stmt_bind_result($statement,$log_num,$ip,$action_date,$action_time,$action_type,$action_desc,$user_emp,$user_cust,$flight_num);
             echo "<table class=\"table\">\n";
-            echo "<thead>\n\t<tr>\n\t\t<th>Origin</th>\n\t\t<th>Destination</th>\n\t\t<th>Date</th>\n\t\t<th>Departure</th>\n\t\t<th>Price</th>\n\t</tr>\n</thead>\n";
+            echo "<thead>\n\t<tr>\n\t\t<th>Log Number</th>\n\t\t<th>IP</th>\n\t\t<th>Action Date</th>\n\t\t<th>Action Time</th>\n\t\t<th>Action Type</th>\n\t\t<th>Action Description</th>\n\t\t<th>User Employee</th>\n\t\t<th>User Customer</th>\n\t\t<th>Flight Number</th>\n\t</tr>\n</thead>\n";
             while (mysqli_stmt_fetch($statement))
             {
               echo "<tr>\n";
+              echo "\t<td>" . $log_num . "</td>\n";
+              echo "\t<td>" . $ip . "</td>\n";
               echo "\t<td>" . $action_date . "</td>\n";
-              echo "\t<td>" . $action . "</td>\n";
-              echo "\t<td>" . $ . "</td>\n";
-              echo "\t<td>" . $ . "</td>\n";
-              echo "\t<td>" . $ . "</td>\n"; 
-              echo "\t<td><form action=\"confirmRes.php\"><button name=\"resSelect\" type=\"submit\" value=\"{$number}\" class=\"btn btn-secondary\">Reserve</button></form></td>\n";
+              echo "\t<td>" . $action_time . "</td>\n";
+              echo "\t<td>" . $action_type . "</td>\n"; 
+              echo "\t<td>" . $action_desc . "</td>\n";
+              echo "\t<td>" . $user_emp . "</td>\n";
+              echo "\t<td>" . $user_cust . "</td>\n";   
+              echo "\t<td>" . $flight_num . "</td>\n";      
+
               echo "</tr>\n";
               
             }
