@@ -105,7 +105,7 @@
         <div class="col-md-4"><a href="admin_customers.php" class="btn btn-default">Edit Customers</a></div>
         <div class="col-md-4"><a href="admin_equipment.php" class="btn btn-default">Edit Equipment</a></div>
         <div class="col-md-4"><a href="admin_employees.php" class="btn btn-default">Edit Employees</a></div>
-        <div class="col-md-4"><a href="admin_certifications.php" class="btn btn-default">Edit Certifications</a></div>
+        <div class="col-md-4"><a href="admin_certification.php" class="btn btn-default">Edit Certifications</a></div>
       </div>
 
     </div> <!-- /container -->
