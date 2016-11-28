@@ -1,4 +1,5 @@
 <?php
+    session_start();
     $error = false;
 ?>
 <!DOCTYPE html>
@@ -14,21 +15,27 @@
     <!-- Bootstrap -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
     
-    <script>
-        
-        function prevCustomer(){
-            
-            document.getElementById("prev-div").style.display = "block";
-            document.getElementById("res-prompt").style.display = "none";
-            
+    <?php
+        if (!isset($_SESSION['error']){
+            echo "
+            <script>
+
+                function prevCustomer(){
+
+                    document.getElementById('prev-div').style.display = 'block';
+                    document.getElementById('res-prompt').style.display = 'none';
+
+                }
+
+                function newCustomer(){
+
+                    document.getElementById('new-div').style.display = 'block';
+                    document.getElementById('res-prompt').style.display = 'none';
+
+                }
+                "
         }
-        
-        function newCustomer(){
-            
-            document.getElementById("new-div").style.display = "block";
-            document.getElementById("res-prompt").style.display = "none";
-            
-        }
+    <?
         
     </script>
 </head>
@@ -177,11 +184,11 @@
                     
                 }else{
                     $error = true;
-                    echo '<script type="text/javascript">'; 
-                    echo 'window.location.href = "index.php";';
-                    echo 'alert("Invalid customer ID");'; 
-                    echo '</script>';
-                    exit();
+                    $_SESSION['error'] = true;
+                    //echo '<script type="text/javascript">'; 
+                    //echo 'window.location.href = "index.php";';
+                    //echo 'alert("Invalid customer ID");'; 
+                    //echo '</script>';
                 }
             } 
         }
@@ -190,6 +197,8 @@
               $res_num = mysqli_insert_id($conn);
               include("log_event.php");
               log_event($conn, "RESERVE", "Created Reservation {$res_num} on flight {$flight_no}", $flight_no, $cust_id, null);
+        }
+            
             } else {
               echo "\nError occurred: " . mysqli_stmt_error($res_statement);
             }
