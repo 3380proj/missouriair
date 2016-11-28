@@ -85,6 +85,7 @@
                 <br>
                 Enter customer ID:
                 <input type="text" name="custID" placeholder="Your ID">
+                <span class="text-danger"><?php echo $usernameError; ?></span>
                 <br>
                 Number of Bags: 
                 <select name="bags">
@@ -98,7 +99,8 @@
         </div>
         
      <?php
-    
+    $error = false;
+    $message = "";                   
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         include("../secure/database.php");
         $conn = mysqli_connect(HOST,USERNAME,PASSWORD,DBNAME) or die("Connect Error " . mysqli_error($conn));
@@ -131,19 +133,45 @@
         $fname = $_POST['fname'];
         $lname = $_POST['lname'];  
         
-        if(mysqli_stmt_execute($cust_statement)){
-          echo $fname . " " . $lname;
-          $cust_id = mysqli_insert_id($conn); 
-        } else {
-          echo "\nCustomer creation error occurred: " . mysqli_stmt_error($cust_statement);
-        }
+       
 
-        if(mysqli_stmt_execute($res_statement)){
-          $res_num = mysqli_insert_id($conn);
-          include("log_event.php");
-          log_event($conn, "RESERVE", "Created Reservation {$res_num} on flight {$flight_no}", $flight_no, $cust_id, null);
-        } else {
-          echo "\nError occurred: " . mysqli_stmt_error($res_statement);
+        if (!isset($_POST['custID'])){
+            if(mysqli_stmt_execute($cust_statement)){
+                echo $fname . " " . $lname;
+                $cust_id = mysqli_insert_id($conn); 
+            } else {
+                echo "\nCustomer creation error occurred: " . mysqli_stmt_error($cust_statement);
+            }
+        }else{
+            
+            custID = $_POST['custID'];
+            $stmt = mysqli_prepare($conn, "SELECT id FROM customer WHERE id = ?");
+            if ($stmt) {    
+                mysqli_stmt_bind_param($stmt, "i", $custID);
+                mysqli_stmt_execute($stmt);
+                $result = mysqli_stmt_get_result($stmt);
+                $num = mysqli_num_rows($result);
+                
+                //Row was found (data was valid) = success
+                if ($num == 1){
+                    
+                    $cust_id = $custID;
+                    
+                }else{
+                    
+                    $message = "Invalid customer ID";
+                    $error = true;
+                }
+            } 
+        }
+        if (!error){
+            if(mysqli_stmt_execute($res_statement)){
+              $res_num = mysqli_insert_id($conn);
+              include("log_event.php");
+              log_event($conn, "RESERVE", "Created Reservation {$res_num} on flight {$flight_no}", $flight_no, $cust_id, null);
+            } else {
+              echo "\nError occurred: " . mysqli_stmt_error($res_statement);
+            }
         }
         mysqli_stmt_close($seats_statement);
         mysqli_stmt_close($res_statement);
