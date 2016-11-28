@@ -14,6 +14,11 @@
         header("Location: index.php");
         exit;
     }
+	
+	include("../secure/database.php");
+    $conn = mysqli_connect(HOST, USERNAME, PASSWORD, DBNAME) or die("Connect Error" . mysqli_error($conn));
+    
+    include "admin_delete.php.php";
 ?>
 
 <!DOCTYPE html>

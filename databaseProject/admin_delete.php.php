@@ -8,23 +8,6 @@
                 exit;
             }
 
-            $pre_check = "SELECT * FROM '$table'";
-
-            $pre_stmt = mysqli_prepare($conn, $pre_check);
-
-            $pre_check_result = $conn->query($pre_check);
-
-            if($pre_check_result){
-                /*
-                $pre_count = $pre_check_result -> num_rows;
-
-                $sql = "DELETE FROM '$table' WHERE '$column' = '$value'";
-
-                $sql_stmt = mysqli_prepare($mysqli, $sql);
-
-                $sqlResult = $mysqli->query($sql);
-                */
-                
                 switch ($table) {
                     case "certification":
                         $stmt = mysqli_prepare($conn, "DELETE FROM certification WHERE emp_id = ?");
