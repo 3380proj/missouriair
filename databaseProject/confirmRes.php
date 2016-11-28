@@ -16,7 +16,7 @@
     <link href="css/bootstrap.min.css" rel="stylesheet">
     
     <?php
-        if (!isset($_SESSION['error']){
+        if (!isset($_SESSION['error'])){
             echo "
             <script>
 
