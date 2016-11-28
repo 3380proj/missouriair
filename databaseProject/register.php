@@ -11,6 +11,7 @@
     $error = false;
     $usernameError = "";
     $passwordError = "";
+    $idError = "";
     $message = "";
 
     if (isset($_POST['registerBtn'])) {
