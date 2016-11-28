@@ -74,7 +74,7 @@
                 //Row was inserted (data was valid) = success
                 if (!($num == 1)){
                     
-                    $message = "Invalid employee ID!"; 
+                    $idError = "Invalid employee ID!"; 
                     
                 }
             }
@@ -174,7 +174,7 @@
                         <span class="input-group-addon"><span class="glyphicon glyphicon-user"></span></span>
                         <input type="text" name="empID" class="form-control" placeholder="Enter your employee ID" maxlength="50"/>
                     </div>
-                    <span class="text-danger"><?php //echo $usernameError; ?></span>
+                    <span class="text-danger"><?php echo $idError; ?></span>
                 </div>
                 
                 <div class="form-group">
