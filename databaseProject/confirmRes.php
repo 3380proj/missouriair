@@ -160,8 +160,8 @@
                 }else{
                     $error = true;
                     echo '<script type="text/javascript">'; 
-                    echo 'alert("Invalid customer ID");'; 
                     echo 'window.location.href = "index.php";';
+                    echo 'alert("Invalid customer ID");'; 
                     echo '</script>';
                     //exit();
                 }
