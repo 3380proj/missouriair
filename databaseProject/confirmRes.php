@@ -120,7 +120,25 @@
           if($numRows == 1) {
             $row = mysqli_fetch_array($result);
             $numSeats = $row['seats'];
+            stmt = mysqli_prepare($conn, "SELECT COUNT(*) as 'count' FROM reservation WHERE flight = ?");
+            if ($stmt) {    
+                mysqli_stmt_bind_param($stmt, "i", $flight_no);
+                mysqli_stmt_execute($stmt);
+                $result = mysqli_stmt_get_result($stmt);
+                $row = mysqli_fetch_array($result);
+                seats = $row['count']; 
+                if ((numSeats - seats) < 0){
+                
+                    $error = true;
+                    echo '<script type="text/javascript">'; 
+                    echo 'window.location.href = "index.php";';
+                    echo 'alert("Sorry, this flight has been filled.");'; 
+                    echo '</script>';
+                    exit();
+                }
+            } 
             $price = $row['price'];
+              
           } else {
             exit();
           }
@@ -162,7 +180,6 @@
                     echo '<script type="text/javascript">'; 
                     echo 'window.location.href = "index.php";';
                     echo 'alert("Invalid customer ID");'; 
-                    echo 'event.preventDefault();';
                     echo '</script>';
                     exit();
                 }
