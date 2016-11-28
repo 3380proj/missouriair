@@ -33,9 +33,9 @@
                     document.getElementById('res-prompt').style.display = 'none';
 
                 }
-                "
+                ";
         }
-    <?
+    ?>
         
     </script>
 </head>
