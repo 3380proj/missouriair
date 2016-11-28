@@ -1,5 +1,4 @@
 <?php
-    $message = "";
     $error = false;
 ?>
 <!DOCTYPE html>
@@ -57,6 +56,8 @@
         <div id="res-prompt">
             <span class="text-danger"><?php echo $message; ?></span>
             <p>Have you made a reseveration before?</p>
+            <br>
+            <p>(Need valid customer ID)</p>
             <input type="submit" name="prevBtn" value="Yes" class="btn btn-primary" onclick="prevCustomer()">
             <input type="submit" name="newBtn" value="No" class="btn btn-primary" onclick="newCustomer()">
         </div>
@@ -161,8 +162,6 @@
                     $cust_id = $custID;
                     
                 }else{
-                    
-                    $message = "Invalid customer ID";
                     $error = true;
                 }
             } 
