@@ -13,7 +13,7 @@
         $conn = mysqli_connect(HOST, USERNAME, PASSWORD, DBNAME) or die("Connect Error" . mysqli_error($conn));
 		
 		if($conn -> connect_error){
-			header("Locaton: error.php");
+			header("Locaton: index.php");
 			exit;
 		}
 		
@@ -30,7 +30,7 @@
 			}
 			
 			else{
-				header("Location: error.php");
+				header("Location: index.php");
 				exit;
 			}
 		}
