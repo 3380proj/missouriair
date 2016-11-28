@@ -107,7 +107,7 @@
         $flight_num_search = "%{$_POST['flight_num']}%";
              
              
-        $statement = mysqli_prepare($conn, "SELECT * FROM logging WHERE action_date LIKE ? AND action LIKE ?");
+        $statement = mysqli_prepare($conn, "SELECT * FROM logging WHERE action_date LIKE ? AND action_type LIKE ? AND log_num LIKE ? AND user_emp LIKE ? AND user_cust LIKE ? AND flight_num LIKE ?");
         mysqli_stmt_bind_param($statement, "sss", $action_date, $action);
         if(mysqli_stmt_execute($statement)){
             mysqli_stmt_bind_result($statement,$number,$departureDate,$price,$origin,$dest,$dep,$arr,$aircraft,$pilot_1,$pilot_2,$pilot_3,$att_1,$att_2,$att_3);
