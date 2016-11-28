@@ -33,7 +33,16 @@
                     document.getElementById('res-prompt').style.display = 'none';
 
                 }
-                ";
+                </script>";
+        }else{
+            
+            echo "
+            <script>
+
+                document.getElementById('res-prompt').style.display = 'none';
+
+            </script>";
+
         }
     ?>
         
