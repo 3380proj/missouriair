@@ -25,13 +25,7 @@
             $lname = $row['lname'];
             $jobtype = $row['job_type'];
             $rank = $row['rank'];
-            if ($jobtype == 0){
-                
-                $empPosition = "Admin";
-                //header ("Location: admin.php");
-                
-                
-            }else if ($jobtype == 1){
+            if ($jobtype == 1){
                 
                 $empPosition = "Pilot";
                 
