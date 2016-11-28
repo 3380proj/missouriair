@@ -27,7 +27,7 @@
 			
 			if(mysqli_stmt_execute($stmt)){
               	include("log_event.php");
-				log_event($conn, "RESERVE", "Added certification {$equip} to pilot {$id}", null, null, $id);
+				log_event($conn, "CERTIFY", "Added certification {$equip} to pilot {$id}", null, null, $id);
 				mysqli_close($conn);
 				exit;
 			}
