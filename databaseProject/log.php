@@ -54,6 +54,7 @@
     <div class="container">
         <h3>Logs</h3>
         <form action="#" method="POST">
+          <!-- if we decide to use Amount of Logs#####
             Amount of Logs
             <select name="amountOfLogs">
                 <option selected disabled>Choose here</option>
@@ -62,7 +63,7 @@
                 <option value = "100">100</option>
                 <option value = "200">200</option>
                 <option value = "500">500</option>
-            </select>
+            </select> -->
             Log Number:
             <input type="text" name="log_num">
             IP:
@@ -80,10 +81,10 @@
             <br>
             Customer:
             <input type="text" name="user_cust">
-            <br>
+            
             Flight Number:
             <input type="text" name="flight_num">
-            <br>
+            
             <input type="submit" name="submit" value="Submit" class="btn btn-success">
             <br>
             <br>
