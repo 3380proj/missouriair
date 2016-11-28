@@ -53,7 +53,7 @@
     <br><br><br><br><br><br>
     <div class="container">
         <h3>Logs</h3>
-        <form action="#" method="POST">
+        <form action="log.php" method="POST">
           <!-- if we decide to use Amount of Logs#####
             Amount of Logs
             <select name="amountOfLogs">
@@ -95,7 +95,7 @@
 
         -->
         <?php 
-        if(isset($_POST['submit'])){
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         include("../secure/database.php");
         $conn = mysqli_connect(HOST,USERNAME,PASSWORD,DBNAME) or die("Connect Error " . mysqli_error($conn));
         
