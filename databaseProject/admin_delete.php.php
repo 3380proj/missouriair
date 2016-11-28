@@ -1,10 +1,6 @@
 <?php
     function delete($table, $column, $value){
-        if(!session_start()) {
-                header("Location: index.php");
-                exit;
-            }
-        if ($admin) {		
+        if (isset($_SESSION['admin'])) {		
             include("../secure/database.php");
             $conn = mysqli_connect(HOST, USERNAME, PASSWORD, DBNAME) or die("Connect Error" . mysqli_error($conn));
 
