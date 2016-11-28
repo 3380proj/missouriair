@@ -132,9 +132,10 @@
         $numBags = intval($_POST['bags']); 
         $price += $numBags * 20; //bag price
         $price *= 1.05; //sales tax
-        $fname = $_POST['fname'];
-        $lname = $_POST['lname'];  
-        
+        if (!isset($_POST['custID'])){
+            $fname = $_POST['fname'];
+            $lname = $_POST['lname'];  
+        }
        
 
         if (!isset($_POST['custID'])){
