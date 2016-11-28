@@ -52,8 +52,8 @@
     <div class="container">
         <div id="res-prompt">
             <p>Have you made a reseveration before?</p>
-            <input type="submit" name="prevBtn" value="Submit" class="btn btn-primary" onclick="prevCustomer()">
-            <input type="submit" name="newBtn" value="Submit" class="btn btn-primary" onclick="newCustomer()">
+            <input type="submit" name="prevBtn" value="Yes" class="btn btn-primary" onclick="prevCustomer()">
+            <input type="submit" name="newBtn" value="No" class="btn btn-primary" onclick="newCustomer()">
         </div>
         
         <div id="new-div" style="display:none;">
