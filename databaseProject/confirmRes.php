@@ -167,7 +167,7 @@
                 }
             } 
         }
-        if (!error){
+        if (!$error){
             if(mysqli_stmt_execute($res_statement)){
               $res_num = mysqli_insert_id($conn);
               include("log_event.php");
