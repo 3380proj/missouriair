@@ -37,14 +37,14 @@
 
         }else{
 
-            unset($_SESSION['employee']);
+            unset($_SESSION['admin']);
             header("Location: index.php");
             
         }
     }
 
     if (isset($_POST['logoutBtn'])) {
-        unset($_SESSION['user']);
+        unset($_SESSION['admin']);
         session_unset();
         session_destroy();
         header("Location: index.php");
