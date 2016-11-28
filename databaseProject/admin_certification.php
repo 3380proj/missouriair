@@ -17,7 +17,7 @@
     
     include("../secure/database.php");
     $conn = mysqli_connect(HOST, USERNAME, PASSWORD, DBNAME) or die("Connect Error" . mysqli_error($conn));
-    include "admin_insert_certification.php";
+    
     include "admin_delete.php";
 ?>
 
