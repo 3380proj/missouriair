@@ -85,7 +85,7 @@
                 <br>
                 Enter customer ID:
                 <input type="text" name="custID" placeholder="Your ID">
-                <span class="text-danger"><?php echo $usernameError; ?></span>
+                <span class="text-danger"><?php echo $message; ?></span>
                 <br>
                 Number of Bags: 
                 <select name="bags">
