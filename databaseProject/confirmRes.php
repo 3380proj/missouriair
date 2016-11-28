@@ -16,8 +16,7 @@
     <link href="css/bootstrap.min.css" rel="stylesheet">
     
     <script>
-    
-    
+        
         function prevCustomer(){
             
             document.getElementById("prev-div").style.display = "block";
@@ -31,6 +30,7 @@
             document.getElementById("res-prompt").style.display = "none";
             
         }
+        
     </script>
 </head>
 
@@ -55,6 +55,7 @@
     <br><br><br><br><br><br>
     <div class="container">
         <div id="res-prompt">
+            <span class="text-danger"><?php echo $message; ?></span>
             <p>Have you made a reseveration before?</p>
             <input type="submit" name="prevBtn" value="Yes" class="btn btn-primary" onclick="prevCustomer()">
             <input type="submit" name="newBtn" value="No" class="btn btn-primary" onclick="newCustomer()">
@@ -89,7 +90,6 @@
                 <br>
                 Enter customer ID:
                 <input type="text" name="custID" placeholder="Your ID">
-                <span class="text-danger"><?php echo $message; ?></span>
                 <br>
                 Number of Bags: 
                 <select name="bags">
