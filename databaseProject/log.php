@@ -53,7 +53,7 @@
     <br><br><br><br><br><br>
     <div class="container">
         <h3>Logs</h3>
-        <form action="log.php" method="POST">
+        <form action="#" method="POST">
             Amount of Logs
             <select name="amountOfLogs">
                 <option selected disabled>Choose here</option>
@@ -84,7 +84,7 @@
             Flight Number:
             <input type="text" name="flight_num">
             <br>
-            <input type="submit" name="refreshBtn" value="Refresh" class="btn btn-success">
+            <input type="submit" name="submit" value="Submit" class="btn btn-success">
             <br>
             <br>
         </form>
@@ -93,7 +93,7 @@
 
         -->
         <?php 
-         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+        if(isset($_POST['submit'])){
         include("../secure/database.php");
         $conn = mysqli_connect(HOST,USERNAME,PASSWORD,DBNAME) or die("Connect Error " . mysqli_error($conn));
         
