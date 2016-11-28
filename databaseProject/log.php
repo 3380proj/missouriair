@@ -6,6 +6,14 @@
       header("Location: index.php");
       exit;
     }
+
+    if (isset($_POST['logoutBtn'])) {
+        unset($_SESSION['admin']);
+        session_unset();
+        session_destroy();
+        header("Location: index.php");
+        exit;
+    }
     
 ?>
 <!DOCTYPE html>
@@ -45,6 +53,7 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <form class="navbar-form navbar-right">
+              <button type="submit" name="logoutBtn" class="btn btn-danger navbar-right">Logout</button>
           </form>
         </div><!--/.navbar-collapse -->
       </div>
