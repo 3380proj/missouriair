@@ -1,12 +1,12 @@
 <?php
 	if(!session_start()) {
 				// If the session couldn't start, present an error
-				header("Location: error.php");
+				header("Location: index.php");
 				exit;
 	}
 	
-	if ($admin) {
-		$id = $_POST['id'];
+	if (isset($_SESSION['admin'])) {
+		$id = $_POST['emp_id'];
 		$fname = $_POST['fname'];
 		$lname = $_POST['lname'];
 		$status = $_POST['status'];
@@ -14,39 +14,35 @@
 		$rank = $_POST['rank'];
 		$job_type = $_POST['job_type'];
 
-		$mysqli = new mysqli($dbhost, $dbuser, $dbpass, $dbname);
+		include("../secure/database.php");
+        $conn = mysqli_connect(HOST, USERNAME, PASSWORD, DBNAME) or die("Connect Error" . mysqli_error($conn));
 		
-		if($mysqli -> connect_error){
-			header("Locaton: error.php");
+		if($conn -> connect_error){
+			header("Locaton: index.php");
 			exit;
 		}
 		
-		$id = $mysqli->real_escape_string($id); 
-		$fname = $mysqli->real_escape_string($fname);
-		$lname = $mysqli->real_escape_string($lname);
-		$status = $mysqli->real_escape_string($status); 
-		$hours = $mysqli->real_escape_string($hours);
-		$rank = $mysqli->real_escape_string($rank);
-		$job_type = $mysqli->real_escape_string($job_type);
-		
 		$sql="INSERT INTO employee (emp_id, fname, lname, status, hours, rank, job_type) VALUES (?, ?, ?, ?, ?, ?, ?)";
 		
-		if($stmt = mysqli_prepare($mysqli, $sql)){
-			mysqli_stmt_bind_param($stmt, "sssssss", $id, $fname, $lname, $status, $hours, $rank, $job_type);
+		if($stmt = mysqli_prepare($conn, $sql)){
+			mysqli_stmt_bind_param($stmt, "issbisi", $id, $fname, $lname, $status, $hours, $rank, $job_type);
 			
 			if(mysqli_stmt_execute($stmt)){
+				log_event($conn, "CERTIFY", "Added certification {$equip} to pilot {$id}", null, null, $id);
+				mysqli_close($conn);
 				exit;
 			}
 			
 			else{
-				header("Location: error.php");
+				mysqli_close($conn);
+				header("Location: index.php");
 				exit;
 			}
 		}
 	}
 	
 	else{
-		header("Location: index.php");
+		//header("Location: index.php");
 		exit;
 	}
 ?>
