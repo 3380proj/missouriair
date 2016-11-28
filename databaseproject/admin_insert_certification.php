@@ -5,7 +5,7 @@
 				exit;
 	}
 	
-	if ($admin) {
+	if (isset($_SESSION['admin'])) {
 		$id = $_POST['emp_id'];
 		$equip = $_POST['equipment'];
 
