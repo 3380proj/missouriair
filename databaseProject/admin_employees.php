@@ -134,7 +134,7 @@
 					  echo "\t<td>" . $status . "</td>\n";
 					  echo "\t<td>" . $hours . "</td>\n";
                       echo "\t<td><form action=\"admin_employees_edit.php\"><button name=\"Edit\" type=\"submit\" class=\"btn btn-secondary\">Edit</button></form></td>\n";
-                      echo "\t<td><form action='' method='POST'><button name=\"delete\" type=\"submit\" class=\"btn btn-secondary\">Delete</button></form></td>\n";
+                      echo "\t<td><form action='' method='POST'><button name=\"delete\" type=\"submit\" value=\"{$id}\" class=\"btn btn-secondary\">Delete</button></form></td>\n";
                       echo "</tr>\n";
 
                 }
@@ -142,9 +142,8 @@
                     
                     if(isset($_POST['delete'])){
                         $table= "employee";
-                        $column= "id";
-                        $value= $id;
-                        if(delete($table, $column, $value)==1)
+                        $value= $_POST['delete'];
+                        if(delete($table, $value)==1)
                         {
                             echo "<script>alert(Sucess)</script>";
                         }
