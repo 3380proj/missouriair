@@ -107,6 +107,7 @@
         $user_cust_search = "%{$_POST['user_cust']}%";
         $flight_num_search = "%{$_POST['flight_num']}%";
              
+        echo $action_date_search . " " . $action_type_search . " " . $log_num_search . " " . $user_emp_search . " " . $user_cust_search . " " . $flight_num_search . " " . $ip_search;
              
         $statement = mysqli_prepare($conn, "SELECT * FROM logging WHERE action_date LIKE ? AND action_type LIKE ? AND log_num LIKE ? AND user_emp LIKE ? AND user_cust LIKE ? AND flight_num LIKE ? AND ip LIKE ?");
         mysqli_stmt_bind_param($statement, "ssiiiis", $action_date_search, $action_type_search, $log_num_search, $user_emp_search, $user_cust_search, $flight_num_search, $ip_search);
