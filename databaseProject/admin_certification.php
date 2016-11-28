@@ -125,7 +125,7 @@
                 }
                 echo "</table>\n";
                     
-                    if($_POST['delete']){
+                    if(isset($_POST['delete'])){
                         $table= "certification";
                         $column= "emp_id";
                         $value= $emp_id;
