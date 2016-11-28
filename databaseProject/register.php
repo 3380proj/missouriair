@@ -68,7 +68,7 @@
             if ($statement) {
                 
                 mysqli_stmt_bind_param($statement, "i", $empID);
-                mysqli_stmt_execute($stmt);
+                mysqli_stmt_execute($statement);
                 $num = mysqli_num_rows($conn);
                 
                 //Row was inserted (data was valid) = success
