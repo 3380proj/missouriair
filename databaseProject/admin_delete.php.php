@@ -28,44 +28,38 @@
                 switch ($table) {
                     case "certification":
                         $stmt = mysqli_prepare($conn, "DELETE FROM certification WHERE emp_id = ?");
+                        mysqli_stmt_bind_param($stmt, "i", $value);
                         break;
                         
                     case "customer":
                         $stmt = mysqli_prepare($conn, "DELETE FROM customer WHERE id = ?");
+                        mysqli_stmt_bind_param($stmt, "i", $value);
                         break;
                         
                     case "employee":
                         $stmt = mysqli_prepare($conn, "SELECT * FROM employee WHERE emp_id = ?");
+                        mysqli_stmt_bind_param($stmt, "i", $value);
                         break;
                         
                     case "equipment":
                         $stmt = mysqli_prepare($conn, "SELECT * FROM equipment WHERE serial LIKE ?");
+                        mysqli_stmt_bind_param($stmt, "s", $value);
                         break;  
                         
                     case "flight":
                         $stmt = mysqli_prepare($conn, "SELECT * FROM flight WHERE number = ?");
+                        mysqli_stmt_bind_param($stmt, "i", $value);
                         break;
          
                 }
-                
-                mysqli_stmt_bind_param($stmt, "ss", $value);
-                mysqli_stmt_execute($stmt);
+                if(mysqli_stmt_execute($stmt)){
+                    return 1;
+                }else{
+                    return 0;
+                }
                 
             else{
-                    exit;
-            }
-
-            if($sqlResult){
-                $post_count = $sqlResult -> num_rows;
-
-                if($post_count == ($pre_count - 1)){
-                    return 1;
-                    exit;
-                }
-
-                else{
-                    exit;
-                }
+                exit();
             }
         }
 
