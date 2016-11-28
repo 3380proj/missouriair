@@ -54,10 +54,8 @@
     <br><br><br><br><br><br>
     <div class="container">
         <div id="res-prompt">
-            <span class="text-danger"><?php echo $message; ?></span>
             <p>Have you made a reseveration before?</p>
-            <br>
-            <p>(Need valid customer ID)</p>
+            <p>If you are, a customer ID is required. (If you were brought back here, your customer ID was invalid)</p>
             <input type="submit" name="prevBtn" value="Yes" class="btn btn-primary" onclick="prevCustomer()">
             <input type="submit" name="newBtn" value="No" class="btn btn-primary" onclick="newCustomer()">
         </div>
