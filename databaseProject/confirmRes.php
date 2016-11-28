@@ -126,8 +126,8 @@
                 mysqli_stmt_execute($stmt);
                 $result = mysqli_stmt_get_result($stmt);
                 $row = mysqli_fetch_array($result);
-                seats = $row['count']; 
-                if ((numSeats - seats) < 0){
+                $seats = $row['count']; 
+                if (($numSeats - $seats) < 0){
                 
                     $error = true;
                     echo '<script type="text/javascript">'; 
