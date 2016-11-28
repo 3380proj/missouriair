@@ -162,7 +162,7 @@
                     echo '<script type="text/javascript">'; 
                     echo 'window.location.href = "index.php";';
                     echo 'alert("Invalid customer ID");'; 
-                    echo 'event.preventDefault()'
+                    echo 'event.preventDefault();'
                     echo '</script>';
                     exit();
                 }
