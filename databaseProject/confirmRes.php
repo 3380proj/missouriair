@@ -144,7 +144,7 @@
             }
         }else{
             
-            custID = $_POST['custID'];
+            $custID = $_POST['custID'];
             $stmt = mysqli_prepare($conn, "SELECT id FROM customer WHERE id = ?");
             if ($stmt) {    
                 mysqli_stmt_bind_param($stmt, "i", $custID);
