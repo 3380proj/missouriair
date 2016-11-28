@@ -6,8 +6,8 @@
 	}
 	
 	if ($admin) {
-		$id = $_POST['emp_id'];
-		$equip = $_POST['equipment'];
+		$id = $_POST['id'];
+		$equip = $_POST['equip'];
 
 		$mysqli = new mysqli($dbhost, $dbuser, $dbpass, $dbname);
 		
