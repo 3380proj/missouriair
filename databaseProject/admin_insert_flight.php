@@ -5,7 +5,7 @@
 				exit;
 	}
 	
-	if ($admin) {
+	if (isset($_SESSION['admin'])) {
 		$number = $_POST['number'];
 		$aircraft = $_POST['aircraft'];
 		$pilot_1 = $_POST['pilot'];
@@ -21,39 +21,29 @@
 		$arr = $_POST['arr'];
 		$price = $_POST['price'];
 
-		$mysqli = new mysqli($dbhost, $dbuser, $dbpass, $dbname);
+		include("../secure/database.php");
+        $conn = mysqli_connect(HOST, USERNAME, PASSWORD, DBNAME) or die("Connect Error" . mysqli_error($conn));
 		
-		if($mysqli -> connect_error){
-			header("Locaton: error.php");
+		if($conn -> connect_error){
+			header("Locaton: index.php");
 			exit;
 		}
 		
-		$number = $mysqli->real_escape_string($number); 
-		$aircraft = $mysqli->real_escape_string($aircraft);
-		$pilot_1 = $mysqli->real_escape_string($pilot_1);
-		$pilot_2 = $mysqli->real_escape_string($pilot_2); 
-		$pilot_3 = $mysqli->real_escape_string($pilot_3);
-		$att_1 = $mysqli->real_escape_string($att_1);
-		$att_2 = $mysqli->real_escape_string($att_2);
-		$att_3 = $mysqli->real_escape_string($att_3);
-		$origin = $mysqli->real_escape_string($origin);
-		$dest = $mysqli->real_escape_string($dest);
-		$day = $mysqli->real_escape_string($day);
-		$dep = $mysqli->real_escape_string($dep);
-		$arr = $mysqli->real_escape_string($arr);
-		$price = $mysqli->real_escape_string($price);
-		
 		$sql="INSERT INTO flight (number, aircraft, pilot_1, pilot_2, pilot_3, att_1, att_2, att_3, origin, dest, day, dep, arr, price) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 		
-		if($stmt = mysqli_prepare($mysqli, $sql)){
-			mysqli_stmt_bind_param($stmt, "ssssssssssssss", $number, $aircraft, $pilot_1, $pilot_2, $pilot_3, $att_1, $att_2, $att_3, $origin, $dest, $day, $dep, $arr, $price);
+		if($stmt = mysqli_prepare($conn, $sql)){
+			mysqli_stmt_bind_param($stmt, "isiiiiiisssssd", $number, $aircraft, $pilot_1, $pilot_2, $pilot_3, $att_1, $att_2, $att_3, $origin, $dest, $day, $dep, $arr, $price);
 			
 			if(mysqli_stmt_execute($stmt)){
+              	include("log_event.php");
+				log_event($conn, "CERTIFY", "Added certification {$equip} to pilot {$id}", null, null, $_SESSION['admin']);
+				mysqli_close($conn);
 				exit;
 			}
 			
 			else{
-				header("Location: error.php");
+				mysqli_close($conn);
+				header("Location: index.php");
 				exit;
 			}
 		}

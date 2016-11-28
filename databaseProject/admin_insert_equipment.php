@@ -5,36 +5,35 @@
 				exit;
 	}
 	
-	if ($admin) {
+	if ($_SESSION['admin'])) {
 		$equipment = $_POST['equipment'];
 		$serial = $_POST['serial'];
 		$seat = $_POST['seat'];
-		$pilots = $_POST['pilots'];
+		$pilots = $_POST['pilot'];
 		$att = $_POST['att'];
 
-		$mysqli = new mysqli($dbhost, $dbuser, $dbpass, $dbname);
+		include("../secure/database.php");
+        $conn = mysqli_connect(HOST, USERNAME, PASSWORD, DBNAME) or die("Connect Error" . mysqli_error($conn));
 		
-		if($mysqli -> connect_error){
-			header("Locaton: error.php");
+		if($conn -> connect_error){
+			header("Locaton: index.php");
 			exit;
 		}
 		
-		$equipment = $mysqli->real_escape_string($equipment);
-		$serial = $mysqli->real_escape_string($serial);
-		$seat = $mysqli->real_escape_string($seat); 
-		$pilots = $mysqli->real_escape_string($pilots);
-		$att = $mysqli->real_escape_string($att);
-		
 		$sql="INSERT INTO equipment (equipment, serial, seat, pilots, att) VALUES ( ?, ?, ?, ?, ?)";
 		
-		if($stmt = mysqli_prepare($mysqli, $sql)){
-			mysqli_stmt_bind_param($stmt, "ssssss", $equipment, $serial, $seat, $pilots, $att);
+		if($stmt = mysqli_prepare($conn, $sql)){
+			mysqli_stmt_bind_param($stmt, "ssiii", $equipment, $serial, $seat, $pilots, $att);
 			
 			if(mysqli_stmt_execute($stmt)){
+				include("log_event.php");
+				log_event($conn, "CERTIFY", "Added certification {$equip} to pilot {$id}", null, null, $_SESSION['admin']);
+				mysqli_close($conn);
 				exit;
 			}
 			
 			else{
+				mysqli_close($conn);
 				header("Location: error.php");
 				exit;
 			}
@@ -42,7 +41,7 @@
 	}
 	
 	else{
-		header("Location: index.php");
+		//header("Location: index.php");
 		exit;
 	}
 ?>
