@@ -1,5 +1,13 @@
 <?php   
     session_start();
+    if( isset($_SESSION['user']) ) {
+      header("Location: home.php");
+      exit;
+    }
+    if( isset($_SESSION['admin']) ) {
+      header("Location: admin.php");
+      exit;
+    }
     $error = false;
     $usernameError = "";
     $passwordError = "";

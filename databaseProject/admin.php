@@ -1,5 +1,19 @@
 <?php
 
+    session_start();
+    //if session is not set this will redirect to login page
+    if(!isset($_SESSION['admin'])) {
+      header("Location: index.php");
+      exit;
+    }
+
+    if (isset($_POST['logoutBtn'])) {
+        unset($_SESSION['admin']);
+        session_unset();
+        session_destroy();
+        header("Location: index.php");
+        exit;
+    }
 ?>
 
 <!DOCTYPE html>
@@ -66,9 +80,12 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="index.php"><img src="MissouriAirLogo2.jpg" style="width:100px;height:100px;"></a>
+          <a class="navbar-brand" href="#"><img src="MissouriAirLogo2.jpg" style="width:100px;height:100px;"></a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
+            <form class="navbar-form navbar-right" method = "POST">
+                <button type="submit" name="logoutBtn" class="btn btn-danger navbar-right">Logout</button>
+            </form>
         </div><!--/.navbar-collapse -->
       </div>
     </nav>

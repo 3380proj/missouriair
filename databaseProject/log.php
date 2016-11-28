@@ -63,12 +63,11 @@
                 <option value = "200">200</option>
                 <option value = "500">500</option>
             </select>
-            Start Date:
-            <input type ="time" name="start_date" id="start_date">
-            End Date:
-            <input type ="time" name="end_date" id="end_date">
+            Date:
+            <input type="text" name="action_date" placeholder="yyyy/mm/dd">
+       
             Type of Action:
-            <select name="actions">
+            <select name="action">
                 <option value = "reservation">Reservation</option>
                 <option value = "flight">Flight</option>
             </select>
@@ -77,18 +76,21 @@
             <br>
             <br>
         </form>
-        
+        <!--
+        What else do we want to search by? PHP up top for session might need to be added/changed
+
+        -->
         <?php 
          if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         include("../secure/database.php");
         $conn = mysqli_connect(HOST,USERNAME,PASSWORD,DBNAME) or die("Connect Error " . mysqli_error($conn));
         
-        $origin_search = "%{$_POST['origin']}%";
-        $dest_search = "%{$_POST['dest']}%";
-        $departureDate_search = "%{$_POST['departureDate']}%";
-        $price_search = "%{$_POST['price']}%"; 
-        $statement = mysqli_prepare($conn, "SELECT * FROM login WHERE origin LIKE ? AND dest LIKE ? AND day LIKE ? AND price LIKE ?");
-        mysqli_stmt_bind_param($statement, "ssss", $origin_search, $dest_search, $departureDate_search, $price_search);
+        $origin_search = "%{$_POST['amountOfLogs']}%";
+        $dest_search = "%{$_POST['action_date']}%";
+        $departureDate_search = "%{$_POST['action']}%";
+
+        $statement = mysqli_prepare($conn, "SELECT * FROM logging WHERE action_date LIKE ? AND action LIKE ?");
+        mysqli_stmt_bind_param($statement, "sss", $action_date, $action);
         if(mysqli_stmt_execute($statement)){
             mysqli_stmt_bind_result($statement,$number,$departureDate,$price,$origin,$dest,$dep,$arr,$aircraft,$pilot_1,$pilot_2,$pilot_3,$att_1,$att_2,$att_3);
             echo "<table class=\"table\">\n";
@@ -96,11 +98,11 @@
             while (mysqli_stmt_fetch($statement))
             {
               echo "<tr>\n";
-              echo "\t<td>" . $origin . "</td>\n";
-              echo "\t<td>" . $dest . "</td>\n";
-              echo "\t<td>" . $departureDate . "</td>\n";
-              echo "\t<td>" . $dep . "</td>\n";
-              echo "\t<td>" . $price . "</td>\n"; 
+              echo "\t<td>" . $action_date . "</td>\n";
+              echo "\t<td>" . $action . "</td>\n";
+              echo "\t<td>" . $ . "</td>\n";
+              echo "\t<td>" . $ . "</td>\n";
+              echo "\t<td>" . $ . "</td>\n"; 
               echo "\t<td><form action=\"confirmRes.php\"><button name=\"resSelect\" type=\"submit\" value=\"{$number}\" class=\"btn btn-secondary\">Reserve</button></form></td>\n";
               echo "</tr>\n";
               
