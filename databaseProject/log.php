@@ -110,18 +110,23 @@
         $statement = mysqli_prepare($conn, "SELECT * FROM logging WHERE action_date LIKE ? AND action_type LIKE ? AND log_num LIKE ? AND user_emp LIKE ? AND user_cust LIKE ? AND flight_num LIKE ? AND ip LIKE ?");
         mysqli_stmt_bind_param($statement, "ssiiiis", $action_date, $action_type, $log_num, $user_emp, $user_cust, $flight_num, $ip);
         if(mysqli_stmt_execute($statement)){
-            mysqli_stmt_bind_result($statement,$number,$departureDate,$price,$origin,$dest,$dep,$arr,$aircraft,$pilot_1,$pilot_2,$pilot_3,$att_1,$att_2,$att_3);
+            mysqli_stmt_bind_result($statement,$log_num,$ip,$action_date,$action_time,$action_type,$action_desc,$user_emp,$user_cust,$flight_num);
             echo "<table class=\"table\">\n";
             echo "<thead>\n\t<tr>\n\t\t<th>Origin</th>\n\t\t<th>Destination</th>\n\t\t<th>Date</th>\n\t\t<th>Departure</th>\n\t\t<th>Price</th>\n\t</tr>\n</thead>\n";
             while (mysqli_stmt_fetch($statement))
             {
               echo "<tr>\n";
+              echo "\t<td>" . $log_num . "</td>\n";
+              echo "\t<td>" . $ip . "</td>\n";
               echo "\t<td>" . $action_date . "</td>\n";
-              echo "\t<td>" . $action . "</td>\n";
-              echo "\t<td>" . $ . "</td>\n";
-              echo "\t<td>" . $ . "</td>\n";
-              echo "\t<td>" . $ . "</td>\n"; 
-              echo "\t<td><form action=\"confirmRes.php\"><button name=\"resSelect\" type=\"submit\" value=\"{$number}\" class=\"btn btn-secondary\">Reserve</button></form></td>\n";
+              echo "\t<td>" . $action_time . "</td>\n";
+              echo "\t<td>" . $action_type . "</td>\n"; 
+              echo "\t<td>" . $action_desc . "</td>\n";
+              echo "\t<td>" . $user_emp . "</td>\n";
+              echo "\t<td>" . $user_cust . "</td>\n";   
+              echo "\t<td>" . $flight_num . "</td>\n";      
+               
+              echo "\t<td><form action=\"#\"><button name=\"resSelect\" type=\"submit\" value=\"{$number}\" class=\"btn btn-secondary\">Reserve</button></form></td>\n";
               echo "</tr>\n";
               
             }
