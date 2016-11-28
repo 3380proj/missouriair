@@ -134,7 +134,7 @@
         <?php
             $sql= mysqli_prepare($conn, "SELECT * FROM flight");
                 if(mysqli_stmt_execute($sql)){
-                    mysqli_stmt_bind_result($num,$day,$price,$origin,$dest,$dep,$arr,$aircraft,$pilot_1,$pilot_2,$pilot_3,$att_1,$att_2,$att_3);
+                    mysqli_stmt_bind_result($number,$day,$price,$origin,$dest,$dep,$arr,$aircraft,$pilot_1,$pilot_2,$pilot_3,$att_1,$att_2,$att_3);
                     echo "<table class=\"table\">\n";
                     echo "<thead>\n\t<tr>\n\t\t<th>Number</th>\n\t\t<th>Day</th>\n\t\t<th>Price</th>\n\t\t<th>Origin</th>\n\t\t<th>Destination</th>\n\t\t<th>Departure\t\t<th>Arrival\t\t<th>Aircraft\t\t<th>Pilot 1\t\t<th>Pilot 2\t\t<th>Pilot 3\t\t<th>Attendant 1\t\t<th>Attendant 2\t\t<th>Attendant 3</th>\n</th>\n</th>\n</th>\n</th>\n</th>\n</th>\n</th>\n</th>\n</thead>\n";
                     while (mysqli_stmt_fetch($sql))
