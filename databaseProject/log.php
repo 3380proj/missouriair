@@ -52,7 +52,7 @@
           <a class="navbar-brand" href="home.php"><img src="MissouriAirLogo2.jpg" style="width:100px;height:100px;"></a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
-          <form class="navbar-form navbar-right">
+          <form class="navbar-form navbar-right" method="POST">
               <button type="submit" name="logoutBtn" class="btn btn-danger navbar-right">Logout</button>
           </form>
         </div><!--/.navbar-collapse -->
