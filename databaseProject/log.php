@@ -77,7 +77,7 @@
             <br>
         </form>
         <!--
-        HOW DO YOU SEARCH BY amountOfLogs?
+        What else do we want to search by? PHP up top for session might need to be added/changed
 
         -->
         <?php 
