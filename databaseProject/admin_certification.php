@@ -127,9 +127,8 @@
                     
                     if(isset($_POST['delete'])){
                         $table= "certification";
-                        $column= "emp_id";
                         $value= $emp_id;
-                        if(delete($table, $column, $value)==1)
+                        if(delete($table, $value)==1)
                         {
                             echo "<script>alert(Sucess)</script>";
                         }
