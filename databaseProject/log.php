@@ -125,8 +125,7 @@
               echo "\t<td>" . $user_emp . "</td>\n";
               echo "\t<td>" . $user_cust . "</td>\n";   
               echo "\t<td>" . $flight_num . "</td>\n";      
-               
-              echo "\t<td><form action=\"#\"><button name=\"resSelect\" type=\"submit\" value=\"{$number}\" class=\"btn btn-secondary\">Reserve</button></form></td>\n";
+
               echo "</tr>\n";
               
             }
