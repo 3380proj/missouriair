@@ -76,9 +76,10 @@
                 <option value = "reservation">Reservation</option>
                 <option value = "flight">Flight</option>
             </select>
+            <br><br>
             Employee:
             <input type="text" name="user_emp">
-            <br>
+            
             Customer:
             <input type="text" name="user_cust">
             
