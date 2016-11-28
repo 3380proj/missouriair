@@ -101,7 +101,7 @@
         if(mysqli_stmt_execute($res_statement)){
           $res_num = mysqli_insert_id($conn);
           include("log_event.php");
-          log_event("RESERVE", "Created Reservation {$res_num} on flight {$flight_no}");
+          log_event($conn, "RESERVE", "Created Reservation {$res_num} on flight {$flight_no}", $flight_no, $cust_id, null);
         } else {
           echo "\nError occurred: " . mysqli_stmt_error($res_statement);
         }
