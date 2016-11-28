@@ -64,8 +64,6 @@
                 <option value = "200">200</option>
                 <option value = "500">500</option>
             </select> -->
-            Log Number:
-            <input type="text" name="log_num">
             IP:
             <input type="text" name="ip">
             Date:
@@ -77,14 +75,6 @@
                 <option value = "flight">Flight</option>
             </select>
             <br><br>
-            Employee:
-            <input type="text" name="user_emp">
-            
-            Customer:
-            <input type="text" name="user_cust">
-            
-            Flight Number:
-            <input type="text" name="flight_num">
             
             <input type="submit" name="submit" value="Submit" class="btn btn-success">
             <br>
@@ -102,15 +92,11 @@
         $action_date_search = "%{$_POST['action_date']}%";
         $action_type_search = "%{$_POST['action_type']}%";
         $ip_search = "%{$_POST['ip']}%";
-        $log_num_search = $_POST['log_num'];     
-        $user_emp_search = $_POST['user_emp'];     
-        $user_cust_search = $_POST['user_cust'];
-        $flight_num_search = $_POST['flight_num'];
-             
+
         echo $action_date_search . " " . $action_type_search . " " . $log_num_search . " " . $user_emp_search . " " . $user_cust_search . " " . $flight_num_search . " " . $ip_search;
              
-        $statement = mysqli_prepare($conn, "SELECT * FROM logging WHERE action_date LIKE ? AND action_type LIKE ? AND ip LIKE ? " . isset($log_num_search)?"AND log_num = ? ":null . isset($user_emp_search)?"AND user_emp = ? ":null . isset($user_cust_search)?"AND user_cust = ? ":null . isset($ip_search)?"AND flight_num = ?":null);
-        mysqli_stmt_bind_param($statement, "sssiiii", $action_date_search, $action_type_search, $ip_search, $log_num_search, $user_emp_search, $user_cust_search, $flight_num_search);
+        $statement = mysqli_prepare($conn, "SELECT * FROM logging WHERE action_date LIKE ? AND action_type LIKE ? AND ip LIKE ?");
+        mysqli_stmt_bind_param($statement, "sss", $action_date_search, $action_type_search, $ip_search);
         if(mysqli_stmt_execute($statement)){
             $result = mysqli_stmt_get_result($statement);
             echo "<table class=\"table\">\n";
