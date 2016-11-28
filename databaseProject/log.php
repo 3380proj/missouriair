@@ -118,7 +118,7 @@
             echo "<table class=\"table\">\n";
             echo "<thead>\n\t<tr>\n\t\t<th>Log Number</th>\n\t\t<th>IP</th>\n\t\t<th>Action Date</th>\n\t\t<th>Action Time</th>\n\t\t<th>Action Type</th>\n\t\t<th>Action Description</th>\n\t\t<th>User Employee</th>\n\t\t<th>User Customer</th>\n\t\t<th>Flight Number</th>\n\t</tr>\n</thead>\n";
            
-            while ($row = mysqli_fetch_array($result, MYSQLI_NUM))
+            while ($row = $result->fetch_assoc())
             {
               echo "<tr>\n";
               echo "\t<td>" . $row['log_num'] . "</td>\n";
