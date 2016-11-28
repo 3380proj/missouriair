@@ -74,10 +74,12 @@ CREATE TABLE reservation
 
 CREATE TABLE logging
 (
-	log_num INTEGER PRIMARY KEY,
+	log_num INTEGER AUTO_INCREMENT PRIMARY KEY,
 	ip VARCHAR(15),
-	action_TIME TIME,
-	action VARCHAR(20),
+	action_date DATE,
+	action_time TIME,
+	action_type VARCHAR(10),
+	action_desc VARCHAR(100),
 	user_emp INTEGER,
 	user_cust INTEGER,
 	flight_num INTEGER,

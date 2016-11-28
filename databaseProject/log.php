@@ -63,14 +63,26 @@
                 <option value = "200">200</option>
                 <option value = "500">500</option>
             </select>
+            Log Number:
+            <input type="text" name="log_num">
+            IP:
+            <input type="text" name="ip">
             Date:
             <input type="text" name="action_date" placeholder="yyyy/mm/dd">
-       
+            
             Type of Action:
-            <select name="action">
+            <select name="action_type">
                 <option value = "reservation">Reservation</option>
                 <option value = "flight">Flight</option>
             </select>
+            Employee:
+            <input type="text" name="user_emp">
+            <br>
+            Customer:
+            <input type="text" name="user_cust">
+            <br>
+            Flight Number:
+            <input type="text" name="flight_num">
             <br>
             <input type="submit" name="refreshBtn" value="Refresh" class="btn btn-success">
             <br>
@@ -85,12 +97,18 @@
         include("../secure/database.php");
         $conn = mysqli_connect(HOST,USERNAME,PASSWORD,DBNAME) or die("Connect Error " . mysqli_error($conn));
         
-        $origin_search = "%{$_POST['origin']}%";
-        $dest_search = "%{$_POST['dest']}%";
-        $departureDate_search = "%{$_POST['departureDate']}%";
-        $price_search = "%{$_POST['price']}%"; 
-        $statement = mysqli_prepare($conn, "SELECT * FROM logging WHERE action_date LIKE ? AND action_TIME LIKE ? AND action LIKE ?");
-        mysqli_stmt_bind_param($statement, "ssss", $action, $action_date, $, $);
+        $amountOfLogs_search = "%{$_POST['amountOfLogs']}%";
+        $action_date_search = "%{$_POST['action_date']}%";
+        $action_type_search = "%{$_POST['action_type']}%";
+        $ip_search = "%{$_POST['ip']}%";
+        $log_num_search = "%{$_POST['log_num']}%";     
+        $user_emp_search = "%{$_POST['user_emp']}%";     
+        $user_cust_search = "%{$_POST['user_cust']}%";
+        $flight_num_search = "%{$_POST['flight_num']}%";
+             
+             
+        $statement = mysqli_prepare($conn, "SELECT * FROM logging WHERE action_date LIKE ? AND action LIKE ?");
+        mysqli_stmt_bind_param($statement, "sss", $action_date, $action);
         if(mysqli_stmt_execute($statement)){
             mysqli_stmt_bind_result($statement,$number,$departureDate,$price,$origin,$dest,$dep,$arr,$aircraft,$pilot_1,$pilot_2,$pilot_3,$att_1,$att_2,$att_3);
             echo "<table class=\"table\">\n";
