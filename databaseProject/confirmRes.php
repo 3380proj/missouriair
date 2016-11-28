@@ -120,6 +120,7 @@
           if($numRows == 1) {
             $row = mysqli_fetch_array($result);
             $numSeats = $row['seats'];
+            $price = $row['price'];
             $stmt = mysqli_prepare($conn, "SELECT COUNT(*) as 'count' FROM reservation WHERE flight = ?");
             if ($stmt) {    
                 mysqli_stmt_bind_param($stmt, "i", $flight_no);
@@ -137,7 +138,6 @@
                     exit();
                 }
             } 
-            $price = $row['price'];
               
           } else {
             exit();
