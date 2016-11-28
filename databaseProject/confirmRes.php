@@ -163,7 +163,7 @@
                     echo 'window.location.href = "index.php";';
                     echo 'alert("Invalid customer ID");'; 
                     echo '</script>';
-                    //exit();
+                    exit();
                 }
             } 
         }
