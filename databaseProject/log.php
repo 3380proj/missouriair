@@ -110,7 +110,7 @@
         echo $action_date_search . " " . $action_type_search . " " . $log_num_search . " " . $user_emp_search . " " . $user_cust_search . " " . $flight_num_search . " " . $ip_search;
              
         $statement = mysqli_prepare($conn, "SELECT * FROM logging WHERE action_date LIKE ? AND action_type LIKE ? AND log_num LIKE ? AND user_emp LIKE ? AND user_cust LIKE ? AND flight_num LIKE ? AND ip LIKE ?");
-        mysqli_stmt_bind_param($statement, "ssiiiis", $action_date_search, $action_type_search, $log_num_search, $user_emp_search, $user_cust_search, $flight_num_search, $ip_search);
+        mysqli_stmt_bind_param($statement, "sssssss", $action_date_search, $action_type_search, $log_num_search, $user_emp_search, $user_cust_search, $flight_num_search, $ip_search);
         if(mysqli_stmt_execute($statement)){
             mysqli_stmt_bind_result($statement,$log_num,$ip,$action_date,$action_time,$action_type,$action_desc,$user_emp,$user_cust,$flight_num);
             echo "<table class=\"table\">\n";
