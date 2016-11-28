@@ -9,10 +9,6 @@
                 exit;
             }
 
-            $table = $mysqli->real_escape_string($table); 
-            $column = $mysqli->real_escape_string($column);
-            $value = $mysqli->real_escape_string($value);
-
             $pre_check = "SELECT * FROM '$table'";
 
             $pre_stmt = mysqli_prepare($mysqli, pre_check);
