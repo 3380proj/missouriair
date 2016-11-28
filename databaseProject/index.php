@@ -6,6 +6,10 @@
       header("Location: home.php");
       exit;
     }
+    if( isset($_SESSION['admin']) ) {
+      header("Location: admin.php");
+      exit;
+    }
     if (isset($_POST['loginBtn'])){
         
         header("Location: login.php");
