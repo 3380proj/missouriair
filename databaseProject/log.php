@@ -90,7 +90,7 @@
         $departureDate_search = "%{$_POST['departureDate']}%";
         $price_search = "%{$_POST['price']}%"; 
         $statement = mysqli_prepare($conn, "SELECT * FROM logging WHERE action_date LIKE ? AND action_TIME LIKE ? AND action LIKE ?");
-        mysqli_stmt_bind_param($statement, "ssss", $origin_search, $dest_search, $departureDate_search, $price_search);
+        mysqli_stmt_bind_param($statement, "ssss", $action, $action_date, $, $);
         if(mysqli_stmt_execute($statement)){
             mysqli_stmt_bind_result($statement,$number,$departureDate,$price,$origin,$dest,$dep,$arr,$aircraft,$pilot_1,$pilot_2,$pilot_3,$att_1,$att_2,$att_3);
             echo "<table class=\"table\">\n";
@@ -98,11 +98,11 @@
             while (mysqli_stmt_fetch($statement))
             {
               echo "<tr>\n";
-              echo "\t<td>" . $origin . "</td>\n";
-              echo "\t<td>" . $dest . "</td>\n";
-              echo "\t<td>" . $departureDate . "</td>\n";
-              echo "\t<td>" . $dep . "</td>\n";
-              echo "\t<td>" . $price . "</td>\n"; 
+              echo "\t<td>" . $action_date . "</td>\n";
+              echo "\t<td>" . $action . "</td>\n";
+              echo "\t<td>" . $ . "</td>\n";
+              echo "\t<td>" . $ . "</td>\n";
+              echo "\t<td>" . $ . "</td>\n"; 
               echo "\t<td><form action=\"confirmRes.php\"><button name=\"resSelect\" type=\"submit\" value=\"{$number}\" class=\"btn btn-secondary\">Reserve</button></form></td>\n";
               echo "</tr>\n";
               
