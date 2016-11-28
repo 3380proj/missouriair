@@ -64,6 +64,21 @@
         // if there's no error, continue to signup
         if(!$error) {
             
+            $statement = mysqli_prepare($conn, "SELECT emp_id FROM employee where emp_id = ?");
+            if ($statement) {
+                
+                mysqli_stmt_bind_param($statement, "i", $empID);
+                mysqli_stmt_execute($stmt);
+                $num = mysqli_num_rows($conn);
+                
+                //Row was inserted (data was valid) = success
+                if (!($num == 1)){
+                    
+                    $message = "Invalid employee ID!"; 
+                    
+                }
+            }
+            
             $stmt = mysqli_prepare($conn, "INSERT INTO authentication (user_id, user_name, pass_hash) VALUES (?, ?, ?)");
             if ($stmt) {
                 
@@ -153,7 +168,6 @@
         <div class="container">
             <form method="POST">
                 <h3>Employee Registration</h3>
-                
                 
                 <div class="form-group">
                     <div class="input-group">
