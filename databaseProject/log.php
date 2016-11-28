@@ -73,7 +73,7 @@
             
             Type of Action:
             <select name="action_type">
-                <option value = "reservation">Reservation</option>
+                <option value = "RESERVE">Reservation</option>
                 <option value = "flight">Flight</option>
             </select>
             <br><br>
