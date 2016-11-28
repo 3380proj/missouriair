@@ -97,6 +97,7 @@
             <br>
             Prices ($0 - $999)
             <input type="text" name="price" placeholder="Enter a price here">
+            <br>
             <button type="submit" name="submit" value="Submit" class="btn btn-primary">Submit</button>
             </form>
         </div>
