@@ -64,11 +64,9 @@
                 <option value = "200">200</option>
                 <option value = "500">500</option>
             </select> -->
-            IP:
-            <input type="text" name="cust_id">
-            <br><br>
-            
-            <input type="submit" name="submit" value="Submit" class="btn btn-success">
+            Customer ID:
+            <input type="text" name="cust_id">      
+            <input type="submit" name="submit" value="Search" class="btn btn-primary">
             <br>
             <br>
         </form>
