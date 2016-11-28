@@ -85,7 +85,7 @@
         <div id="prev-div" style="display:none;">
             <form method="POST" action="confirmRes.php" name="resForm">
                 Flight Number:
-                <input type="text" name="flight_no" value="<?php echo $_GET["resSelect"] ?>" readonly>
+                <input type="text" name="flight_no" value="<?php if(isset($_GET["resSelect"])){echo $_GET["resSelect"];}?>" readonly>
                 <br>
                 Enter customer ID:
                 <input type="text" name="custID" placeholder="Your ID">
