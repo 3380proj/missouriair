@@ -91,10 +91,57 @@
     </nav>
 
     <br><br><br><br><br><br>
-    <div class="container">
+    <div class="container"> <!--Container-->
 
-<!-- all of the things go here -->
+        <form method="POST" action="admin_insert_certification.php" name="new_certification">
+            Customer ID:
+            <input type="text" name="id" placeholder="Customer ID">
+            <br>
+            First Name:
+            <input type="text" name="fname" placeholder="First Name">
+			Last Name:
+            <input type="text" name="lname" placeholder="Last Name">
+            <button type="submit" name="submit" class="btn btn-primary">Submit</button>
+        </form>
+        <br><br><br><br><br>
+        <?php
+            $sql= mysqli_prepare($conn, "SELECT * FROM customer");
+                if(mysqli_stmt_execute($sql)){
+                    mysqli_stmt_bind_result($sql,$id,$fname,$lname);
+                    echo "<table class=\"table\">\n";
+                    echo "<thead>\n\t<tr>\n\t\t<th>ID</th>\n\t\t<th>First Name</th>\n\t\t<th>Last Name</th>\n</thead>\n";
+                    while (mysqli_stmt_fetch($sql))
+                    {
+                      echo "<tr>\n";
+                      echo "\t<td>" . $id . "</td>\n";
+                      echo "\t<td>" . $fname . "</td>\n";
+					  echo "\t<td>" . $lname . "</td>\n";
+                      echo "\t<td><form action=\"admin_customers_edit.php\"><button name=\"Edit\" type=\"submit\" class=\"btn btn-secondary\">Edit</button></form></td>\n";
+                      echo "\t<td><form action='' method='POST'><button name=\"delete\" type=\"submit\" class=\"btn btn-secondary\">Delete</button></form></td>\n";
+                      echo "</tr>\n";
 
+                }
+                echo "</table>\n";
+                    
+                    if(isset($_POST['delete'])){
+                        $table= "customer";
+                        $column= "id";
+                        $value= $id;
+                        if(delete($table, $column, $value)==1)
+                        {
+                            echo "<script>alert(Sucess)</script>";
+                        }
+                        else
+                        {
+                            echo "<script>alert(Failed)</script>";
+                        }
+                        
+                    }
+            }
+            mysqli_stmt_close($sql);
+            mysqli_close($conn);       
+            
+        ?>
     </div> <!-- /container -->
 
       
