@@ -10,7 +10,7 @@
 
             $pre_check = "SELECT * FROM '$table'";
 
-            $pre_stmt = mysqli_prepare($conn, pre_check);
+            $pre_stmt = mysqli_prepare($conn, $pre_check);
 
             $pre_check_result = $conn->query($pre_check);
 
