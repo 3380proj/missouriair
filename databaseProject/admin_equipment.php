@@ -14,6 +14,11 @@
         header("Location: index.php");
         exit;
     }
+	
+	include("../secure/database.php");
+    $conn = mysqli_connect(HOST, USERNAME, PASSWORD, DBNAME) or die("Connect Error" . mysqli_error($conn));
+    
+    include "admin_delete.php.php";
 ?>
 
 <!DOCTYPE html>
@@ -91,10 +96,63 @@
     </nav>
 
     <br><br><br><br><br><br>
-    <div class="container">
+    <div class="container"> <!--Container-->
 
-<!-- all of the things go here -->
+        <form method="POST" action="admin_insert_certification.php" name="new_certification">
+            Serial:
+            <input type="text" name="serial" placeholder="Serial">
+            <br>
+            Seats:
+            <input type="text" name="seats" placeholder="Seats">
+			Equipment:
+            <input type="text" name="equipment" placeholder="Equipment">
+			Pilots:
+            <input type="text" name="pilot" placeholder="Pilots">
+			Attendants:
+            <input type="text" name="att" placeholder="Attendants">
+            <button type="submit" name="submit" class="btn btn-primary">Submit</button>
+        </form>
+        <br><br><br><br><br>
+        <?php
+            $sql= mysqli_prepare($conn, "SELECT * FROM equipment");
+                if(mysqli_stmt_execute($sql)){
+                    mysqli_stmt_bind_result($sql,$serial,$seats,$equipment,$pilot,$att);
+                    echo "<table class=\"table\">\n";
+                    echo "<thead>\n\t<tr>\n\t\t<th>Serial</th>\n\t\t<th>Seats</th>\n\t\t<th>Equipment</th>\n\t\t<th>Pilots</th>\n\t\t<th>Attendants</th>\n</thead>\n";
+                    while (mysqli_stmt_fetch($sql))
+                    {
+                      echo "<tr>\n";
+                      echo "\t<td>" . $serial . "</td>\n";
+                      echo "\t<td>" . $seats . "</td>\n";
+					  echo "\t<td>" . $equipment . "</td>\n";
+					  echo "\t<td>" . $pilot . "</td>\n";
+					  echo "\t<td>" . $att . "</td>\n";
+                      echo "\t<td><form action=\"admin_customers_edit.php\"><button name=\"Edit\" type=\"submit\" class=\"btn btn-secondary\">Edit</button></form></td>\n";
+                      echo "\t<td><form action='' method='POST'><button name=\"delete\" type=\"submit\" class=\"btn btn-secondary\">Delete</button></form></td>\n";
+                      echo "</tr>\n";
 
+                }
+                echo "</table>\n";
+                    
+                    if(isset($_POST['delete'])){
+                        $table= "equipment";
+                        $column= "serial";
+                        $value= $serial;
+                        if(delete($table, $column, $value)==1)
+                        {
+                            echo "<script>alert(Sucess)</script>";
+                        }
+                        else
+                        {
+                            echo "<script>alert(Failed)</script>";
+                        }
+                        
+                    }
+            }
+            mysqli_stmt_close($sql);
+            mysqli_close($conn);       
+            
+        ?>
     </div> <!-- /container -->
 
       

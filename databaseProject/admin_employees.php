@@ -14,6 +14,11 @@
         header("Location: index.php");
         exit;
     }
+	
+	include("../secure/database.php");
+    $conn = mysqli_connect(HOST, USERNAME, PASSWORD, DBNAME) or die("Connect Error" . mysqli_error($conn));
+    
+    include "admin_delete.php.php";
 ?>
 
 <!DOCTYPE html>
@@ -91,10 +96,69 @@
     </nav>
 
     <br><br><br><br><br><br>
-    <div class="container">
+    <div class="container"> <!--Container-->
 
-<!-- all of the things go here -->
+        <form method="POST" action="admin_insert_certification.php" name="new_certification">
+            Employee ID:
+            <input type="text" name="id" placeholder="Employee ID">
+            <br>
+            First Name:
+            <input type="text" name="fname" placeholder="First Name">
+			Last Name:
+            <input type="text" name="lname" placeholder="Last Name">
+			Job Type:
+            <input type="text" name="job_type" placeholder="Job Type">
+			Rank:
+            <input type="text" name="rank" placeholder="Rank">
+			Status:
+            <input type="text" name="status" placeholder="Status">
+			Hours:
+            <input type="text" name="hours" placeholder="Hours">
+            <button type="submit" name="submit" class="btn btn-primary">Submit</button>
+        </form>
+        <br><br><br><br><br>
+        <?php
+            $sql= mysqli_prepare($conn, "SELECT * FROM employee");
+                if(mysqli_stmt_execute($sql)){
+                    mysqli_stmt_bind_result($sql,$id,$fname,$lname,$job_type,$rank,$status,$hours);
+                    echo "<table class=\"table\">\n";
+                    echo "<thead>\n\t<tr>\n\t\t<th>ID</th>\n\t\t<th>First Name</th>\n\t\t<th>Last Name</th>\n\t\t<th>Job Type\t\t<th>Rank\t\t<th>Status\t\t<th>Hours</th>\n</th>\n</th>\n</th>\n</thead>\n";
+                    while (mysqli_stmt_fetch($sql))
+                    {
+                      echo "<tr>\n";
+                      echo "\t<td>" . $id . "</td>\n";
+                      echo "\t<td>" . $fname . "</td>\n";
+					  echo "\t<td>" . $lname . "</td>\n";
+					  echo "\t<td>" . $job_type . "</td>\n";
+					  echo "\t<td>" . $rank . "</td>\n";
+					  echo "\t<td>" . $status . "</td>\n";
+					  echo "\t<td>" . $hours . "</td>\n";
+                      echo "\t<td><form action=\"admin_employees_edit.php\"><button name=\"Edit\" type=\"submit\" class=\"btn btn-secondary\">Edit</button></form></td>\n";
+                      echo "\t<td><form action='' method='POST'><button name=\"delete\" type=\"submit\" class=\"btn btn-secondary\">Delete</button></form></td>\n";
+                      echo "</tr>\n";
 
+                }
+                echo "</table>\n";
+                    
+                    if(isset($_POST['delete'])){
+                        $table= "employee";
+                        $column= "id";
+                        $value= $id;
+                        if(delete($table, $column, $value)==1)
+                        {
+                            echo "<script>alert(Sucess)</script>";
+                        }
+                        else
+                        {
+                            echo "<script>alert(Failed)</script>";
+                        }
+                        
+                    }
+            }
+            mysqli_stmt_close($sql);
+            mysqli_close($conn);       
+            
+        ?>
     </div> <!-- /container -->
 
       

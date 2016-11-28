@@ -14,6 +14,11 @@
         header("Location: index.php");
         exit;
     }
+	
+	include("../secure/database.php");
+    $conn = mysqli_connect(HOST, USERNAME, PASSWORD, DBNAME) or die("Connect Error" . mysqli_error($conn));
+    
+    include "admin_delete.php.php";
 ?>
 
 <!DOCTYPE html>
@@ -91,10 +96,90 @@
     </nav>
 
     <br><br><br><br><br><br>
-    <div class="container">
+    <div class="container"> <!--Container-->
 
-<!-- all of the things go here -->
+        <form method="POST" action="admin_insert_certification.php" name="new_certification">
+            Flight Number:
+            <input type="text" name="num" placeholder="Flight Number">
+            <br>
+            Day:
+            <input type="text" name="day" placeholder="Day">
+			Price:
+            <input type="text" name="price" placeholder="Price">
+			Origin:
+            <input type="text" name="origin" placeholder="Origin">
+			Destination:
+            <input type="text" name="dest" placeholder="Destination">
+			Dep. Time:
+            <input type="text" name="dep" placeholder="Departure">
+			Arr. Time:
+            <input type="text" name="arr" placeholder="Arrival">
+			Aircraft:
+            <input type="text" name="aircraft" placeholder="Aircraft">
+			Pilot 1:
+            <input type="text" name="pilot_1" placeholder="Pilot 1">
+			Pilot 2:
+            <input type="text" name="pilot_2" placeholder="Pilot 2">
+			Pilot 3:
+            <input type="text" name="pilot_3" placeholder="Pilot 3">
+			Attendant 1:
+            <input type="text" name="att_1" placeholder="Attendant 1">
+			Attendant 2:
+            <input type="text" name="att_2" placeholder="Attendant 2">
+			Attendant 3:
+            <input type="text" name="att_3" placeholder="Attendant 3">
+            <button type="submit" name="submit" class="btn btn-primary">Submit</button>
+        </form>
+        <br><br><br><br><br>
+        <?php
+            $sql= mysqli_prepare($conn, "SELECT * FROM flight");
+                if(mysqli_stmt_execute($sql)){
+                    mysqli_stmt_bind_result($num,$day,$price,$origin,$dest,$dep,$arr,$aircraft,$pilot_1,$pilot_2,$pilot_3,$att_1,$att_2,$att_3);
+                    echo "<table class=\"table\">\n";
+                    echo "<thead>\n\t<tr>\n\t\t<th>Number</th>\n\t\t<th>Day</th>\n\t\t<th>Price</th>\n\t\t<th>Origin</th>\n\t\t<th>Destination</th>\n\t\t<th>Departure\t\t<th>Arrival\t\t<th>Aircraft\t\t<th>Pilot 1\t\t<th>Pilot 2\t\t<th>Pilot 3\t\t<th>Attendant 1\t\t<th>Attendant 2\t\t<th>Attendant 3</th>\n</th>\n</th>\n</th>\n</th>\n</th>\n</th>\n</th>\n</th>\n</thead>\n";
+                    while (mysqli_stmt_fetch($sql))
+                    {
+                      echo "<tr>\n";
+                      echo "\t<td>" . $num . "</td>\n";
+                      echo "\t<td>" . $day . "</td>\n";
+					  echo "\t<td>" . $price . "</td>\n";
+					  echo "\t<td>" . $origin . "</td>\n";
+					  echo "\t<td>" . $dest . "</td>\n";
+					  echo "\t<td>" . $dep . "</td>\n";
+					  echo "\t<td>" . $arr . "</td>\n";
+					  echo "\t<td>" . $aircraft . "</td>\n";
+					  echo "\t<td>" . $pilot_1 . "</td>\n";
+					  echo "\t<td>" . $pilot_2 . "</td>\n";
+					  echo "\t<td>" . $pilot_3 . "</td>\n";
+					  echo "\t<td>" . $att_1 . "</td>\n";
+					  echo "\t<td>" . $att_2 . "</td>\n";
+					  echo "\t<td>" . $att_3 . "</td>\n";
+                      echo "\t<td><form action=\"admin_flights_edit.php\"><button name=\"Edit\" type=\"submit\" class=\"btn btn-secondary\">Edit</button></form></td>\n";
+                      echo "\t<td><form action='' method='POST'><button name=\"delete\" type=\"submit\" class=\"btn btn-secondary\">Delete</button></form></td>\n";
+                      echo "</tr>\n";
 
+                }
+                echo "</table>\n";
+                    
+                    if(isset($_POST['delete'])){
+                        $table= "flight";
+                        $column= "number";
+                        $value= $num;
+                        if(delete($table, $column, $value)==1)
+                        {
+                            echo "<script>alert(Sucess)</script>";
+                        }
+                        else
+                        {
+                            echo "<script>alert(Failed)</script>";
+                        }
+                        
+                    }
+            }
+            mysqli_stmt_close($sql);
+            mysqli_close($conn);       
+            
+        ?>
     </div> <!-- /container -->
 
       
