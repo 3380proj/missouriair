@@ -17,16 +17,14 @@
         function prevCustomer(){
             
             document.getElementById("prev-div").style.display = "block";
-            document.getElementById("newBtn").style.display = "none";
-            document.getElementById("prevBtn").style.display = "none";
+            document.getElementById("res-prompt").style.display = "none";
             
         }
         
         function newCustomer(){
             
             document.getElementById("new-div").style.display = "block";
-            document.getElementById("newBtn").style.display = "none";
-            document.getElementById("prevBtn").style.display = "none";
+            document.getElementById("res-prompt").style.display = "none";
             
         }
     </script>
