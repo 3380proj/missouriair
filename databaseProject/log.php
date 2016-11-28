@@ -85,12 +85,12 @@
         include("../secure/database.php");
         $conn = mysqli_connect(HOST,USERNAME,PASSWORD,DBNAME) or die("Connect Error " . mysqli_error($conn));
         
-        $origin_search = "%{$_POST['origin']}%";
-        $dest_search = "%{$_POST['dest']}%";
-        $departureDate_search = "%{$_POST['departureDate']}%";
-        $price_search = "%{$_POST['price']}%"; 
-        $statement = mysqli_prepare($conn, "SELECT * FROM logging WHERE action_date LIKE ? AND action_TIME LIKE ? AND action LIKE ?");
-        mysqli_stmt_bind_param($statement, "ssss", $action, $action_date, $, $);
+        $origin_search = "%{$_POST['amountOfLogs']}%";
+        $dest_search = "%{$_POST['action_date']}%";
+        $departureDate_search = "%{$_POST['action']}%";
+
+        $statement = mysqli_prepare($conn, "SELECT * FROM logging WHERE action_date LIKE ? AND action LIKE ?");
+        mysqli_stmt_bind_param($statement, "sss", $action_date, $action);
         if(mysqli_stmt_execute($statement)){
             mysqli_stmt_bind_result($statement,$number,$departureDate,$price,$origin,$dest,$dep,$arr,$aircraft,$pilot_1,$pilot_2,$pilot_3,$att_1,$att_2,$att_3);
             echo "<table class=\"table\">\n";
