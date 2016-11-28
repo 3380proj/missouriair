@@ -97,7 +97,6 @@
         include("../secure/database.php");
         $conn = mysqli_connect(HOST,USERNAME,PASSWORD,DBNAME) or die("Connect Error " . mysqli_error($conn));
         
-        $amountOfLogs = "%{$_POST['amountOfLogs']}%";
         $action_date = "%{$_POST['action_date']}%";
         $action_type = "%{$_POST['action_type']}%";
         $ip = "%{$_POST['ip']}%";
