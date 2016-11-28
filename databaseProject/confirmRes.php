@@ -10,6 +10,26 @@
     <link rel="shortcut icon" href="favicon.ico"> 
     <!-- Bootstrap -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
+    
+    <script>
+    
+    
+        function prevCustomer(){
+            
+            document.getElementById("prev-div").style.display = "block";
+            document.getElementById("newBtn").style.display = "none";
+            document.getElementById("prevBtn").style.display = "none";
+            
+        }
+        
+        function newCustomer(){
+            
+            document.getElementById("new-div").style.display = "block";
+            document.getElementById("newBtn").style.display = "none";
+            document.getElementById("prevBtn").style.display = "none";
+            
+        }
+    </script>
 </head>
 
 <body>
@@ -32,30 +52,52 @@
 
     <br><br><br><br><br><br>
     <div class="container">
+        <div id="res-prompt">
+            <p>Have you made a reseveration before?</p>
+            <input type="submit" name="prevBtn" value="Submit" class="btn btn-primary" onclick="prevCustomer()">
+            <input type="submit" name="newBtn" value="Submit" class="btn btn-primary" onclick="newCustomer()">
+        </div>
         
-    <p> Add a reservation? </p>
-        <!--  first name, last name, age,
-        number of bags. The price for the flight will be calculated as the price in the database PLUS $20 for each
-        bag and 5% sales tax.-->
-        <form method="POST" action="confirmRes.php" name="resForm">
-    Flight Number:
-    <input type="text" name="flight_no" value="<?php echo $_GET["resSelect"] ?>" readonly>
-    <br>
-		First Name:
-		<input type="text" name="fname" placeholder="First name">
-		<br>
-		Last Name:
-		<input type="text" name="lname" placeholder="Last name">
-		<br>
-		Number of Bags: 
-		<select name="bags">
-    	<option value="0">0</option>
-			<option value="1">1</option>
-			<option value="2">2</option>
-      <option value="3">3</option>	
-		</select>
-        <input type="submit" name="submit" value="Submit" class="btn btn-primary">
-		</form>    
+        <div id="new-div" style="display:none;">
+            <form method="POST" action="confirmRes.php" name="resForm">
+                Flight Number:
+                <input type="text" name="flight_no" value="<?php echo $_GET["resSelect"] ?>" readonly>
+                <br>
+                First Name:
+                <input type="text" name="fname" placeholder="First name">
+                <br>
+                Last Name:
+                <input type="text" name="lname" placeholder="Last name">
+                <br>
+                Number of Bags: 
+                <select name="bags">
+                    <option value="0">0</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>	
+                </select>
+                <input type="submit" name="submit" value="Submit" class="btn btn-primary">
+            </form>   
+        </div>
+        
+        <div id="prev-div" style="display:none;">
+            <form method="POST" action="confirmRes.php" name="resForm">
+                Flight Number:
+                <input type="text" name="flight_no" value="<?php echo $_GET["resSelect"] ?>" readonly>
+                <br>
+                Enter customer ID:
+                <input type="text" name="custID" placeholder="Your ID">
+                <br>
+                Number of Bags: 
+                <select name="bags">
+                    <option value="0">0</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>	
+                </select>
+                <input type="submit" name="submit" value="Submit" class="btn btn-primary">
+            </form>   
+        </div>
         
      <?php
     
