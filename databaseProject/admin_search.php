@@ -31,7 +31,7 @@
                 
             }else {
                 
-                $empPosition = "Flight Attendant";
+                $empPosition = "Results";
                 
             }
 
