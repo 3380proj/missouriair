@@ -43,6 +43,24 @@
             $error = true;
             $usernameError = "Please enter your employee ID.";
         } 
+        
+        $statement = mysqli_prepare($conn, "SELECT emp_id FROM employee where emp_id = ?");
+        if ($statement) {
+                
+            mysqli_stmt_bind_param($statement, "i", $empID);
+            mysqli_stmt_execute($statement);
+            $result = mysqli_stmt_get_result($statement);
+            $num = mysqli_num_rows($result);
+
+            //Row was inserted (data was valid) = success
+            if (!($num == 1)){
+
+                $error = true;
+                $idError = "Invalid employee ID!"; 
+
+            }
+        }
+            
         //name validation
         if (empty($username)) {
             $error = true;
@@ -64,22 +82,6 @@
         
         // if there's no error, continue to signup
         if(!$error) {
-            
-            $statement = mysqli_prepare($conn, "SELECT emp_id FROM employee where emp_id = ?");
-            if ($statement) {
-                
-                mysqli_stmt_bind_param($statement, "i", $empID);
-                mysqli_stmt_execute($statement);
-                $result = mysqli_stmt_get_result($statement);
-                $num = mysqli_num_rows($result);
-                
-                //Row was inserted (data was valid) = success
-                if (!($num == 1)){
-                    
-                    $idError = "Invalid employee ID!"; 
-                    
-                }
-            }
             
             $stmt = mysqli_prepare($conn, "INSERT INTO authentication (user_id, user_name, pass_hash) VALUES (?, ?, ?)");
             if ($stmt) {
