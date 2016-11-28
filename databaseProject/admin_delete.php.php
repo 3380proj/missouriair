@@ -1,7 +1,6 @@
 <?php
     function delete($table, $column, $value){
-        if (isset($_SESSION['admin'])) {		
-            include("../secure/database.php");
+        if (isset($_SESSION['admin'])) {
             $conn = mysqli_connect(HOST, USERNAME, PASSWORD, DBNAME) or die("Connect Error" . mysqli_error($conn));
 
             if($conn -> connect_error){
@@ -9,15 +8,11 @@
                 exit;
             }
 
-            $table = $mysqli->real_escape_string($table); 
-            $column = $mysqli->real_escape_string($column);
-            $value = $mysqli->real_escape_string($value);
-
             $pre_check = "SELECT * FROM '$table'";
 
-            $pre_stmt = mysqli_prepare($mysqli, pre_check);
+            $pre_stmt = mysqli_prepare($conn, pre_check);
 
-            $pre_check_result = $mysqli->query($pre_check);
+            $pre_check_result = $conn->query($pre_check);
 
             if($pre_check_result){
                 $pre_count = $pre_check_result -> num_rows;
