@@ -20,17 +20,17 @@
                         break;
                         
                     case "employee":
-                        $stmt = mysqli_prepare($conn, "SELECT * FROM employee WHERE emp_id = ?");
+                        $stmt = mysqli_prepare($conn, "DELETE FROM employee WHERE emp_id = ?");
                         mysqli_stmt_bind_param($stmt, "i", $value);
                         break;
                         
                     case "equipment":
-                        $stmt = mysqli_prepare($conn, "SELECT * FROM equipment WHERE serial LIKE ?");
+                        $stmt = mysqli_prepare($conn, "DELETE FROM equipment WHERE serial LIKE ?");
                         mysqli_stmt_bind_param($stmt, "s", $value);
                         break;  
                         
                     case "flight":
-                        $stmt = mysqli_prepare($conn, "SELECT * FROM flight WHERE number = ?");
+                        $stmt = mysqli_prepare($conn, "DELETE FROM flight WHERE number = ?");
                         mysqli_stmt_bind_param($stmt, "i", $value);
                         break;
          
