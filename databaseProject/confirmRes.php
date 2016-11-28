@@ -55,7 +55,6 @@
     <div class="container">
         <div id="res-prompt">
             <p>Have you made a reseveration before?</p>
-            <p>If you are, a customer ID is required. (If you were brought back here, your customer ID was invalid)</p>
             <input type="submit" name="prevBtn" value="Yes" class="btn btn-primary" onclick="prevCustomer()">
             <input type="submit" name="newBtn" value="No" class="btn btn-primary" onclick="newCustomer()">
         </div>
@@ -160,8 +159,7 @@
                     
                 }else{
                     $error = true;
-                    //echo "<script>alert('Invalid Customer ID');</script>";
-                    header("Location: index.php");
+                    echo "<script>alert('Invalid Customer ID');</script>";
                     //exit();
                 }
             } 
