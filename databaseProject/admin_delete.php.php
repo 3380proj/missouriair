@@ -52,7 +52,6 @@
                 mysqli_stmt_execute($stmt);
                 
             else{
-                    header("Location: index.php");
                     exit;
             }
 
@@ -65,7 +64,6 @@
                 }
 
                 else{
-                    header("Location: index.php");
                     exit;
                 }
             }

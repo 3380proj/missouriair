@@ -1,7 +1,7 @@
 <?php
 	if(!session_start()) {
 				// If the session couldn't start, present an error
-				header("Location: error.php");
+				header("Location: index.php");
 				exit;
 	}
 	
@@ -17,17 +17,15 @@
 			exit;
 		}
 		
-		$id = $conn->real_escape_string($id); 
-		$equip = $conn->real_escape_string($equip);
 		
 		$sql="INSERT INTO certification (emp_id, equipment) VALUES (?, ?)";
 		
 		if($stmt = mysqli_prepare($conn, $sql)){
-			mysqli_stmt_bind_param($stmt, "ss", $id, $equip);
+			mysqli_stmt_bind_param($stmt, "is", $id, $equip);
 			
 			if(mysqli_stmt_execute($stmt)){
               	include("log_event.php");
-				log_event($conn, "RESERVE", "Added certification {$equip} to pilot {$id}", null, null, $id);
+				log_event($conn, "CERTIFY", "Added certification {$equip} to pilot {$id}", null, null, $_SESSION['admin']);
 				mysqli_close($conn);
 				exit;
 			}
