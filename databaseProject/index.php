@@ -15,6 +15,11 @@
         header("Location: login.php");
         
     }
+    if (isset($_POST['lookupBtn'])){
+        
+        header("Location: lookup.php");
+        
+    }
 
 ?>
 <!DOCTYPE html>
@@ -55,6 +60,7 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <form class="navbar-form navbar-right" method = "POST">
+            <button type="submit" name="lookupBtn" class="btn btn-primary">Flight Lookup</button>
             <button type="submit" name="loginBtn" class="btn btn-success">Employee Login</button>
           </form>
         </div><!--/.navbar-collapse -->
