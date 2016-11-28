@@ -33,11 +33,18 @@
                     document.getElementById('res-prompt').style.display = 'none';
 
                 }
-                ";
+                </script>";
+        }else{
+            
+            echo "
+            <script>
+
+                document.getElementById('res-prompt').style.display = 'none';
+
+            </script>";
+
         }
     ?>
-        
-    </script>
 </head>
 
 <body>
@@ -197,6 +204,7 @@
               $res_num = mysqli_insert_id($conn);
               include("log_event.php");
               log_event($conn, "RESERVE", "Created Reservation {$res_num} on flight {$flight_no}", $flight_no, $cust_id, null);
+              unset($_SESSION['error']);  
             }
             else {
               echo "\nError occurred: " . mysqli_stmt_error($res_statement);
