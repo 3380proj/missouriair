@@ -9,19 +9,20 @@
 		$id = $_POST['emp_id'];
 		$equip = $_POST['equipment'];
 
-		$mysqli = new mysqli($dbhost, $dbuser, $dbpass, $dbname);
+		include("../secure/database.php");
+        $conn = mysqli_connect(HOST, USERNAME, PASSWORD, DBNAME) or die("Connect Error" . mysqli_error($conn));
 		
-		if($mysqli -> connect_error){
+		if($conn -> connect_error){
 			header("Locaton: error.php");
 			exit;
 		}
 		
-		$id = $mysqli->real_escape_string($id); 
-		$equip = $mysqli->real_escape_string($equip);
+		$id = $conn->real_escape_string($id); 
+		$equip = $conn->real_escape_string($equip);
 		
 		$sql="INSERT INTO certification (emp_id, equipment) VALUES (?, ?)";
 		
-		if($stmt = mysqli_prepare($mysqli, $sql)){
+		if($stmt = mysqli_prepare($conn, $sql)){
 			mysqli_stmt_bind_param($stmt, "ss", $id, $equip);
 			
 			if(mysqli_stmt_execute($stmt)){
