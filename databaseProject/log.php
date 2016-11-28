@@ -53,7 +53,7 @@
     <br><br><br><br><br><br>
     <div class="container">
         <h3>Logs</h3>
-        <form action="#" method="POST">
+        <form action="log.php" method="POST">
           <!-- if we decide to use Amount of Logs#####
             Amount of Logs
             <select name="amountOfLogs">
@@ -95,25 +95,25 @@
 
         -->
         <?php 
-        if(isset($_POST['submit'])){
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         include("../secure/database.php");
         $conn = mysqli_connect(HOST,USERNAME,PASSWORD,DBNAME) or die("Connect Error " . mysqli_error($conn));
         
-        $action_date = "%{$_POST['action_date']}%";
-        $action_type = "%{$_POST['action_type']}%";
-        $ip = "%{$_POST['ip']}%";
-        $log_num = "%{$_POST['log_num']}%";     
-        $user_emp = "%{$_POST['user_emp']}%";     
-        $user_cust = "%{$_POST['user_cust']}%";
-        $flight_num = "%{$_POST['flight_num']}%";
+        $action_date_search = "%{$_POST['action_date']}%";
+        $action_type_search = "%{$_POST['action_type']}%";
+        $ip_search = "%{$_POST['ip']}%";
+        $log_num_search = "%{$_POST['log_num']}%";     
+        $user_emp_search = "%{$_POST['user_emp']}%";     
+        $user_cust_search = "%{$_POST['user_cust']}%";
+        $flight_num_search = "%{$_POST['flight_num']}%";
              
              
         $statement = mysqli_prepare($conn, "SELECT * FROM logging WHERE action_date LIKE ? AND action_type LIKE ? AND log_num LIKE ? AND user_emp LIKE ? AND user_cust LIKE ? AND flight_num LIKE ? AND ip LIKE ?");
-        mysqli_stmt_bind_param($statement, "ssiiiis", $action_date, $action_type, $log_num, $user_emp, $user_cust, $flight_num, $ip);
+        mysqli_stmt_bind_param($statement, "ssiiiis", $action_date_search, $action_type_search, $log_num_search, $user_emp_search, $user_cust_search, $flight_num_search, $ip_search);
         if(mysqli_stmt_execute($statement)){
             mysqli_stmt_bind_result($statement,$log_num,$ip,$action_date,$action_time,$action_type,$action_desc,$user_emp,$user_cust,$flight_num);
             echo "<table class=\"table\">\n";
-            echo "<thead>\n\t<tr>\n\t\t<th>Log Num</th>\n\t\t<th>IP</th>\n\t\t<th>Action Date</th>\n\t\t<th>Action Time</th>\n\t\t<th>Action Type</th>\n\t\t<th>Action Description</th>\n\t\t<th>User Employee</th>\n\t\t<th>User Customer</th>\n\t\t<th>Flight Number</th>\n\t</tr>\n</thead>\n";
+            echo "<thead>\n\t<tr>\n\t\t<th>Log Number</th>\n\t\t<th>IP</th>\n\t\t<th>Action Date</th>\n\t\t<th>Action Time</th>\n\t\t<th>Action Type</th>\n\t\t<th>Action Description</th>\n\t\t<th>User Employee</th>\n\t\t<th>User Customer</th>\n\t\t<th>Flight Number</th>\n\t</tr>\n</thead>\n";
             while (mysqli_stmt_fetch($statement))
             {
               echo "<tr>\n";
