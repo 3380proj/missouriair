@@ -1,3 +1,7 @@
+<?php
+    $message = "";
+    $error = false;
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -98,9 +102,7 @@
             </form>   
         </div>
         
-     <?php
-    $error = false;
-    $message = "";                   
+     <?php           
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         include("../secure/database.php");
         $conn = mysqli_connect(HOST,USERNAME,PASSWORD,DBNAME) or die("Connect Error " . mysqli_error($conn));
