@@ -26,10 +26,14 @@
 			mysqli_stmt_bind_param($stmt, "ss", $id, $equip);
 			
 			if(mysqli_stmt_execute($stmt)){
+              	include("log_event.php");
+				log_event($conn, "RESERVE", "Added certification {$equip} to pilot {$id}", null, null, $id);
+				mysqli_close($conn);
 				exit;
 			}
 			
 			else{
+				mysqli_close($conn);
 				header("Location: index.php");
 				exit;
 			}
