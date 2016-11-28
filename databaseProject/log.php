@@ -67,7 +67,7 @@
             IP:
             <input type="text" name="ip">
             Date:
-            <input type="text" name="action_date" placeholder="yyyy/mm/dd">
+            <input type="text" name="action_date" placeholder="yyyy-mm-dd">
             
             Type of Action:
             <select name="action_type">
