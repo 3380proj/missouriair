@@ -9,5 +9,7 @@
         $user_emp = isset($_SESSION['admin'])?$_SESSION['admin']:null;
         $user_cust = isset($cust_id)?$cust_id:null;
         $flight_num = isset($flight_no)?$flight_no:null;
+
+        mysqli_stmt_execute($log_statement);
     }       
 ?>
