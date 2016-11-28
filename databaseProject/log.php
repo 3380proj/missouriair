@@ -112,21 +112,24 @@
         $statement = mysqli_prepare($conn, "SELECT log_num, ip, action_date, action_time, action_type, action_desc, user_emp, user_cust, flight_num FROM logging WHERE action_date LIKE ? AND action_type LIKE ? AND log_num LIKE ? AND user_emp LIKE ? AND user_cust LIKE ? AND flight_num LIKE ? AND ip LIKE ?");
         mysqli_stmt_bind_param($statement, "sssssss", $action_date_search, $action_type_search, $log_num_search, $user_emp_search, $user_cust_search, $flight_num_search, $ip_search);
         if(mysqli_stmt_execute($statement)){
-            mysqli_stmt_bind_result($statement,$log_num,$ip,$action_date,$action_time,$action_type,$action_desc,$user_emp,$user_cust,$flight_num);
+            $result = mysqli_stmt_get_result($statement);
+
+            /*mysqli_stmt_bind_result($statement,$log_num,$ip,$action_date,$action_time,$action_type,$action_desc,$user_emp,$user_cust,$flight_num);
             echo "<table class=\"table\">\n";
             echo "<thead>\n\t<tr>\n\t\t<th>Log Number</th>\n\t\t<th>IP</th>\n\t\t<th>Action Date</th>\n\t\t<th>Action Time</th>\n\t\t<th>Action Type</th>\n\t\t<th>Action Description</th>\n\t\t<th>User Employee</th>\n\t\t<th>User Customer</th>\n\t\t<th>Flight Number</th>\n\t</tr>\n</thead>\n";
-            while (mysqli_stmt_fetch($statement))
+           */
+            while ($row = mysqli_fetch_array($result, MYSQLI_NUM))
             {
               echo "<tr>\n";
-              echo "\t<td>" . $log_num . "</td>\n";
-              echo "\t<td>" . $ip . "</td>\n";
-              echo "\t<td>" . $action_date . "</td>\n";
-              echo "\t<td>" . $action_time . "</td>\n";
-              echo "\t<td>" . $action_type . "</td>\n"; 
-              echo "\t<td>" . $action_desc . "</td>\n";
-              echo "\t<td>" . $user_emp . "</td>\n";
-              echo "\t<td>" . $user_cust . "</td>\n";   
-              echo "\t<td>" . $flight_num . "</td>\n";      
+              echo "\t<td>" . $row['log_num'] . "</td>\n";
+              echo "\t<td>" . $row['ip'] . "</td>\n";
+              echo "\t<td>" . $row['action_date'] . "</td>\n";
+              echo "\t<td>" . $row['action_time'] . "</td>\n";
+              echo "\t<td>" . $row['action_type'] . "</td>\n"; 
+              echo "\t<td>" . $row['action_desc'] . "</td>\n";
+              echo "\t<td>" . $row['user_emp'] . "</td>\n";
+              echo "\t<td>" . $row['user_cust'] . "</td>\n";   
+              echo "\t<td>" . $row['flight_num'] . "</td>\n";      
 
               echo "</tr>\n";
               
