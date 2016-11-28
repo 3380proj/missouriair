@@ -92,8 +92,6 @@
         $action_date_search = "%{$_POST['action_date']}%";
         $action_type_search = "%{$_POST['action_type']}%";
         $ip_search = "%{$_POST['ip']}%";
-
-        echo $action_date_search . " " . $action_type_search . " " . $log_num_search . " " . $user_emp_search . " " . $user_cust_search . " " . $flight_num_search . " " . $ip_search;
              
         $statement = mysqli_prepare($conn, "SELECT * FROM logging WHERE action_date LIKE ? AND action_type LIKE ? AND ip LIKE ?");
         mysqli_stmt_bind_param($statement, "sss", $action_date_search, $action_type_search, $ip_search);
