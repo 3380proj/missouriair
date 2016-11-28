@@ -63,10 +63,9 @@
                 <option value = "200">200</option>
                 <option value = "500">500</option>
             </select>
-            Start Date:
-            <input type ="time" name="start_date" id="start_date">
-            End Date:
-            <input type ="time" name="end_date" id="end_date">
+            Date:
+            <input type="text" name="action_date" placeholder="yyyy/mm/dd">
+       
             Type of Action:
             <select name="action">
                 <option value = "reservation">Reservation</option>
@@ -90,7 +89,7 @@
         $dest_search = "%{$_POST['dest']}%";
         $departureDate_search = "%{$_POST['departureDate']}%";
         $price_search = "%{$_POST['price']}%"; 
-        $statement = mysqli_prepare($conn, "SELECT * FROM logging WHERE origin LIKE ? AND dest LIKE ? AND action_TIME LIKE ? AND action LIKE ?");
+        $statement = mysqli_prepare($conn, "SELECT * FROM logging WHERE action_date LIKE ? AND action_TIME LIKE ? AND action LIKE ?");
         mysqli_stmt_bind_param($statement, "ssss", $origin_search, $dest_search, $departureDate_search, $price_search);
         if(mysqli_stmt_execute($statement)){
             mysqli_stmt_bind_result($statement,$number,$departureDate,$price,$origin,$dest,$dep,$arr,$aircraft,$pilot_1,$pilot_2,$pilot_3,$att_1,$att_2,$att_3);
