@@ -1,11 +1,11 @@
 <?php
 
-    //session_start();
-    // if session is not set this will redirect to home page
-    //if( !isset($_SESSION['user']) ) {
-      //header("Location: index.php");
-      //exit;
-    //}
+    session_start();
+    //if session is not set this will redirect to home page
+    if( !isset($_SESSION['admin']) ) {
+      header("Location: index.php");
+      exit;
+    }
     
 ?>
 <!DOCTYPE html>
