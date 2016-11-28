@@ -159,7 +159,10 @@
                     
                 }else{
                     $error = true;
-                    echo "<script>alert('Invalid Customer ID'); echo window.location.href = 'index.php';</script>";
+                    echo '<script type="text/javascript">'; 
+                    echo 'alert("Invalid customer ID");'; 
+                    echo 'window.location.href = "index.php";';
+                    echo '</script>';
                     //exit();
                 }
             } 
