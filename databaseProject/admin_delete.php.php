@@ -57,11 +57,7 @@
                 }else{
                     return 0;
                 }
-                
-            else{
-                exit();
             }
-        }
 
         else{
             header("Location: index.php");
