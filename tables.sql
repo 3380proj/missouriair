@@ -46,13 +46,13 @@ CREATE TABLE flight
 	att_1 INTEGER,
 	att_2 INTEGER,
 	att_3 INTEGER,
-	FOREIGN KEY (aircraft) REFERENCES equipment(serial),
-	FOREIGN KEY (pilot_1) REFERENCES employee(emp_id),
-	FOREIGN KEY (pilot_2) REFERENCES employee(emp_id),
-	FOREIGN KEY (pilot_3) REFERENCES employee(emp_id),
-	FOREIGN KEY (att_1) REFERENCES employee(emp_id),
-	FOREIGN KEY (att_2) REFERENCES employee(emp_id),
-	FOREIGN KEY (att_3) REFERENCES employee(emp_id)
+	FOREIGN KEY (aircraft) REFERENCES equipment(serial) ON DELETE CASCADE,
+	FOREIGN KEY (pilot_1) REFERENCES employee(emp_id) ON DELETE CASCADE,
+	FOREIGN KEY (pilot_2) REFERENCES employee(emp_id) ON DELETE CASCADE,
+	FOREIGN KEY (pilot_3) REFERENCES employee(emp_id) ON DELETE CASCADE,
+	FOREIGN KEY (att_1) REFERENCES employee(emp_id) ON DELETE CASCADE,
+	FOREIGN KEY (att_2) REFERENCES employee(emp_id) ON DELETE CASCADE,
+	FOREIGN KEY (att_3) REFERENCES employee(emp_id) ON DELETE CASCADE
 );
 
 CREATE TABLE customer
@@ -68,8 +68,8 @@ CREATE TABLE reservation
 	flight INTEGER,
 	customer INTEGER,
 	price DECIMAL(13,2),
-	FOREIGN KEY (flight) REFERENCES flight(number),
-	FOREIGN KEY (customer) REFERENCES customer(id)
+	FOREIGN KEY (flight) REFERENCES flight(number) ON DELETE CASCADE,
+	FOREIGN KEY (customer) REFERENCES customer(id) ON DELETE CASCADE
 );
 
 CREATE TABLE logging
@@ -83,9 +83,9 @@ CREATE TABLE logging
 	user_emp INTEGER,
 	user_cust INTEGER,
 	flight_num INTEGER,
-	FOREIGN KEY (user_emp) REFERENCES employee(emp_id),
-	FOREIGN KEY (user_cust) REFERENCES customer(id),
-	FOREIGN KEY (flight_num) REFERENCES flight(number)
+	FOREIGN KEY (user_emp) REFERENCES employee(emp_id) ON DELETE CASCADE,
+	FOREIGN KEY (user_cust) REFERENCES customer(id) ON DELETE CASCADE,
+	FOREIGN KEY (flight_num) REFERENCES flight(number) ON DELETE CASCADE
 );
 
 CREATE TABLE authentication
@@ -93,5 +93,5 @@ CREATE TABLE authentication
 	user_id INTEGER PRIMARY KEY,
     user_name VARCHAR(50),
 	pass_hash VARCHAR(15),
-	FOREIGN KEY (user_id) REFERENCES employee(emp_id)
+	FOREIGN KEY (user_id) REFERENCES employee(emp_id) ON DELETE CASCADE
 );
