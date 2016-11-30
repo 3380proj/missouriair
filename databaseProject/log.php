@@ -83,6 +83,11 @@
                 <option value = ""></option>
                 <option value = "RESERVE">Reservation</option>
                 <option value = "CERTIFY">Certification</option>
+                <option value = "ONBOARD">Onboarding</option>
+                <option value = "TERMINATE">Termination</option>
+                <option value = "CUSTOMER">Customer</option>
+                <option value = "FLIGHT">Flights</option>
+                <option value = "EQUIP">Equipment</option>
             </select>
             <br><br>
             
