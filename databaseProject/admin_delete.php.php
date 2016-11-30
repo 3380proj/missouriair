@@ -29,7 +29,7 @@
                         break;
                         
                     case "equipment":
-                        $stmt = mysqli_prepare($conn, "DELETE FROM equipment WHERE serial LIKE ?");
+                        $stmt = mysqli_prepare($conn, "DELETE FROM equipment WHERE serial = ?");
                         mysqli_stmt_bind_param($stmt, "s", $value);
                         log_event($conn, "EQUIP", "Removed equipment {$value}", null, null, $_SESSION['admin']);
                         break;  
