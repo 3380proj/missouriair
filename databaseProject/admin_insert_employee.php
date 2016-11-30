@@ -28,7 +28,7 @@
 			mysqli_stmt_bind_param($stmt, "issbisi", $id, $fname, $lname, $status, $hours, $rank, $job_type);
 			
 			if(mysqli_stmt_execute($stmt)){
-				log_event($conn, "CERTIFY", "Added certification {$equip} to pilot {$id}", null, null, $_SESSION['admin']);
+				log_event($conn, "ONBOARD", "Added employee {$id} with job type $job_type", null, null, $_SESSION['admin']);
 				mysqli_close($conn);
 				exit;
 			}

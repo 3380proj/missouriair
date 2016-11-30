@@ -36,7 +36,7 @@
 			
 			if(mysqli_stmt_execute($stmt)){
               	include("log_event.php");
-				log_event($conn, "CERTIFY", "Added certification {$equip} to pilot {$id}", null, null, $_SESSION['admin']);
+				log_event($conn, "CERTIFY", "Added flight {$number} from $origin to $dest on $day at $dep", null, null, $_SESSION['admin']);
 				mysqli_close($conn);
 				exit;
 			}
