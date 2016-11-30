@@ -1,5 +1,6 @@
 <?php
     function delete($table, $value){
+        include("log_event.php");
         if (isset($_SESSION['admin'])) {
             $conn = mysqli_connect(HOST, USERNAME, PASSWORD, DBNAME) or die("Connect Error" . mysqli_error($conn));
 
