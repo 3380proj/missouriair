@@ -191,7 +191,7 @@
               log_event($conn, "RESERVE", "Created Reservation {$res_num} on flight {$flight_no}", $flight_no, $cust_id, null);
               echo '<script type="text/javascript">'; 
               echo 'window.location.href = "index.php";';
-              echo 'alert("Your reservation has been made");'; 
+              echo 'alert("Your reservation has been made. Your customer number is {$custID}");'; 
               echo '</script>';
             } else {
               echo "\nError occurred: " . mysqli_stmt_error($res_statement);
