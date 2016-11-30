@@ -155,7 +155,7 @@
 					  echo "\t<td>" . $att_2 . "</td>\n";
 					  echo "\t<td>" . $att_3 . "</td>\n";
                       echo "\t<td><form action=\"admin_flights_edit.php\"><button name=\"Edit\" type=\"submit\" class=\"btn btn-secondary\">Edit</button></form></td>\n";
-                      echo "\t<td><button name=\"delete\" type=\"submit\" value=\"{$emp_id}\" class=\"btn btn-secondary\">Delete</button></form></td>\n";
+                      echo "\t<td><button name=\"delete\" type=\"submit\" value=\"{$number}\" class=\"btn btn-secondary\">Delete</button></form></td>\n";
                       echo "</tr>\n";
 
                 }
