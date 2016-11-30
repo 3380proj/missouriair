@@ -80,6 +80,7 @@
             
             Type of Action:
             <select name="action_type">
+                <option value = ""></option>
                 <option value = "RESERVE">Reservation</option>
                 <option value = "CERTIFY">Certification</option>
             </select>
