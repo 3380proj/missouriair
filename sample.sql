@@ -53,7 +53,6 @@ INSERT INTO authentication VALUES
 	(111111, 'admin', 'secret');
 
 INSERT INTO `logging` VALUES
-	(1,'10.7.5.236','2016-11-25','19:29:00','RESERVE','Created Reservation 2 on flight 454',NULL,2,454),
 	(2,'10.7.36.182','2016-11-25','19:33:00','CERTIFY','Added certification A380 to pilot 382901',111111,NULL,NULL),
 	(3,'10.7.5.236','2016-11-25','19:33:00','CERTIFY','Added certification DC9 to pilot 111111',111111,NULL,NULL),
 	(4,'10.7.36.182','2016-11-25','19:34:00','CERTIFY','Added certification B737 to pilot 388929',111111,NULL,NULL),
