@@ -9,7 +9,7 @@ INSERT INTO employee VALUES
 	(776573, 'Janet', 'Johnson', 2, 'Senior', 1, 7654),
 	(111980, 'Hillary', 'Trump', 2, 'Senior', 1, 13101),
 	(485932, 'Donald', 'Clinton', 2, 'Senior', 1, 8876),
-	(111111, 'Admin', 'Admin', 0, null, 1, null);
+	(111111, 'Admin', 'Istrator', 0, null, 1, null);
 
 INSERT INTO certification VALUES
 	(382901, 'B747'),
@@ -39,7 +39,8 @@ INSERT INTO equipment VALUES
 
 INSERT INTO flight VALUES
 	(454, '2016-11-19', 1129, 'DALLAS', 'PARIS', '07:00:00', '17:30:00', 'N3029', 123492, 887362, null, 99872, 485932, 111980),
-	(5540, '2016-11-21', 899, 'PARIS', 'CHICAGO', '16:00:00', '05:00:00', 'N47892', 382901, 887362, null, 776573, 372819, 485932);
+	(5540, '2016-11-21', 899, 'PARIS', 'CHICAGO', '16:00:00', '05:00:00', 'N47892', 382901, 887362, null, 776573, 372819, 485932),
+	(1249, '2016-11-22', 1129, 'ST LOUIS', 'LOS ANGELES', '10:00:00', '4:00:00', 'N3029', 382901, 887362, null, 776573, 485932, 111980);
 
 INSERT INTO customer VALUES
 	(1, 'Susan', 'Miller');
@@ -48,4 +49,5 @@ INSERT INTO reservation VALUES
 	('B4091', 5540, 1, 899);
 
 INSERT INTO authentication VALUES
-	(99872, 'csmith', 'secret');
+	(99872, 'csmith', 'secret'),
+	(111111, 'admin', 'secret');
